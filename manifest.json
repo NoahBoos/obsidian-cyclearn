@@ -1,0 +1,10 @@
+{
+  "id": "flashcards",
+  "name": "Flashcards",
+  "version": "1.0.0",
+  "minAppVersion": "0.15.0",
+  "description": "The all-in-one solution tailored for flashcards user. With no external apps required, everything's made for and used by your vault.",
+  "author": "Noah Boos AKA Rift",
+  "authorUrl": "https://github.com/NoahBoos",
+  "isDesktopOnly": true
+}
