@@ -1,5 +1,4 @@
 import * as fs from "fs";
-import Loki from "lokijs";
 import Flashcards from "../main";
 
 
