@@ -29,6 +29,10 @@ export class Review {
         return database.getCollection<Review>("reviews").find();
     }
 
+    public static ReadAllByCard(database: Loki, idCard: string): Review[] {
+        return database.getCollection<Review>("reviews").find({ id_card: idCard });
+    }
+
     public static Update(database: Loki, idToUpdate: string, newReviewData: Partial<Review>): boolean {
         const reviewToUpdate: Review = database.getCollection<Review>("reviews").findOne({ id: idToUpdate });
         if (!reviewToUpdate) return false;
