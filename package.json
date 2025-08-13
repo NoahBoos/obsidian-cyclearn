@@ -19,6 +19,7 @@
   "homepage": "https://github.com/NoahBoos/obsidian-flashcards#readme",
   "devDependencies": {
     "@types/node": "^22.13.9",
+    "@types/sql.js": "^1.4.9",
     "@typescript-eslint/eslint-plugin": "^8.26.0",
     "@typescript-eslint/parser": "^8.26.0",
     "builtin-modules": "^5.0.0",
@@ -26,5 +27,8 @@
     "obsidian": "^1.8.7",
     "tslib": "^2.8.1",
     "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "lokijs": "^1.5.12"
   }
 }
