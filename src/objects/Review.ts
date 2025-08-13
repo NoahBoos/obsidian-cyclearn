@@ -7,16 +7,16 @@ export class Review {
     public grade: number;
     public time_taken: number;
 
-    constructor(id_card: string, reviewed_at: string, grade: number, time_taken: number = 0, id: string = GENERATE_UUID(16)) {
+    constructor(idCard: string, reviewedAt: string, grade: number, timeTaken: number = 0, id: string = GENERATE_UUID(16)) {
         this.id = id;
-        this.id_card = id_card;
-        this.reviewed_at = reviewed_at;
+        this.id_card = idCard;
+        this.reviewed_at = reviewedAt;
         this.grade = grade;
-        this.time_taken = time_taken;
+        this.time_taken = timeTaken;
     }
 
-    public static Create(database: Loki, id_card: string, review_at: string, grade: number, time_taken: number) {
-        const newReview = new Review(id_card, review_at, grade, time_taken);
+    public static Create(database: Loki, idCard: string, reviewAt: string, grade: number, timeTaken: number) {
+        const newReview = new Review(idCard, reviewAt, grade, timeTaken);
         database.getCollection<Review>("reviews").insert(newReview);
         return newReview;
     }

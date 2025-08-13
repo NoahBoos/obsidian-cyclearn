@@ -5,14 +5,14 @@ export class TaggedNote {
     public id_note: string;
     public id_tag: string;
 
-    constructor(id_note: string, id_tag: string, id: string = GENERATE_UUID(16)) {
+    constructor(idNote: string, idTag: string, id: string = GENERATE_UUID(16)) {
         this.id = id;
-        this.id_note = id_note;
-        this.id_tag = id_tag;
+        this.id_note = idNote;
+        this.id_tag = idTag;
     }
 
-    public static Create(database: Loki, id_note: string, id_tag: string): TaggedNote {
-        const newTaggedNote = new TaggedNote(id_note, id_tag);
+    public static Create(database: Loki, idNote: string, idTag: string): TaggedNote {
+        const newTaggedNote = new TaggedNote(idNote, idTag);
         database.getCollection<TaggedNote>("notes_tags").insert(newTaggedNote);
         return newTaggedNote;
     }

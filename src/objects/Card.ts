@@ -8,17 +8,17 @@ export class Card {
     public interval: number;
     public review_amount: number;
 
-    constructor(id_note: string, due_at: number, ease_factor: number = 2.5, interval: number = 1, review_amount: number = 0, id: string = GENERATE_UUID(16)) {
+    constructor(idNote: string, dueAt: number, easeFactor: number = 2.5, interval: number = 1, reviewAmount: number = 0, id: string = GENERATE_UUID(16)) {
         this.id = id;
-        this.id_note = id_note;
-        this.due_at = due_at;
-        this.ease_factor = ease_factor;
+        this.id_note = idNote;
+        this.due_at = dueAt;
+        this.ease_factor = easeFactor;
         this.interval = interval;
-        this.review_amount = review_amount;
+        this.review_amount = reviewAmount;
     }
 
-    public static Create(database: Loki, id_note: string, due_at: number): Card {
-        const newCard = new Card(id_note, due_at);
+    public static Create(database: Loki, idNote: string, dueAt: number): Card {
+        const newCard = new Card(idNote, dueAt);
         database.getCollection<Card>("cards").insert(newCard);
         return newCard;
     }

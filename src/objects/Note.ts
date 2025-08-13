@@ -6,15 +6,15 @@ export class Note {
     public id_template: string;
     public fields: Record<string, string>;
 
-    constructor(id_deck: string, id_template: string, fields: Record<string, string> = {}, id: string = GENERATE_UUID(16)) {
+    constructor(idDeck: string, idTemplate: string, fields: Record<string, string> = {}, id: string = GENERATE_UUID(16)) {
         this.id = id;
-        this.id_deck = id_deck;
-        this.id_template = id_template;
+        this.id_deck = idDeck;
+        this.id_template = idTemplate;
         this.fields = fields;
     }
 
-    public static Create(database: Loki, id_deck: string, id_template: string, fields: Record<string, string>): Note {
-        const newNote = new Note(id_deck, id_template, fields);
+    public static Create(database: Loki, idDeck: string, idTemplate: string, fields: Record<string, string>): Note {
+        const newNote = new Note(idDeck, idTemplate, fields);
         database.getCollection<Note>("notes").insert(newNote);
         return newNote;
     }

@@ -1,11 +1,13 @@
 import {Plugin} from "obsidian";
 import {DEFAULT_SETTINGS, I_FlashcardsSettings} from "./interfaces/I_FlashcardsSettings";
+import {InitializeDatabase} from "./database/Database";
 
 export default class Flashcards extends Plugin {
     settings: I_FlashcardsSettings;
 
     async onload() {
         await this.LoadSettings();
+        InitializeDatabase(this);
     }
 
     async onunload() {
