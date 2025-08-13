@@ -29,6 +29,7 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
-    "lokijs": "^1.5.12"
+    "lokijs": "^1.5.12",
+    "nanoid": "^5.1.5"
   }
 }
