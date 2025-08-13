@@ -1,6 +1,6 @@
 import * as fs from "fs";
+import Loki from "lokijs";
 import Flashcards from "../main";
-
 
 export function InitializeDatabase(flashcards: Flashcards) {
     const PATH_DATABASE = `${this.app.vault.adapter.basePath}/.obsidian/plugins/obsidian-${flashcards.manifest.id}/database.json`;
