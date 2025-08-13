@@ -27,6 +27,14 @@ export class Note {
         return database.getCollection<Note>("notes").find();
     }
 
+    public static ReadAllByDeck(database: Loki, idDeck: string): Note[] {
+        return database.getCollection<Note>("notes").find({ id_deck: idDeck });
+    }
+
+    public static ReadAllByTemplate(database: Loki, idTemplate: string): Note[] {
+        return database.getCollection<Note>("notes").find({ id_template: idTemplate });
+    }
+
     public static Update(database: Loki, idToUpdate: string, newNoteData: Partial<Note>): boolean {
         const noteToUpdate: Note = database.getCollection<Note>("notes").findOne({ id: idToUpdate });
         if (!noteToUpdate) return false;
