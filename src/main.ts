@@ -1,5 +1,5 @@
 import {Plugin} from "obsidian";
-import {DEFAULT_SETTINGS, I_FlashcardsSettings} from "./interfaces/I_FlashcardsSettings";
+import {DEFAULT_SETTINGS, I_FlashcardsSettings} from "./settings/I_FlashcardsSettings";
 import {InitializeDatabase} from "./database/Database";
 
 export default class Flashcards extends Plugin {
