@@ -31,6 +31,10 @@ export class Card {
         return database.getCollection<Card>("cards").find();
     }
 
+    public static ReadAllByNote(database: Loki, idNote: string): Card[] {
+        return database.getCollection<Card>("cards").find({ id_note: idNote });
+    }
+
     public static Update(database: Loki, idToUpdate: string, newCardData: Partial<Card>): boolean {
         const cardToUpdate: Card = database.getCollection<Card>("cards").findOne({ id: idToUpdate });
         if (!cardToUpdate) return false;
