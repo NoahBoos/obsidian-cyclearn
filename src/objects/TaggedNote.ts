@@ -25,6 +25,14 @@ export class TaggedNote {
         return database.getCollection<TaggedNote>("notes_tags").find();
     }
 
+    public static ReadAllByNote(database: Loki, idNote: string): TaggedNote[] {
+        return database.getCollection<TaggedNote>("notes_tags").find({ id_note: idNote });
+    }
+
+    public static ReadAllByTag(database: Loki, idTag: string): TaggedNote[] {
+        return database.getCollection<TaggedNote>("notes_tags").find({ id_tag: idTag });
+    }
+
     public static Update(database: Loki, idToUpdate: string, newTaggedNoteData: Partial<TaggedNote>): boolean {
         const taggedNoteToUpdate: TaggedNote = database.getCollection<TaggedNote>("notes_tags").findOne({ id: idToUpdate });
         if (!taggedNoteToUpdate) return false;
