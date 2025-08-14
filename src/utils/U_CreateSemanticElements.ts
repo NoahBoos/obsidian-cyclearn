@@ -11,7 +11,7 @@ export function CreateContainer(parent: HTMLElement | Element, classes: string[]
 
 export function CreateHeader(parent: HTMLElement | Element, classes: string[] = []): HTMLElement {
     classes.push(
-        ""
+        "flashcards__header--default"
     );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("header", {
@@ -22,7 +22,7 @@ export function CreateHeader(parent: HTMLElement | Element, classes: string[] = 
 
 export function CreateMain(parent: HTMLElement | Element, classes: string[] = []): HTMLElement {
     classes.push(
-        ""
+        "flashcards__main--default"
     );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("main", {

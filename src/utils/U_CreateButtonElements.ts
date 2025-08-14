@@ -1,7 +1,7 @@
 import {ButtonComponent} from "obsidian";
 
 export function CreateButton(parent: HTMLElement, setCTA: boolean, text: string = null, icon: string = null, classes: string[] = []): ButtonComponent {
-    classes.push("");
+    classes.push("flashcards__button--default");
     let createdEl: ButtonComponent = new ButtonComponent(parent);
     if (setCTA) {
         createdEl.setCta();
