@@ -1,4 +1,5 @@
 import {InputGroupData} from "../objects/InputGroupData";
+import {CreateContainer} from "./U_CreateSemanticElements";
 
 export function CreateLabel(parent: HTMLElement | Element, text: string, classes: string[] = []): HTMLLabelElement {
     classes.push(
@@ -26,8 +27,9 @@ export function CreateInput(parent: HTMLElement | Element, type: string, placeho
     return createdEl;
 }
 
-export function CreateInputGroups(parent: HTMLElement | Element, inputData: InputGroupData) {
-    const createdLabel = CreateLabel(parent, inputData.fieldName);
-    const createdInput = CreateInput(parent, inputData.fieldType, inputData.fieldPlaceholder, inputData.fieldValue);
-    return createdInput;
+export function CreateInputGroup(parent: HTMLElement | Element, inputData: InputGroupData) {
+    const inputGroupContainer: HTMLDivElement = CreateContainer(parent, ["flashcards__inputGroupContainer"]);
+    CreateLabel(inputGroupContainer, inputData.fieldName);
+    CreateInput(inputGroupContainer, inputData.fieldType, inputData.fieldPlaceholder, inputData.fieldValue);
+    return inputGroupContainer;
 }
