@@ -1,11 +1,11 @@
+import {InputGroupData} from "../objects/InputGroupData";
+
 export function CreateLabel(parent: HTMLElement | Element, text: string, classes: string[] = []): HTMLLabelElement {
     classes.push();
     let createdEl: HTMLLabelElement;
     createdEl = parent.createEl("label", {
         text: text,
-        cls: [
-            classes.join(" ")
-        ]
+        cls: [classes.join(" ")]
     });
     return createdEl;
 }
@@ -22,9 +22,8 @@ export function CreateInput(parent: HTMLElement | Element, type: string, placeho
     return createdEl;
 }
 
-export function CreateInputGroups(parent: HTMLElement | Element, inputData: Array<Object>) {
-    for (let i = 0; i < inputData.length; i++) {
-        CreateLabel(parent, inputData[i]["fieldName"]);
-        CreateInput(parent, inputData[i]["fieldName"], inputData[i]["fieldValue"]);
-    }
+export function CreateInputGroups(parent: HTMLElement | Element, inputData: InputGroupData) {
+    const createdLabel = CreateLabel(parent, inputData.fieldName);
+    const createdInput = CreateInput(parent, inputData.fieldType, inputData.fieldPlaceholder, inputData.fieldValue);
+    return createdInput;
 }
