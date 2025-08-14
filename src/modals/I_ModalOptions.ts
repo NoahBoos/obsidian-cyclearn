@@ -9,3 +9,9 @@ export const CREATE_DECK_MODAL_OPTIONS: I_ModalOptions = {
     modalConfirmButtonText: "Create a new deck",
     modalConfirmButtonIcon: null
 }
+
+export const CREATE_TAG_MODAL_OPTIONS: I_ModalOptions = {
+    modalTitle: "Create a new tag",
+    modalConfirmButtonText: "Create a new tag",
+    modalConfirmButtonIcon: null
+}
