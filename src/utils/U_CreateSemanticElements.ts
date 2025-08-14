@@ -1,6 +1,6 @@
 export function CreateContainer(parent: HTMLElement | Element, classes: string[] = []): HTMLDivElement {
     classes.push(
-        ""
+        "flashcards__container--default"
     );
     let createdEl: HTMLDivElement;
     createdEl = parent.createEl("div", {

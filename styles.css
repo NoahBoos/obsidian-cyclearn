@@ -21,6 +21,10 @@
     margin: 0;
 }
 
+.flashcards__heading--width-fit-content {
+    width: fit-content;
+}
+
 .flashcards__main--default {
     width: 100%;
     display: flex;
@@ -39,4 +43,40 @@
 
 .flashcards__button--default {
     width: 40%;
+}
+
+.flashcards__in-header-button {
+    width: fit-content;
+}
+
+.flashcards__horizontal-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.flashcards__vertical-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.flashcards__container--default {
+    width: 100%;
+}
+
+.flashcards__dropdown--default {
+    width: 100%;
+}
+
+.flashcards__dropdown--width-fit-content {
+    width: fit-content !important;
+}
+
+.flashcards__input--width-100 {
+    width: 100%;
 }
