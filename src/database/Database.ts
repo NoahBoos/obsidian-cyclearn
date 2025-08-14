@@ -2,6 +2,8 @@ import * as fs from "fs";
 import Loki from "lokijs";
 import Flashcards from "../main";
 
+export let database: Loki;
+
 export function InitializeDatabase(flashcards: Flashcards) {
     const PATH_DATABASE = `${this.app.vault.adapter.basePath}/.obsidian/plugins/obsidian-${flashcards.manifest.id}/database.json`;
 
@@ -9,7 +11,7 @@ export function InitializeDatabase(flashcards: Flashcards) {
         fs.writeFileSync(PATH_DATABASE, JSON.stringify({}));
     }
 
-    const database = new Loki(PATH_DATABASE, {
+    database = new Loki(PATH_DATABASE, {
         autosave: true,
         autosaveInterval: 5000,
         persistenceMethod: 'fs'
