@@ -1,5 +1,7 @@
 export function CreateTitle(parent: HTMLElement | Element, title: string, classes: string[] = []): HTMLElement {
-    classes.push();
+    classes.push(
+        ""
+    );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("h1", {
         text: title,
@@ -9,7 +11,9 @@ export function CreateTitle(parent: HTMLElement | Element, title: string, classe
 }
 
 export function CreateSubtitle(parent: HTMLElement | Element, title: string, classes: string[] = []): HTMLElement {
-    classes.push();
+    classes.push(
+        ""
+    );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("h2", {
         text: title,
@@ -19,7 +23,9 @@ export function CreateSubtitle(parent: HTMLElement | Element, title: string, cla
 }
 
 export function CreateH3(parent: HTMLElement | Element, title: string, classes: string[] = []): HTMLElement {
-    classes.push();
+    classes.push(
+        ""
+    );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("h3", {
         text: title,
@@ -29,7 +35,9 @@ export function CreateH3(parent: HTMLElement | Element, title: string, classes: 
 }
 
 export function CreateH4(parent: HTMLElement | Element, title: string, classes: string[] = []): HTMLElement {
-    classes.push();
+    classes.push(
+        ""
+    );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("h4", {
         text: title,
@@ -39,7 +47,9 @@ export function CreateH4(parent: HTMLElement | Element, title: string, classes: 
 }
 
 export function CreateH5(parent: HTMLElement | Element, title: string, classes: string[] = []): HTMLElement {
-    classes.push();
+    classes.push(
+        ""
+    );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("h5", {
         text: title,
@@ -49,7 +59,9 @@ export function CreateH5(parent: HTMLElement | Element, title: string, classes: 
 }
 
 export function CreateH6(parent: HTMLElement | Element, title: string, classes: string[] = []): HTMLElement {
-    classes.push();
+    classes.push(
+        ""
+    );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("h6", {
         text: title,
@@ -59,7 +71,9 @@ export function CreateH6(parent: HTMLElement | Element, title: string, classes: 
 }
 
 export function CreateParagraph(parent: HTMLElement | Element, text: string, classes: string[] = []): HTMLElement {
-    classes.push();
+    classes.push(
+        ""
+    );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("p", {
         text: text,

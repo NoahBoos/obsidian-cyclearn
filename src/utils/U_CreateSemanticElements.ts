@@ -1,5 +1,7 @@
 export function CreateContainer(parent: HTMLElement | Element, classes: string[] = []): HTMLDivElement {
-    classes.push();
+    classes.push(
+        ""
+    );
     let createdEl: HTMLDivElement;
     createdEl = parent.createEl("div", {
         cls: [classes.join(" ")]
@@ -8,7 +10,9 @@ export function CreateContainer(parent: HTMLElement | Element, classes: string[]
 }
 
 export function CreateHeader(parent: HTMLElement | Element, classes: string[] = []): HTMLElement {
-    classes.push();
+    classes.push(
+        ""
+    );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("header", {
         cls: [classes.join(" ")]
@@ -17,7 +21,9 @@ export function CreateHeader(parent: HTMLElement | Element, classes: string[] = 
 }
 
 export function CreateMain(parent: HTMLElement | Element, classes: string[] = []): HTMLElement {
-    classes.push();
+    classes.push(
+        ""
+    );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("main", {
         cls: [classes.join(" ")]
@@ -26,7 +32,9 @@ export function CreateMain(parent: HTMLElement | Element, classes: string[] = []
 }
 
 export function CreateSection(parent: HTMLElement | Element, classes: string[] = []): HTMLElement {
-    classes.push();
+    classes.push(
+        ""
+    );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("section", {
         cls: [classes.join(" ")]
@@ -35,7 +43,9 @@ export function CreateSection(parent: HTMLElement | Element, classes: string[] =
 }
 
 export function CreateArticle(parent: HTMLElement | Element, classes: string[] = []): HTMLElement {
-    classes.push();
+    classes.push(
+        ""
+    );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("article", {
         cls: [classes.join(" ")]
@@ -44,7 +54,9 @@ export function CreateArticle(parent: HTMLElement | Element, classes: string[] =
 }
 
 export function CreateAside(parent: HTMLElement | Element, classes: string[] = []): HTMLElement {
-    classes.push();
+    classes.push(
+        ""
+    );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("aside", {
         cls: [classes.join(" ")]
@@ -53,7 +65,9 @@ export function CreateAside(parent: HTMLElement | Element, classes: string[] = [
 }
 
 export function CreateFooter(parent: HTMLElement | Element, classes: string[] = []): HTMLElement {
-    classes.push();
+    classes.push(
+        ""
+    );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("footer", {
         cls: [classes.join(" ")]

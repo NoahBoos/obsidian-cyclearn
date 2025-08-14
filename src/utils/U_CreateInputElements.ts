@@ -1,7 +1,9 @@
 import {InputGroupData} from "../objects/InputGroupData";
 
 export function CreateLabel(parent: HTMLElement | Element, text: string, classes: string[] = []): HTMLLabelElement {
-    classes.push();
+    classes.push(
+        ""
+    );
     let createdEl: HTMLLabelElement;
     createdEl = parent.createEl("label", {
         text: text,
@@ -11,7 +13,9 @@ export function CreateLabel(parent: HTMLElement | Element, text: string, classes
 }
 
 export function CreateInput(parent: HTMLElement | Element, type: string, placeholder: string = "", value: string = "", classes: string[] = []): HTMLInputElement {
-    classes.push();
+    classes.push(
+        ""
+    );
     let createdEl: HTMLInputElement;
     createdEl = parent.createEl("input", {
         type: type,

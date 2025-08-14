@@ -1,7 +1,9 @@
 import {DropdownComponent} from "obsidian";
 
 export function CreateDropdown(parent: HTMLElement, defaultString: string, classes: string[] = []): DropdownComponent {
-    classes.push();
+    classes.push(
+        ""
+    );
     let createdEl: DropdownComponent;
     createdEl = new DropdownComponent(parent);
     createdEl.selectEl.addClass(classes.join(" "));
