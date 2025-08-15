@@ -5,8 +5,13 @@ import {V_FlashcardsView, VT_FLASHCARDS_VIEW_TYPE} from "./views/V_FlashcardsVie
 import {ActivateView} from "./utils/U_View";
 import {FlashcardsSettingTab} from "./settings/FlashcardsSettingTab";
 import {CreateDeckModal} from "./modals/CreateDeckModal";
-import {CREATE_DECK_MODAL_OPTIONS, CREATE_TAG_MODAL_OPTIONS} from "./modals/I_ModalOptions";
+import {
+    CREATE_DECK_MODAL_OPTIONS,
+    CREATE_TAG_MODAL_OPTIONS,
+    CREATE_TEMPLATE_MODAL_OPTIONS
+} from "./modals/I_ModalOptions";
 import {CreateTagModal} from "./modals/CreateTagModal";
+import {CreateTemplateModal} from "./modals/CreateTemplateModal";
 
 export default class Flashcards extends Plugin {
     settings: I_FlashcardsSettings;
@@ -39,6 +44,14 @@ export default class Flashcards extends Plugin {
                new CreateTagModal(this.app, CREATE_TAG_MODAL_OPTIONS).open();
            }
         });
+
+        this.addCommand({
+            id: "flashcards-create-template",
+            name: "Create a new template",
+            callback: () => {
+                new CreateTemplateModal(this.app, CREATE_TEMPLATE_MODAL_OPTIONS).open();
+            }
+        })
     }
 
     async onunload() {

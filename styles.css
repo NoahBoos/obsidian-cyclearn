@@ -25,6 +25,10 @@
     width: fit-content;
 }
 
+.flashcards__heading--text-align-left {
+    text-align: left;
+}
+
 .flashcards__main--default {
     width: 100%;
     display: flex;

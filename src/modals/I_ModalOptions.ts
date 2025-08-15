@@ -15,3 +15,9 @@ export const CREATE_TAG_MODAL_OPTIONS: I_ModalOptions = {
     modalConfirmButtonText: "Create a new tag",
     modalConfirmButtonIcon: null
 }
+
+export const CREATE_TEMPLATE_MODAL_OPTIONS: I_ModalOptions = {
+    modalTitle: "Create a new template",
+    modalConfirmButtonText: "Create a new template",
+    modalConfirmButtonIcon: null
+}
