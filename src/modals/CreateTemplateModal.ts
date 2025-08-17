@@ -6,26 +6,30 @@ import {database} from "../database/Database";
 import {InputGroupData} from "../objects/InputGroupData";
 import {CreateInput, CreateInputGroup} from "../utils/U_CreateInputElements";
 import {CreateSubtitle} from "../utils/U_CreateTextualElements";
-import {CreateContainer} from "../utils/U_CreateSemanticElements";
+import {CreateContainer, CreateSection} from "../utils/U_CreateSemanticElements";
 import {CreateDropdown, CreateOptionsForDropdownFromRecord} from "../utils/U_CreateDropdownElements";
 import {AUTHORIZED_ELEMENT_TYPES} from "../utils/U_AuthorizedElementTypes";
 import Loki from "lokijs";
 
 export class CreateTemplateModal extends FlashcardsModal {
     protected BuildMain(parent: HTMLElement): void {
-        CreateSubtitle(parent, "General Information");
+        // General Information Container Code
+        const generalInformationContainer: HTMLElement = CreateSection(parent);
+        CreateSubtitle(generalInformationContainer, "General Information");
         const nameInputGroupData: InputGroupData = new InputGroupData("text", "Name", "A wonderful template", null);
-        const nameInputGroupContainer: HTMLDivElement = CreateInputGroup(parent, nameInputGroupData);
+        const nameInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, nameInputGroupData);
         const nameInput: HTMLInputElement = nameInputGroupContainer.querySelector("input");
 
         const descriptionInputGroupData: InputGroupData = new InputGroupData("text", "Description", "This template is templating !", null);
-        const descriptionInputGroupContainer: HTMLDivElement = CreateInputGroup(parent, descriptionInputGroupData);
+        const descriptionInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, descriptionInputGroupData);
         const descriptionInput: HTMLInputElement = descriptionInputGroupContainer.querySelector("input");
 
-        const fieldHeader: HTMLDivElement = CreateContainer(parent, ["flashcards--flex-row", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-16"]);
+        // Field Information Container Code
+        const fieldInformationContainer: HTMLElement = CreateSection(parent);
+        const fieldHeader: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-row", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-16"]);
         CreateSubtitle(fieldHeader, "Fields", ["flashcards--width-fit-content"]);
         const addFieldButton: ButtonComponent = CreateButton(fieldHeader, true, "", "plus", ["flashcards--width-fit-content"]);
-        const fieldContainer: HTMLDivElement = CreateContainer(parent, ["flashcards--flex-column", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-8"]);
+        const fieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-8"]);
         addFieldButton.onClick(async () => {
            const fieldInputGroupContainer: HTMLDivElement = CreateContainer(fieldContainer, ["flashcards--flex-row", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-16"]);
            const fieldInput: HTMLInputElement = CreateInput(fieldInputGroupContainer, "text", "A cool field", null, ["flashcards--width-100"]);
@@ -33,7 +37,9 @@ export class CreateTemplateModal extends FlashcardsModal {
            CreateOptionsForDropdownFromRecord(fieldSelector, AUTHORIZED_ELEMENT_TYPES);
         });
 
-        const confirmButton: ButtonComponent = CreateButton(parent, true, this.modalOptions.modalConfirmButtonText, this.modalOptions.modalConfirmButtonIcon);
+        // Submit Container & Data Treatment Code
+        const submitContainer: HTMLElement = CreateSection(parent);
+        const confirmButton: ButtonComponent = CreateButton(submitContainer, true, this.modalOptions.modalConfirmButtonText, this.modalOptions.modalConfirmButtonIcon);
         confirmButton.onClick(async () => {
             this.ProcessData(database, fieldContainer, nameInput, descriptionInput);
         });
@@ -42,7 +48,7 @@ export class CreateTemplateModal extends FlashcardsModal {
                 event.preventDefault();
                 this.ProcessData(database, fieldContainer, nameInput, descriptionInput);
             }
-        })
+        });
     }
 
     protected ProcessData(database: Loki, fieldContainer?: HTMLDivElement, nameInput?: HTMLInputElement, descriptionInput?: HTMLInputElement) {
