@@ -1,4 +1,7 @@
 import {DropdownComponent} from "obsidian";
+import {Deck} from "../objects/Deck";
+import {Tag} from "../objects/Tag";
+import {Template} from "../objects/Template";
 
 export function CreateDropdown(parent: HTMLElement, defaultString: string, classes: string[] = []): DropdownComponent {
     classes.push(
@@ -11,6 +14,12 @@ export function CreateDropdown(parent: HTMLElement, defaultString: string, class
     return createdEl;
 }
 
-export function CreateOptionsForDropdown(parent: DropdownComponent, dataset: Record<string, string>) {
+export function CreateOptionsForDropdownFromRecord(parent: DropdownComponent, dataset: Record<string, string>) {
     parent.addOptions(dataset);
+}
+
+export function CreateOptionsForDropdownFromTable(parent: DropdownComponent, dataset: Array<Deck | Tag | Template>) {
+    dataset.forEach((element: Deck | Tag | Template) => {
+        parent.addOption(element.id, element.name);
+    })
 }

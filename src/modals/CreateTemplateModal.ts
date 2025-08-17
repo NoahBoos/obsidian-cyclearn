@@ -7,7 +7,7 @@ import {InputGroupData} from "../objects/InputGroupData";
 import {CreateInput, CreateInputGroup} from "../utils/U_CreateInputElements";
 import {CreateSubtitle} from "../utils/U_CreateTextualElements";
 import {CreateContainer} from "../utils/U_CreateSemanticElements";
-import {CreateDropdown, CreateOptionsForDropdown} from "../utils/U_CreateDropdownElements";
+import {CreateDropdown, CreateOptionsForDropdownFromRecord} from "../utils/U_CreateDropdownElements";
 import {AUTHORIZED_ELEMENT_TYPES} from "../utils/U_AuthorizedElementTypes";
 
 export class CreateTemplateModal extends FlashcardsModal {
@@ -29,7 +29,7 @@ export class CreateTemplateModal extends FlashcardsModal {
            const fieldInputGroupContainer: HTMLDivElement = CreateContainer(fieldContainer, ["flashcards__horizontal-container"]);
            const fieldInput: HTMLInputElement = CreateInput(fieldInputGroupContainer, "text", "A cool field", null, ["flashcards__input--width-100"]);
            const fieldSelector: DropdownComponent = CreateDropdown(fieldInputGroupContainer, "No type selected", ["flashcards__dropdown--width-fit-content"]);
-           CreateOptionsForDropdown(fieldSelector, AUTHORIZED_ELEMENT_TYPES);
+           CreateOptionsForDropdownFromRecord(fieldSelector, AUTHORIZED_ELEMENT_TYPES);
         });
 
         let fields: Record<string, string> = {};
