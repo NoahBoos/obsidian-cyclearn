@@ -1,7 +1,7 @@
 import {Plugin, WorkspaceLeaf} from "obsidian";
 import {DEFAULT_SETTINGS, I_FlashcardsSettings} from "./settings/I_FlashcardsSettings";
 import {InitializeDatabase} from "./database/Database";
-import {V_FlashcardsView, VT_FLASHCARDS_VIEW_TYPE} from "./views/V_FlashcardsView";
+import {FlashcardsStudioView, FLASHCARDS_STUDIO_VIEW_TYPE} from "./views/FlashcardsStudioView";
 import {ActivateView} from "./utils/U_View";
 import {FlashcardsSettingTab} from "./settings/FlashcardsSettingTab";
 import {CreateDeckModal} from "./modals/CreateDeckModal";
@@ -20,13 +20,13 @@ export default class Flashcards extends Plugin {
     async onload() {
         await this.LoadSettings();
         InitializeDatabase(this);
-        this.registerView(VT_FLASHCARDS_VIEW_TYPE, (leaf: WorkspaceLeaf) => new V_FlashcardsView(leaf, this));
+        this.registerView(FLASHCARDS_STUDIO_VIEW_TYPE, (leaf: WorkspaceLeaf) => new FlashcardsStudioView(leaf, this));
 
         this.addCommand({
-            id: "flashcards-home",
-            name: "Home",
+            id: "flashcards-studio-view",
+            name: "Studio view",
             callback: () => {
-                ActivateView(VT_FLASHCARDS_VIEW_TYPE);
+                ActivateView(FLASHCARDS_STUDIO_VIEW_TYPE);
             }
         });
 

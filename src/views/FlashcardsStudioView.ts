@@ -2,10 +2,9 @@ import {ItemView, WorkspaceLeaf} from "obsidian";
 import Flashcards from "../main";
 import {CreateAside, CreateContainer, CreateFooter, CreateHeader, CreateMain} from "../utils/U_CreateSemanticElements";
 
-export const VT_FLASHCARDS_VIEW_TYPE = "flashcards-view";
+export const FLASHCARDS_STUDIO_VIEW_TYPE = "flashcards-studio-view";
 
-
-export class V_FlashcardsView extends ItemView {
+export class FlashcardsStudioView extends ItemView {
     plugin: Flashcards;
 
     constructor(leaf: WorkspaceLeaf, plugin: Flashcards) {
@@ -14,7 +13,7 @@ export class V_FlashcardsView extends ItemView {
     }
 
     getViewType(): string {
-        return VT_FLASHCARDS_VIEW_TYPE;
+        return FLASHCARDS_STUDIO_VIEW_TYPE;
     }
 
     getDisplayText(): string {
@@ -33,7 +32,6 @@ export class V_FlashcardsView extends ItemView {
         const contentWrapper: HTMLDivElement = CreateContainer(container);
         const aside: HTMLElement = CreateAside(contentWrapper);
         const main: HTMLElement = CreateMain(contentWrapper);
-        const footer: HTMLElement = CreateFooter(container);
     }
 
     async onClose() {
