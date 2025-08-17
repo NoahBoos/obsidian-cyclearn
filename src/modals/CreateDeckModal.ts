@@ -6,19 +6,24 @@ import {ButtonComponent} from "obsidian";
 import {database} from "../database/Database";
 import {Deck} from "../objects/Deck";
 import {CreateSubtitle} from "../utils/U_CreateTextualElements";
+import {CreateSection} from "../utils/U_CreateSemanticElements";
 
 export class CreateDeckModal extends FlashcardsModal {
     protected BuildMain(parent: HTMLElement) {
-        CreateSubtitle(parent, "General Information");
+        // General Information Container Code
+        const generalInformationContainer: HTMLElement = CreateSection(parent);
+        CreateSubtitle(generalInformationContainer, "General Information");
         const nameInputGroupData: InputGroupData = new InputGroupData("text", "Name", "My cool deck", null);
-        const nameInputGroupContainer: HTMLDivElement = CreateInputGroup(parent, nameInputGroupData);
+        const nameInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, nameInputGroupData);
         const nameInput: HTMLInputElement = nameInputGroupContainer.querySelector("input");
 
         const descriptionInputGroupData: InputGroupData = new InputGroupData("text", "Description", "This deck teaches cool thingies !", null);
-        const descriptionInputGroupContainer: HTMLDivElement = CreateInputGroup(parent, descriptionInputGroupData);
+        const descriptionInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, descriptionInputGroupData);
         const descriptionInput: HTMLInputElement = descriptionInputGroupContainer.querySelector("input");
 
-        const confirmButton: ButtonComponent = CreateButton(parent, true, this.modalOptions.modalConfirmButtonText, this.modalOptions.modalConfirmButtonIcon);
+        // Submit Container & Data Treatment Code
+        const submitContainer: HTMLElement = CreateSection(parent);
+        const confirmButton: ButtonComponent = CreateButton(submitContainer, true, this.modalOptions.modalConfirmButtonText, this.modalOptions.modalConfirmButtonIcon);
         confirmButton.onClick(async () => {
             this.ProcessData(database, nameInput, descriptionInput);
         });
