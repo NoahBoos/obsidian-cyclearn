@@ -5,16 +5,18 @@ export class Note {
     public id_deck: string;
     public id_template: string;
     public fields: Record<string, string>;
+    public hasTwoFaces: boolean;
 
-    constructor(idDeck: string, idTemplate: string, fields: Record<string, string> = {}, id: string = GENERATE_UUID(16)) {
+    constructor(idDeck: string, idTemplate: string, fields: Record<string, string> = {}, hasTwoFaces: boolean = true, id: string = GENERATE_UUID(16)) {
         this.id = id;
         this.id_deck = idDeck;
         this.id_template = idTemplate;
         this.fields = fields;
+        this.hasTwoFaces = hasTwoFaces;
     }
 
-    public static Create(database: Loki, idDeck: string, idTemplate: string, fields: Record<string, string>): Note {
-        const newNote = new Note(idDeck, idTemplate, fields);
+    public static Create(database: Loki, idDeck: string, idTemplate: string, fields: Record<string, string>, hasTwoFaces: boolean): Note {
+        const newNote = new Note(idDeck, idTemplate, fields, hasTwoFaces);
         database.getCollection<Note>("notes").insert(newNote);
         return newNote;
     }
