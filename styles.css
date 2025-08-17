@@ -10,8 +10,16 @@
     margin: 0;
 }
 
+.flashcards--width-20 {
+    width: 20% !important;
+}
+
 .flashcards--width-40 {
     width: 40%;
+}
+
+.flashcards--width-80 {
+    width: 80% !important;
 }
 
 .flashcards--width-100 {

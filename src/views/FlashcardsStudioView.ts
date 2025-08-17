@@ -1,6 +1,15 @@
-import {ItemView, WorkspaceLeaf} from "obsidian";
+import {ButtonComponent, ItemView, WorkspaceLeaf} from "obsidian";
 import Flashcards from "../main";
 import {CreateAside, CreateContainer, CreateFooter, CreateHeader, CreateMain} from "../utils/U_CreateSemanticElements";
+import {database} from "../database/Database";
+import {Tag} from "../objects/Tag";
+import {Note} from "../objects/Note";
+import {Deck} from "../objects/Deck";
+import {Card} from "../objects/Card";
+import {TaggedNote} from "../objects/TaggedNote";
+import {Template} from "../objects/Template";
+import {CreateSubtitle, CreateTitle} from "../utils/U_CreateTextualElements";
+import {CreateButton} from "../utils/U_CreateButtonElements";
 
 export const FLASHCARDS_STUDIO_VIEW_TYPE = "flashcards-studio-view";
 let activeView: string = "flashcards--read-all";
@@ -18,7 +27,7 @@ export class FlashcardsStudioView extends ItemView {
     }
 
     getDisplayText(): string {
-        return "Flashcards";
+        return "Flashcards Studio View";
     }
 
     getIcon(): string {
@@ -29,10 +38,46 @@ export class FlashcardsStudioView extends ItemView {
         const container: Element = this.containerEl.children[1];
         container.empty();
 
+        // Table Gathering
+        const deckTable: Deck[] = Deck.ReadAll(database);
+        const templateTable: Template[] = Template.ReadAll(database);
+        const tagTable: Tag[] = Tag.ReadAll(database);
+
+        // Header Code
         const header: HTMLElement = CreateHeader(container);
-        const contentWrapper: HTMLDivElement = CreateContainer(container);
-        const aside: HTMLElement = CreateAside(contentWrapper);
-        const main: HTMLElement = CreateMain(contentWrapper);
+        CreateTitle(header, "Flashcards Studio View");
+
+        // Aside & Main Wrapper
+        const contentWrapper: HTMLDivElement = CreateContainer(container, ["flashcards--flex-row"]);
+        /// Aside Code
+        const aside: HTMLElement = CreateAside(contentWrapper, ["flashcards--width-20", "flashcards--flex-column", "flashcards--gap-16"]);
+        //// Global Filter Code
+        CreateSubtitle(aside, "Global Filters");
+        const globalFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
+        const noteReadAllButton: ButtonComponent = CreateButton(globalFilterWrapper, false, "See all notes", null, ["flashcards--width-100", "flashcards--justify-start"]);
+        const deckReadAllButton: ButtonComponent = CreateButton(globalFilterWrapper, false, "See all decks", null, ["flashcards--width-100", "flashcards--justify-start"]);
+        const templateReadAllButton: ButtonComponent = CreateButton(globalFilterWrapper, false, "See all templates", null, ["flashcards--width-100", "flashcards--justify-start"]);
+        const tagReadAllButton: ButtonComponent = CreateButton(globalFilterWrapper, false, "See all tags", null, ["flashcards--width-100", "flashcards--justify-start"]);
+        //// Deck Filter Code
+        CreateSubtitle(aside, "Deck Filters");
+        const deckFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
+        deckTable.forEach((deck: Deck) => {
+            CreateButton(deckFilterWrapper, false, deck.name, null, ["flashcards--width-100", "flashcards--justify-start"]);
+        })
+        //// Template Filter Code
+        CreateSubtitle(aside, "Template Filters");
+        const templateFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
+        templateTable.forEach((template: Template) => {
+            CreateButton(templateFilterWrapper, false, template.name, null, ["flashcards--width-100", "flashcards--justify-start"]);
+        })
+        //// Tag Filter Code
+        CreateSubtitle(aside, "Tag Filters");
+        const tagFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
+        tagTable.forEach((tag: Tag) => {
+            CreateButton(tagFilterWrapper, false, tag.name, null, ["flashcards--width-100", "flashcards--justify-start"]);
+        })
+        /// Main
+        const main: HTMLElement = CreateMain(contentWrapper, ["flashcards--width-80"]);
     }
 
     async onClose() {
