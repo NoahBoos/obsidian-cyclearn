@@ -3,6 +3,7 @@ import Flashcards from "../main";
 import {CreateAside, CreateContainer, CreateFooter, CreateHeader, CreateMain} from "../utils/U_CreateSemanticElements";
 
 export const FLASHCARDS_STUDIO_VIEW_TYPE = "flashcards-studio-view";
+let activeView: string = "flashcards--read-all";
 
 export class FlashcardsStudioView extends ItemView {
     plugin: Flashcards;
