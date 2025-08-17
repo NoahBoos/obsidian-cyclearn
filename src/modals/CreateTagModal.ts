@@ -7,19 +7,24 @@ import {database} from "../database/Database";
 import {Tag} from "../objects/Tag";
 import {CreateSubtitle} from "../utils/U_CreateTextualElements";
 import Loki from "lokijs";
+import {CreateSection} from "../utils/U_CreateSemanticElements";
 
 export class CreateTagModal extends FlashcardsModal {
     protected BuildMain(parent: HTMLElement) {
-        CreateSubtitle(parent, "General Information");
+        // General Information Container Code
+        const generalInformationContainer: HTMLElement = CreateSection(parent);
+        CreateSubtitle(generalInformationContainer, "General Information");
         const nameInputGroupData: InputGroupData = new InputGroupData("text", "Name", "My amazing tag", null);
-        const nameInputGroupContainer: HTMLDivElement = CreateInputGroup(parent, nameInputGroupData);
+        const nameInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, nameInputGroupData);
         const nameInput: HTMLInputElement = nameInputGroupContainer.querySelector("input");
 
         const descriptionInputGroupData: InputGroupData = new InputGroupData("text", "Description", "This tag is tagging cool notes !", null);
-        const descriptionInputGroupContainer: HTMLDivElement = CreateInputGroup(parent, descriptionInputGroupData);
+        const descriptionInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, descriptionInputGroupData);
         const descriptionInput: HTMLInputElement = descriptionInputGroupContainer.querySelector("input");
 
-        const confirmButton: ButtonComponent = CreateButton(parent, true, this.modalOptions.modalConfirmButtonText, this.modalOptions.modalConfirmButtonIcon);
+        // Field Information Container Code
+        const fieldInformationContainer: HTMLElement = CreateSection(parent);
+        const confirmButton: ButtonComponent = CreateButton(fieldInformationContainer, true, this.modalOptions.modalConfirmButtonText, this.modalOptions.modalConfirmButtonIcon);
         confirmButton.onClick(async () => {
             this.ProcessData(database, nameInput, descriptionInput);
         });
