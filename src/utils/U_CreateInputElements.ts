@@ -33,3 +33,11 @@ export function CreateInputGroup(parent: HTMLElement | Element, inputData: Input
     CreateInput(inputGroupContainer, inputData.fieldType, inputData.fieldPlaceholder, inputData.fieldValue);
     return inputGroupContainer;
 }
+
+export function CreateCheckboxInputGroup(parent: HTMLElement | Element, inputData: InputGroupData): HTMLDivElement {
+    const inputGroupContainer: HTMLDivElement = CreateContainer(parent, ["flashcards__checkboxInputGroupContainer"]);
+    const checkbox: HTMLInputElement = CreateInput(inputGroupContainer, "checkbox");
+    checkbox.checked = Boolean(inputData.fieldValue);
+    CreateLabel(inputGroupContainer, inputData.fieldName);
+    return inputGroupContainer;
+}
