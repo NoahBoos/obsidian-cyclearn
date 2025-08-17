@@ -1,4 +1,5 @@
 import {GENERATE_UUID} from "../utils/U_GenerateUUID";
+import {CardType} from "./E_CardType";
 
 export class Card {
     public id: string;
@@ -7,18 +8,20 @@ export class Card {
     public ease_factor: number;
     public interval: number;
     public review_amount: number;
+    public card_type: CardType;
 
-    constructor(idNote: string, dueAt: number, easeFactor: number = 2.5, interval: number = 1, reviewAmount: number = 0, id: string = GENERATE_UUID(16)) {
+    constructor(idNote: string, dueAt: number, cardType: CardType, easeFactor: number = 2.5, interval: number = 1, reviewAmount: number = 0, id: string = GENERATE_UUID(16)) {
         this.id = id;
         this.id_note = idNote;
         this.due_at = dueAt;
         this.ease_factor = easeFactor;
         this.interval = interval;
         this.review_amount = reviewAmount;
+        this.card_type = cardType;
     }
 
-    public static Create(database: Loki, idNote: string, dueAt: number): Card {
-        const newCard = new Card(idNote, dueAt);
+    public static Create(database: Loki, idNote: string, dueAt: number, cardType: CardType): Card {
+        const newCard = new Card(idNote, dueAt, cardType);
         database.getCollection<Card>("cards").insert(newCard);
         return newCard;
     }
