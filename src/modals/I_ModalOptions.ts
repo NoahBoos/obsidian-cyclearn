@@ -21,3 +21,9 @@ export const CREATE_TEMPLATE_MODAL_OPTIONS: I_ModalOptions = {
     modalConfirmButtonText: "Create a new template",
     modalConfirmButtonIcon: null
 }
+
+export const CREATE_NOTE_MODAL_OPTIONS: I_ModalOptions = {
+    modalTitle: "Create a new note",
+    modalConfirmButtonText: "Create a new note",
+    modalConfirmButtonIcon: null
+}

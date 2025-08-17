@@ -6,12 +6,13 @@ import {ActivateView} from "./utils/U_View";
 import {FlashcardsSettingTab} from "./settings/FlashcardsSettingTab";
 import {CreateDeckModal} from "./modals/CreateDeckModal";
 import {
-    CREATE_DECK_MODAL_OPTIONS,
+    CREATE_DECK_MODAL_OPTIONS, CREATE_NOTE_MODAL_OPTIONS,
     CREATE_TAG_MODAL_OPTIONS,
     CREATE_TEMPLATE_MODAL_OPTIONS
 } from "./modals/I_ModalOptions";
 import {CreateTagModal} from "./modals/CreateTagModal";
 import {CreateTemplateModal} from "./modals/CreateTemplateModal";
+import {CreateNoteModal} from "./modals/CreateNoteModal";
 
 export default class Flashcards extends Plugin {
     settings: I_FlashcardsSettings;
@@ -50,6 +51,14 @@ export default class Flashcards extends Plugin {
             name: "Create a new template",
             callback: () => {
                 new CreateTemplateModal(this.app, CREATE_TEMPLATE_MODAL_OPTIONS).open();
+            }
+        });
+
+        this.addCommand({
+            id: "flashcards-create-note",
+            name: "Create a new note",
+            callback: () => {
+                new CreateNoteModal(this.app, CREATE_NOTE_MODAL_OPTIONS).open();
             }
         })
     }
