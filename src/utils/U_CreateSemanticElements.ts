@@ -33,7 +33,7 @@ export function CreateMain(parent: HTMLElement | Element, classes: string[] = []
 
 export function CreateSection(parent: HTMLElement | Element, classes: string[] = []): HTMLElement {
     classes.push(
-        ""
+        "flashcards__section--default"
     );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("section", {
@@ -44,7 +44,7 @@ export function CreateSection(parent: HTMLElement | Element, classes: string[] =
 
 export function CreateArticle(parent: HTMLElement | Element, classes: string[] = []): HTMLElement {
     classes.push(
-        ""
+        "flashcards__article--default"
     );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("article", {

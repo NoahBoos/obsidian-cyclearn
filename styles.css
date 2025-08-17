@@ -73,6 +73,19 @@
     width: 100%;
 }
 
+.flashcards__section--default {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.flashcards__article--default {
+    width: 100%;
+}
+
 .flashcards__dropdown--default {
     width: 100%;
 }
