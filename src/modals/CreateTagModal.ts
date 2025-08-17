@@ -10,7 +10,7 @@ import Loki from "lokijs";
 
 export class CreateTagModal extends FlashcardsModal {
     protected BuildMain(parent: HTMLElement) {
-        CreateSubtitle(parent, "General Information", ["flashcards__heading--text-align-left"]);
+        CreateSubtitle(parent, "General Information");
         const nameInputGroupData: InputGroupData = new InputGroupData("text", "Name", "My amazing tag", null);
         const nameInputGroupContainer: HTMLDivElement = CreateInputGroup(parent, nameInputGroupData);
         const nameInput: HTMLInputElement = nameInputGroupContainer.querySelector("input");

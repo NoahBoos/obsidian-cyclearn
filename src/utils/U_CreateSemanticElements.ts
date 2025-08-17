@@ -1,6 +1,6 @@
 export function CreateContainer(parent: HTMLElement | Element, classes: string[] = []): HTMLDivElement {
     classes.push(
-        "flashcards__container--default"
+        "flashcards--width-100"
     );
     let createdEl: HTMLDivElement;
     createdEl = parent.createEl("div", {
@@ -11,7 +11,10 @@ export function CreateContainer(parent: HTMLElement | Element, classes: string[]
 
 export function CreateHeader(parent: HTMLElement | Element, classes: string[] = []): HTMLElement {
     classes.push(
-        "flashcards__header--default"
+        "flashcards--width-100",
+        "flashcards--flex-row",
+        "flashcards--justify-between",
+        "flashcards--align-center"
     );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("header", {
@@ -22,7 +25,11 @@ export function CreateHeader(parent: HTMLElement | Element, classes: string[] = 
 
 export function CreateMain(parent: HTMLElement | Element, classes: string[] = []): HTMLElement {
     classes.push(
-        "flashcards__main--default"
+        "flashcards--width-100",
+        "flashcards--flex-column",
+        "flashcards--justify-center",
+        "flashcards--align-center",
+        "flashcards--gap-16"
     );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("main", {
@@ -33,7 +40,11 @@ export function CreateMain(parent: HTMLElement | Element, classes: string[] = []
 
 export function CreateSection(parent: HTMLElement | Element, classes: string[] = []): HTMLElement {
     classes.push(
-        "flashcards__section--default"
+        "flashcards--width-100",
+        "flashcards--flex-column",
+        "flashcards--justify-center",
+        "flashcards--align-center",
+        "flashcards--gap-16"
     );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("section", {
@@ -44,7 +55,7 @@ export function CreateSection(parent: HTMLElement | Element, classes: string[] =
 
 export function CreateArticle(parent: HTMLElement | Element, classes: string[] = []): HTMLElement {
     classes.push(
-        "flashcards__article--default"
+        "flashcards--width-100"
     );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("article", {

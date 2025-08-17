@@ -5,7 +5,7 @@ import {Template} from "../objects/Template";
 
 export function CreateDropdown(parent: HTMLElement, defaultString: string, classes: string[] = []): DropdownComponent {
     classes.push(
-        "flashcards__dropdown--default"
+        "flashcards--width-100"
     );
     let createdEl: DropdownComponent;
     createdEl = new DropdownComponent(parent);

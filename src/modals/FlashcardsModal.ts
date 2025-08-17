@@ -13,7 +13,7 @@ export abstract class FlashcardsModal extends Modal {
 
     onOpen() {
         const {contentEl} = this;
-        contentEl.addClass("flashcards__modal");
+        contentEl.addClass("flashcards--width-100", "flashcards--flex-column", "flashcards--justify-center", "flashcards--align-center", "flashcards--gap-16");
         const header = CreateHeader(contentEl);
         const title = CreateTitle(header, this.modalOptions.modalTitle);
         const main = CreateMain(contentEl);

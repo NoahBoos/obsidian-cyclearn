@@ -23,7 +23,7 @@ export class CreateNoteModal extends FlashcardsModal {
 
         // General Information Container Code
         const generalInformationContainer: HTMLElement = CreateSection(parent);
-        CreateSubtitle(generalInformationContainer, "General Information", ["flashcards__heading--text-align-left"]);
+        CreateSubtitle(generalInformationContainer, "General Information");
         const deckSelector: DropdownComponent = CreateDropdown(generalInformationContainer, "Choose a deck");
         CreateOptionsForDropdownFromTable(deckSelector, deckTable);
         const templateSelector: DropdownComponent = CreateDropdown(generalInformationContainer, "Choose a template");
@@ -34,8 +34,8 @@ export class CreateNoteModal extends FlashcardsModal {
 
         // Field Information Container Code
         const fieldInformationContainer: HTMLElement = CreateSection(parent);
-        CreateSubtitle(fieldInformationContainer, "Field Information", ["flashcards__heading--text-align-left"]);
-        const fieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards__container--flex-column"]);
+        CreateSubtitle(fieldInformationContainer, "Field Information");
+        const fieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-center", "flashcards--align-center", "flashcards--gap-16"]);
         templateSelector.onChange(() => {
             fieldContainer.empty();
             const selectedTemplate: Template = Template.ReadOne(database, templateSelector.getValue());

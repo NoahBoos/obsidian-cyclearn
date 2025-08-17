@@ -13,7 +13,7 @@ import Loki from "lokijs";
 
 export class CreateTemplateModal extends FlashcardsModal {
     protected BuildMain(parent: HTMLElement): void {
-        CreateSubtitle(parent, "General Information", ["flashcards__heading--text-align-left"]);
+        CreateSubtitle(parent, "General Information");
         const nameInputGroupData: InputGroupData = new InputGroupData("text", "Name", "A wonderful template", null);
         const nameInputGroupContainer: HTMLDivElement = CreateInputGroup(parent, nameInputGroupData);
         const nameInput: HTMLInputElement = nameInputGroupContainer.querySelector("input");
@@ -22,14 +22,14 @@ export class CreateTemplateModal extends FlashcardsModal {
         const descriptionInputGroupContainer: HTMLDivElement = CreateInputGroup(parent, descriptionInputGroupData);
         const descriptionInput: HTMLInputElement = descriptionInputGroupContainer.querySelector("input");
 
-        const fieldHeader: HTMLDivElement = CreateContainer(parent, ["flashcards__horizontal-container"]);
-        CreateSubtitle(fieldHeader, "Fields", ["flashcards__heading--width-fit-content", "flashcards__heading--text-align-left"]);
-        const addFieldButton: ButtonComponent = CreateButton(fieldHeader, true, "", "plus", ["flashcards__in-header-button"]);
-        const fieldContainer: HTMLDivElement = CreateContainer(parent, ["flashcards__vertical-container"]);
+        const fieldHeader: HTMLDivElement = CreateContainer(parent, ["flashcards--flex-row", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-16"]);
+        CreateSubtitle(fieldHeader, "Fields", ["flashcards--width-fit-content"]);
+        const addFieldButton: ButtonComponent = CreateButton(fieldHeader, true, "", "plus", ["flashcards--width-fit-content"]);
+        const fieldContainer: HTMLDivElement = CreateContainer(parent, ["flashcards--flex-column", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-8"]);
         addFieldButton.onClick(async () => {
-           const fieldInputGroupContainer: HTMLDivElement = CreateContainer(fieldContainer, ["flashcards__horizontal-container"]);
-           const fieldInput: HTMLInputElement = CreateInput(fieldInputGroupContainer, "text", "A cool field", null, ["flashcards__input--width-100"]);
-           const fieldSelector: DropdownComponent = CreateDropdown(fieldInputGroupContainer, "No type selected", ["flashcards__dropdown--width-fit-content"]);
+           const fieldInputGroupContainer: HTMLDivElement = CreateContainer(fieldContainer, ["flashcards--flex-row", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-16"]);
+           const fieldInput: HTMLInputElement = CreateInput(fieldInputGroupContainer, "text", "A cool field", null, ["flashcards--width-100"]);
+           const fieldSelector: DropdownComponent = CreateDropdown(fieldInputGroupContainer, "No type selected", ["flashcards--width-fit-content"]);
            CreateOptionsForDropdownFromRecord(fieldSelector, AUTHORIZED_ELEMENT_TYPES);
         });
 

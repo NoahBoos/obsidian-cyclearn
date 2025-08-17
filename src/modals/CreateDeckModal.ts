@@ -9,7 +9,7 @@ import {CreateSubtitle} from "../utils/U_CreateTextualElements";
 
 export class CreateDeckModal extends FlashcardsModal {
     protected BuildMain(parent: HTMLElement) {
-        CreateSubtitle(parent, "General Information", ["flashcards__heading--text-align-left"]);
+        CreateSubtitle(parent, "General Information");
         const nameInputGroupData: InputGroupData = new InputGroupData("text", "Name", "My cool deck", null);
         const nameInputGroupContainer: HTMLDivElement = CreateInputGroup(parent, nameInputGroupData);
         const nameInput: HTMLInputElement = nameInputGroupContainer.querySelector("input");

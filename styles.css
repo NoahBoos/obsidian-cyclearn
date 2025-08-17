@@ -1,116 +1,57 @@
-.flashcards__modal {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    width: 100%;
-}
-
-.flashcards__header--default {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.flashcards__heading--default {
-    width: 100%;
-    text-align: center;
-    margin: 0;
-}
-
-.flashcards__heading--width-fit-content {
-    width: fit-content;
-}
-
-.flashcards__heading--text-align-left {
+.flashcards--text-left {
     text-align: left;
 }
 
-.flashcards__main--default {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
+.flashcards--text-center {
+    text-align: center;
 }
 
-.flashcards__inputGroupContainer {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+.flashcards--margin-0 {
+    margin: 0;
 }
 
-.flashcards__checkboxInputGroupContainer {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: left;
-    gap: 8px;
-}
-
-.flashcards__button--default {
+.flashcards--width-40 {
     width: 40%;
 }
 
-.flashcards__in-header-button {
+.flashcards--width-100 {
+    width: 100%;
+}
+
+.flashcards--width-fit-content {
     width: fit-content;
 }
 
-.flashcards__horizontal-container {
+.flashcards--flex-row {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
 }
 
-.flashcards__vertical-container {
+.flashcards--flex-column {
     display: flex;
     flex-direction: column;
-    align-items: center;
+}
+
+.flashcards--justify-start {
+    justify-content: flex-start;
+}
+
+.flashcards--justify-center {
     justify-content: center;
+}
+
+.flashcards--justify-between {
+    justify-content: space-between;
+}
+
+.flashcards--align-center {
+    align-items: center;
+}
+
+.flashcards--gap-8 {
     gap: 8px;
 }
 
-.flashcards__container--default {
-    width: 100%;
-}
-
-.flashcards__section--default {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-}
-
-.flashcards__article--default {
-    width: 100%;
-}
-
-.flashcards__dropdown--default {
-    width: 100%;
-}
-
-.flashcards__dropdown--width-fit-content {
-    width: fit-content !important;
-}
-
-.flashcards__input--width-100 {
-    width: 100%;
-}
-
-.flashcards__container--flex-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.flashcards--gap-16 {
     gap: 16px;
 }

@@ -28,14 +28,14 @@ export function CreateInput(parent: HTMLElement | Element, type: string, placeho
 }
 
 export function CreateInputGroup(parent: HTMLElement | Element, inputData: InputGroupData) {
-    const inputGroupContainer: HTMLDivElement = CreateContainer(parent, ["flashcards__inputGroupContainer"]);
+    const inputGroupContainer: HTMLDivElement = CreateContainer(parent, ["flashcards--flex-column", "flashcards--gap-8"]);
     CreateLabel(inputGroupContainer, inputData.fieldName);
     CreateInput(inputGroupContainer, inputData.fieldType, inputData.fieldPlaceholder, inputData.fieldValue);
     return inputGroupContainer;
 }
 
 export function CreateCheckboxInputGroup(parent: HTMLElement | Element, inputData: InputGroupData): HTMLDivElement {
-    const inputGroupContainer: HTMLDivElement = CreateContainer(parent, ["flashcards__checkboxInputGroupContainer"]);
+    const inputGroupContainer: HTMLDivElement = CreateContainer(parent, ["flashcards--flex-row", "flashcards--align-center", "flashcards--gap-8"]);
     const checkbox: HTMLInputElement = CreateInput(inputGroupContainer, "checkbox");
     checkbox.checked = Boolean(inputData.fieldValue);
     CreateLabel(inputGroupContainer, inputData.fieldName);

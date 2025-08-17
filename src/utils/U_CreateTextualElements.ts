@@ -1,6 +1,8 @@
 export function CreateTitle(parent: HTMLElement | Element, title: string, classes: string[] = []): HTMLElement {
     classes.push(
-        "flashcards__heading--default"
+        "flashcards--width-100",
+        "flashcards--text-center",
+        "flashcards--margin-0"
     );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("h1", {
@@ -12,7 +14,9 @@ export function CreateTitle(parent: HTMLElement | Element, title: string, classe
 
 export function CreateSubtitle(parent: HTMLElement | Element, title: string, classes: string[] = []): HTMLElement {
     classes.push(
-        "flashcards__heading--default"
+        "flashcards--width-100",
+        "flashcards--text-left",
+        "flashcards--margin-0"
     );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("h2", {
@@ -24,7 +28,9 @@ export function CreateSubtitle(parent: HTMLElement | Element, title: string, cla
 
 export function CreateH3(parent: HTMLElement | Element, title: string, classes: string[] = []): HTMLElement {
     classes.push(
-        "flashcards__heading--default"
+        "flashcards--width-100",
+        "flashcards--text-left",
+        "flashcards--margin-0"
     );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("h3", {
@@ -36,7 +42,9 @@ export function CreateH3(parent: HTMLElement | Element, title: string, classes: 
 
 export function CreateH4(parent: HTMLElement | Element, title: string, classes: string[] = []): HTMLElement {
     classes.push(
-        "flashcards__heading--default"
+        "flashcards--width-100",
+        "flashcards--text-left",
+        "flashcards--margin-0"
     );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("h4", {
@@ -48,7 +56,9 @@ export function CreateH4(parent: HTMLElement | Element, title: string, classes: 
 
 export function CreateH5(parent: HTMLElement | Element, title: string, classes: string[] = []): HTMLElement {
     classes.push(
-        "flashcards__heading--default"
+        "flashcards--width-100",
+        "flashcards--text-left",
+        "flashcards--margin-0"
     );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("h5", {
@@ -60,7 +70,9 @@ export function CreateH5(parent: HTMLElement | Element, title: string, classes: 
 
 export function CreateH6(parent: HTMLElement | Element, title: string, classes: string[] = []): HTMLElement {
     classes.push(
-        "flashcards__heading--default"
+        "flashcards--width-100",
+        "flashcards--text-left",
+        "flashcards--margin-0"
     );
     let createdEl: HTMLElement;
     createdEl = parent.createEl("h6", {
