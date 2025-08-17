@@ -20,15 +20,18 @@ export class CreateDeckModal extends FlashcardsModal {
 
         const confirmButton: ButtonComponent = CreateButton(parent, true, this.modalOptions.modalConfirmButtonText, this.modalOptions.modalConfirmButtonIcon);
         confirmButton.onClick(async () => {
-            Deck.Create(database, nameInput.value, descriptionInput.value);
-            this.close();
+            this.ProcessData(database, nameInput, descriptionInput);
         });
         this.contentEl.addEventListener("keydown", async (event: KeyboardEvent) => {
             if (event.shiftKey && event.key === "Enter") {
                 event.preventDefault();
-                Deck.Create(database, nameInput.value, descriptionInput.value);
-                this.close();
+                this.ProcessData(database, nameInput, descriptionInput);
             }
         });
+    }
+
+    protected ProcessData(database: Loki, nameInput?: HTMLInputElement, descriptionInput?: HTMLInputElement) {
+        Deck.Create(database, nameInput.value, descriptionInput.value);
+        this.close();
     }
 }

@@ -6,6 +6,7 @@ import {ButtonComponent} from "obsidian";
 import {database} from "../database/Database";
 import {Tag} from "../objects/Tag";
 import {CreateSubtitle} from "../utils/U_CreateTextualElements";
+import Loki from "lokijs";
 
 export class CreateTagModal extends FlashcardsModal {
     protected BuildMain(parent: HTMLElement) {
@@ -20,15 +21,18 @@ export class CreateTagModal extends FlashcardsModal {
 
         const confirmButton: ButtonComponent = CreateButton(parent, true, this.modalOptions.modalConfirmButtonText, this.modalOptions.modalConfirmButtonIcon);
         confirmButton.onClick(async () => {
-            Tag.Create(database, nameInput.value, descriptionInput.value);
-            this.close();
+            this.ProcessData(database, nameInput, descriptionInput);
         });
         this.contentEl.addEventListener("keydown", async (event: KeyboardEvent) => {
            if (event.shiftKey && event.key === "Enter") {
                event.preventDefault();
-               Tag.Create(database, nameInput.value, descriptionInput.value);
-               this.close();
+               this.ProcessData(database, nameInput, descriptionInput);
            }
         });
+    }
+
+    protected ProcessData(database: Loki, nameInput?: HTMLInputElement, descriptionInput?: HTMLInputElement) {
+        Tag.Create(database, nameInput.value, descriptionInput.value);
+        this.close();
     }
 }

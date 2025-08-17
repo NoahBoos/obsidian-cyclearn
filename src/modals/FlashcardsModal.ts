@@ -26,4 +26,6 @@ export abstract class FlashcardsModal extends Modal {
     }
 
     protected abstract BuildMain(parent: HTMLElement): void;
+
+    protected abstract ProcessData(database: Loki): void;
 }

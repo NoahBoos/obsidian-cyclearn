@@ -12,6 +12,7 @@ import {CreateDropdown, CreateOptionsForDropdownFromTable} from "../utils/U_Crea
 import {Note} from "../objects/Note";
 import {Card} from "../objects/Card";
 import {CardType} from "../objects/E_CardType";
+import Loki from "lokijs";
 
 export class CreateNoteModal extends FlashcardsModal {
     protected BuildMain(parent: HTMLElement): void {
@@ -49,36 +50,30 @@ export class CreateNoteModal extends FlashcardsModal {
         const confirmButton: ButtonComponent = CreateButton(submitContainer, true, this.modalOptions.modalConfirmButtonText, this.modalOptions.modalConfirmButtonIcon);
         let fields: Record<string, string> = {};
         confirmButton.onClick(() => {
-            for (const field of fieldContainer.querySelectorAll("div")) {
-                let fieldLabel: HTMLLabelElement = field.querySelector("label");
-                let fieldInput: HTMLInputElement = field.querySelector("input");
-                fields[fieldInput.value] = fieldLabel.textContent;
-            }
-            let addedNote: Note = Note.Create(database, deckSelector.getValue(), templateSelector.getValue(), fields, hasTwoFacesCheckboxInput.checked);
-            if (addedNote.hasTwoFaces) {
-                Card.Create(database, addedNote.id, null, CardType.FRONT);
-                Card.Create(database, addedNote.id, null, CardType.BACK);
-            } else {
-                Card.Create(database, addedNote.id, null, CardType.FRONT);
-            }
-            this.close();
+            this.ProcessData(database, fieldContainer, deckSelector, templateSelector, hasTwoFacesCheckboxInput);
         });
         this.contentEl.addEventListener("keydown", (event: KeyboardEvent) => {
             if (event.shiftKey && event.key === "Enter") {
-                for (const field of fieldContainer.querySelectorAll("div")) {
-                    let fieldLabel: HTMLLabelElement = field.querySelector("label");
-                    let fieldInput: HTMLInputElement = field.querySelector("input");
-                    fields[fieldInput.value] = fieldLabel.textContent;
-                }
-                let addedNote: Note = Note.Create(database, deckSelector.getValue(), templateSelector.getValue(), fields, hasTwoFacesCheckboxInput.checked);
-                if (addedNote.hasTwoFaces) {
-                    Card.Create(database, addedNote.id, null, CardType.FRONT);
-                    Card.Create(database, addedNote.id, null, CardType.BACK);
-                } else {
-                    Card.Create(database, addedNote.id, null, CardType.FRONT);
-                }
-                this.close();
+                event.preventDefault();
+                this.ProcessData(database, fieldContainer, deckSelector, templateSelector, hasTwoFacesCheckboxInput);
             }
         });
+    }
+
+    protected ProcessData(database: Loki, fieldContainer?: HTMLDivElement, deckSelector?: DropdownComponent, templateSelector?: DropdownComponent, hasTwoFacesCheckboxInput?: HTMLInputElement): void {
+        let fields: Record<string, string> = {};
+        for (const field of fieldContainer.querySelectorAll("div")) {
+            let fieldLabel: HTMLLabelElement = field.querySelector("label");
+            let fieldInput: HTMLInputElement = field.querySelector("input");
+            fields[fieldLabel.textContent] = fieldInput.value;
+        }
+        let addedNote: Note = Note.Create(database, deckSelector.getValue(), templateSelector.getValue(), fields, hasTwoFacesCheckboxInput.checked);
+        if (addedNote.hasTwoFaces) {
+            Card.Create(database, addedNote.id, null, CardType.FRONT);
+            Card.Create(database, addedNote.id, null, CardType.BACK);
+        } else {
+            Card.Create(database, addedNote.id, null, CardType.FRONT);
+        }
+        this.close();
     }
 }
