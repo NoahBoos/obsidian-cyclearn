@@ -5,9 +5,11 @@ import {InputGroupData} from "../objects/InputGroupData";
 import {ButtonComponent} from "obsidian";
 import {database} from "../database/Database";
 import {Deck} from "../objects/Deck";
+import {CreateSubtitle} from "../utils/U_CreateTextualElements";
 
 export class CreateDeckModal extends FlashcardsModal {
     protected BuildMain(parent: HTMLElement) {
+        CreateSubtitle(parent, "General Information", ["flashcards__heading--text-align-left"]);
         const nameInputGroupData: InputGroupData = new InputGroupData("text", "Name", "My cool deck", null);
         const nameInputGroupContainer: HTMLDivElement = CreateInputGroup(parent, nameInputGroupData);
         const nameInput: HTMLInputElement = nameInputGroupContainer.querySelector("input");

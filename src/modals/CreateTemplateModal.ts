@@ -12,7 +12,7 @@ import {AUTHORIZED_ELEMENT_TYPES} from "../utils/U_AuthorizedElementTypes";
 
 export class CreateTemplateModal extends FlashcardsModal {
     protected BuildMain(parent: HTMLElement): void {
-        CreateSubtitle(parent, "Core Information", ["flashcards__heading--text-align-left"]);
+        CreateSubtitle(parent, "General Information", ["flashcards__heading--text-align-left"]);
         const nameInputGroupData: InputGroupData = new InputGroupData("text", "Name", "A wonderful template", null);
         const nameInputGroupContainer: HTMLDivElement = CreateInputGroup(parent, nameInputGroupData);
         const nameInput: HTMLInputElement = nameInputGroupContainer.querySelector("input");

@@ -5,9 +5,11 @@ import {CreateButton} from "../utils/U_CreateButtonElements";
 import {ButtonComponent} from "obsidian";
 import {database} from "../database/Database";
 import {Tag} from "../objects/Tag";
+import {CreateSubtitle} from "../utils/U_CreateTextualElements";
 
 export class CreateTagModal extends FlashcardsModal {
     protected BuildMain(parent: HTMLElement) {
+        CreateSubtitle(parent, "General Information", ["flashcards__heading--text-align-left"]);
         const nameInputGroupData: InputGroupData = new InputGroupData("text", "Name", "My amazing tag", null);
         const nameInputGroupContainer: HTMLDivElement = CreateInputGroup(parent, nameInputGroupData);
         const nameInput: HTMLInputElement = nameInputGroupContainer.querySelector("input");
