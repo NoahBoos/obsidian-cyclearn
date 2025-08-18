@@ -51,3 +51,9 @@ export const UPDATE_TAG_MODAL_OPTIONS: I_ModalOptions = {
     modalConfirmButtonText: "Update a tag",
     modalConfirmButtonIcon: null
 }
+
+export const DELETE_TAG_MODAL_OPTIONS: I_ModalOptions = {
+    modalTitle: "Delete a tag",
+    modalConfirmButtonText: "Confirm deletion",
+    modalConfirmButtonIcon: null
+}
