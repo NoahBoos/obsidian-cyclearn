@@ -2,8 +2,9 @@ import {App, Modal} from "obsidian";
 import {CreateHeader, CreateMain} from "../utils/U_CreateSemanticElements";
 import {I_ModalOptions} from "./I_ModalOptions";
 import {CreateTitle} from "../utils/U_CreateTextualElements";
+import {Note} from "esbuild";
 
-export abstract class FlashcardsModal extends Modal {
+export abstract class FlashcardsCreateObjectModal extends Modal {
     modalOptions: I_ModalOptions;
 
     constructor(app: App, modalOptions: I_ModalOptions) {

@@ -1,4 +1,4 @@
-import {FlashcardsModal} from "./FlashcardsModal";
+import {FlashcardsCreateObjectModal} from "./FlashcardsCreateObjectModal";
 import {CreateContainer, CreateSection} from "../utils/U_CreateSemanticElements";
 import {CreateSubtitle} from "../utils/U_CreateTextualElements";
 import {InputGroupData} from "../objects/InputGroupData";
@@ -14,7 +14,7 @@ import {Card} from "../objects/Card";
 import {CardType} from "../objects/E_CardType";
 import Loki from "lokijs";
 
-export class CreateNoteModal extends FlashcardsModal {
+export class CreateNoteModal extends FlashcardsCreateObjectModal {
     protected BuildMain(parent: HTMLElement): void {
         // Table Gathering
         const deckTable: Deck[] = Deck.ReadAll(database);

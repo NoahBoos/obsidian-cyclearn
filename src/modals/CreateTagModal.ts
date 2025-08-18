@@ -1,4 +1,4 @@
-import {FlashcardsModal} from "./FlashcardsModal";
+import {FlashcardsCreateObjectModal} from "./FlashcardsCreateObjectModal";
 import {InputGroupData} from "../objects/InputGroupData";
 import {CreateInputGroup} from "../utils/U_CreateInputElements";
 import {CreateButton} from "../utils/U_CreateButtonElements";
@@ -9,7 +9,7 @@ import {CreateSubtitle} from "../utils/U_CreateTextualElements";
 import Loki from "lokijs";
 import {CreateSection} from "../utils/U_CreateSemanticElements";
 
-export class CreateTagModal extends FlashcardsModal {
+export class CreateTagModal extends FlashcardsCreateObjectModal {
     protected BuildMain(parent: HTMLElement) {
         // General Information Container Code
         const generalInformationContainer: HTMLElement = CreateSection(parent);

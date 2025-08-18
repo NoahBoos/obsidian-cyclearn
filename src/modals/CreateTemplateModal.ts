@@ -1,4 +1,4 @@
-import {FlashcardsModal} from "./FlashcardsModal";
+import {FlashcardsCreateObjectModal} from "./FlashcardsCreateObjectModal";
 import {ButtonComponent, DropdownComponent} from "obsidian";
 import {CreateButton} from "../utils/U_CreateButtonElements";
 import {Template} from "../objects/Template";
@@ -11,7 +11,7 @@ import {CreateDropdown, CreateOptionsForDropdownFromRecord} from "../utils/U_Cre
 import {AUTHORIZED_ELEMENT_TYPES} from "../utils/U_AuthorizedElementTypes";
 import Loki from "lokijs";
 
-export class CreateTemplateModal extends FlashcardsModal {
+export class CreateTemplateModal extends FlashcardsCreateObjectModal {
     protected BuildMain(parent: HTMLElement): void {
         // General Information Container Code
         const generalInformationContainer: HTMLElement = CreateSection(parent);

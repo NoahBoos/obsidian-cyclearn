@@ -1,4 +1,4 @@
-import {FlashcardsModal} from "./FlashcardsModal";
+import {FlashcardsCreateObjectModal} from "./FlashcardsCreateObjectModal";
 import {CreateButton} from "../utils/U_CreateButtonElements";
 import {CreateInputGroup} from "../utils/U_CreateInputElements";
 import {InputGroupData} from "../objects/InputGroupData";
@@ -8,7 +8,7 @@ import {Deck} from "../objects/Deck";
 import {CreateSubtitle} from "../utils/U_CreateTextualElements";
 import {CreateSection} from "../utils/U_CreateSemanticElements";
 
-export class CreateDeckModal extends FlashcardsModal {
+export class CreateDeckModal extends FlashcardsCreateObjectModal {
     protected BuildMain(parent: HTMLElement) {
         // General Information Container Code
         const generalInformationContainer: HTMLElement = CreateSection(parent);
