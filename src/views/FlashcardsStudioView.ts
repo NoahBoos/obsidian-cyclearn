@@ -12,6 +12,15 @@ import {CreateSubtitle, CreateTitle} from "../utils/U_CreateTextualElements";
 import {CreateButton} from "../utils/U_CreateButtonElements";
 import {CreateTable, CreateTableHeader, CreateTableRow} from "../utils/U_CreateTableElements";
 import {stringify} from "node:querystring";
+import {CreateNoteModal} from "../modals/CreateNoteModal";
+import {
+    CREATE_DECK_MODAL_OPTIONS,
+    CREATE_NOTE_MODAL_OPTIONS, CREATE_TAG_MODAL_OPTIONS,
+    CREATE_TEMPLATE_MODAL_OPTIONS
+} from "../modals/I_ModalOptions";
+import {CreateDeckModal} from "../modals/CreateDeckModal";
+import {CreateTemplateModal} from "../modals/CreateTemplateModal";
+import {CreateTagModal} from "../modals/CreateTagModal";
 
 export const FLASHCARDS_STUDIO_VIEW_TYPE = "flashcards-studio-view";
 let activeView: string = "flashcards--read-all";
@@ -46,8 +55,25 @@ export class FlashcardsStudioView extends ItemView {
         const tagTable: Tag[] = Tag.ReadAll(database);
 
         // Header Code
-        const header: HTMLElement = CreateHeader(container, ["flashcards--margin-bottom-16"]);
-        CreateTitle(header, "Flashcards Studio View");
+        const header: HTMLElement = CreateHeader(container, ["flashcards--margin-bottom-16", "flashcards--flex-column", "flashcards--gap-16"]);
+        CreateTitle(header, "Flashcards Studio View", ["flashcards--width-fit-content"]);
+        const headerButtonContainer: HTMLDivElement = CreateContainer(header, ["flashcards--flex-row", "flashcards--justify-center", "flashcards--gap-16"]);
+        const newNoteButton: ButtonComponent = CreateButton(headerButtonContainer, true, "New note", null, ["flashcards--width-fit-content"]);
+        newNoteButton.onClick(() => {
+           new CreateNoteModal(this.app, CREATE_NOTE_MODAL_OPTIONS).open();
+        });
+        const newDeckButton: ButtonComponent = CreateButton(headerButtonContainer, true, "New deck", null, ["flashcards--width-fit-content"]);
+        newDeckButton.onClick(() => {
+            new CreateDeckModal(this.app, CREATE_DECK_MODAL_OPTIONS).open();
+        });
+        const newTemplateButton: ButtonComponent = CreateButton(headerButtonContainer, true, "New template", null, ["flashcards--width-fit-content"]);
+        newTemplateButton.onClick(() => {
+           new CreateTemplateModal(this.app, CREATE_TEMPLATE_MODAL_OPTIONS).open();
+        });
+        const newTagButton: ButtonComponent = CreateButton(headerButtonContainer, true, "New tag", null, ["flashcards--width-fit-content"]);
+        newTagButton.onClick(() => {
+            new CreateTagModal(this.app, CREATE_TAG_MODAL_OPTIONS).open();
+        })
 
         // Aside & Main Wrapper
         const contentWrapper: HTMLDivElement = CreateContainer(container, ["flashcards--flex-row", "flashcards--gap-32"]);
