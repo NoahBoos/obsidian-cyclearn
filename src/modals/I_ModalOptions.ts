@@ -27,3 +27,9 @@ export const CREATE_NOTE_MODAL_OPTIONS: I_ModalOptions = {
     modalConfirmButtonText: "Create a new note",
     modalConfirmButtonIcon: null
 }
+
+export const UPDATE_NOTE_MODAL_OPTIONS: I_ModalOptions = {
+    modalTitle: "Update a note",
+    modalConfirmButtonText: "Update a note",
+    modalConfirmButtonIcon: null
+}
