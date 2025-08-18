@@ -33,3 +33,9 @@ export const UPDATE_NOTE_MODAL_OPTIONS: I_ModalOptions = {
     modalConfirmButtonText: "Update a note",
     modalConfirmButtonIcon: null
 }
+
+export const UPDATE_DECK_MODAL_OPTIONS: I_ModalOptions = {
+    modalTitle: "Update a deck",
+    modalConfirmButtonText: "Update a deck",
+    modalConfirmButtonIcon: null
+}
