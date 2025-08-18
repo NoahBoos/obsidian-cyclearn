@@ -14,8 +14,13 @@ import {CreateTable, CreateTableHeader, CreateTableRow} from "../utils/U_CreateT
 import {CreateNoteModal} from "../modals/CreateNoteModal";
 import {
     CREATE_DECK_MODAL_OPTIONS,
-    CREATE_NOTE_MODAL_OPTIONS, CREATE_TAG_MODAL_OPTIONS,
-    CREATE_TEMPLATE_MODAL_OPTIONS, UPDATE_DECK_MODAL_OPTIONS, UPDATE_NOTE_MODAL_OPTIONS, UPDATE_TEMPLATE_MODAL_OPTIONS
+    CREATE_NOTE_MODAL_OPTIONS,
+    CREATE_TAG_MODAL_OPTIONS,
+    CREATE_TEMPLATE_MODAL_OPTIONS,
+    UPDATE_DECK_MODAL_OPTIONS,
+    UPDATE_NOTE_MODAL_OPTIONS,
+    UPDATE_TAG_MODAL_OPTIONS,
+    UPDATE_TEMPLATE_MODAL_OPTIONS
 } from "../modals/I_ModalOptions";
 import {CreateDeckModal} from "../modals/CreateDeckModal";
 import {CreateTemplateModal} from "../modals/CreateTemplateModal";
@@ -23,6 +28,7 @@ import {CreateTagModal} from "../modals/CreateTagModal";
 import {UpdateNoteModal} from "../modals/UpdateNoteModal";
 import {UpdateDeckModal} from "../modals/UpdateDeckModal";
 import {UpdateTemplateModal} from "../modals/UpdateTemplateModal";
+import {UpdateTagModal} from "../modals/UpdateTagModal";
 
 export const FLASHCARDS_STUDIO_VIEW_TYPE = "flashcards-studio-view";
 let activeView: string = "flashcards--read-all";
@@ -153,7 +159,7 @@ export class FlashcardsStudioView extends ItemView {
             const editButton: ButtonComponent =  CreateButton(firstCell, true, null, "pencil", ["flashcards--width-fit-content"]);
             editButton.onClick(() => {
                 new UpdateNoteModal(this.app, UPDATE_NOTE_MODAL_OPTIONS, note).open();
-            })
+            });
             const cells: NodeListOf<HTMLTableCellElement> = tableRow.querySelectorAll("td");
             cells[0].classList.add("flashcards--width-15-lock");
             cells[1].classList.add("flashcards--width-30-lock");
@@ -181,7 +187,7 @@ export class FlashcardsStudioView extends ItemView {
             const editButton: ButtonComponent =  CreateButton(firstCell, true, null, "pencil", ["flashcards--width-fit-content"]);
             editButton.onClick(() => {
                 new UpdateDeckModal(this.app, UPDATE_DECK_MODAL_OPTIONS, deck).open();
-            })
+            });
             const cells: NodeListOf<HTMLTableCellElement> = tableRow.querySelectorAll("td");
             cells[0].classList.add("flashcards--width-15-lock");
             cells[1].classList.add("flashcards--width-30-lock");
@@ -208,7 +214,7 @@ export class FlashcardsStudioView extends ItemView {
             const editButton: ButtonComponent =  CreateButton(firstCell, true, null, "pencil", ["flashcards--width-fit-content"]);
             editButton.onClick(() => {
                 new UpdateTemplateModal(this.app, UPDATE_TEMPLATE_MODAL_OPTIONS, template).open();
-            })
+            });
             const cells: NodeListOf<HTMLTableCellElement> = tableRow.querySelectorAll("td");
             cells[0].classList.add("flashcards--width-15-lock");
             cells[1].classList.add("flashcards--width-30-lock");
@@ -234,8 +240,8 @@ export class FlashcardsStudioView extends ItemView {
             });
             const editButton: ButtonComponent =  CreateButton(firstCell, true, null, "pencil", ["flashcards--width-fit-content"]);
             editButton.onClick(() => {
-
-            })
+                new UpdateTagModal(this.app, UPDATE_TAG_MODAL_OPTIONS, tag).open();
+            });
             const cells: NodeListOf<HTMLTableCellElement> = tableRow.querySelectorAll("td");
             cells[0].classList.add("flashcards--width-15-lock");
             cells[1].classList.add("flashcards--width-30-lock");

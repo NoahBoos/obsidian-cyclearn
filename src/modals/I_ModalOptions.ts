@@ -45,3 +45,9 @@ export const UPDATE_TEMPLATE_MODAL_OPTIONS: I_ModalOptions = {
     modalConfirmButtonText: "Update a template",
     modalConfirmButtonIcon: null
 }
+
+export const UPDATE_TAG_MODAL_OPTIONS: I_ModalOptions = {
+    modalTitle: "Update a tag",
+    modalConfirmButtonText: "Update a tag",
+    modalConfirmButtonIcon: null
+}
