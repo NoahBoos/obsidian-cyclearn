@@ -103,7 +103,7 @@
 }
 
 .flashcards--justify-center {
-    justify-content: center !important;
+    justify-content: center;
 }
 
 .flashcards--justify-between {
