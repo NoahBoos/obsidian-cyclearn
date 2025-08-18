@@ -11,7 +11,6 @@ import {Template} from "../objects/Template";
 import {CreateSubtitle, CreateTitle} from "../utils/U_CreateTextualElements";
 import {CreateButton} from "../utils/U_CreateButtonElements";
 import {CreateTable, CreateTableHeader, CreateTableRow} from "../utils/U_CreateTableElements";
-import {stringify} from "node:querystring";
 import {CreateNoteModal} from "../modals/CreateNoteModal";
 import {
     CREATE_DECK_MODAL_OPTIONS,
@@ -144,8 +143,14 @@ export class FlashcardsStudioView extends ItemView {
             const usedTemplate: Template = Template.ReadOne(database, note.id_template);
             const tableRow: HTMLTableRowElement = CreateTableRow(table, ["", Object.values(note.fields)[0], usedDeck.name, usedTemplate.name])
             const firstCell: HTMLTableCellElement = tableRow.querySelector("td");
-            CreateButton(firstCell, true, null, "x", ["flashcards--width-fit-content", "flashcards--margin-right-8"]);
-            CreateButton(firstCell, true, null, "pencil", ["flashcards--width-fit-content"]);
+            const deleteButton: ButtonComponent = CreateButton(firstCell, true, null, "x", ["flashcards--width-fit-content", "flashcards--margin-right-8"]);
+            deleteButton.onClick(() => {
+
+            });
+            const editButton: ButtonComponent =  CreateButton(firstCell, true, null, "pencil", ["flashcards--width-fit-content"]);
+            editButton.onClick(() => {
+
+            })
             const cells: NodeListOf<HTMLTableCellElement> = tableRow.querySelectorAll("td");
             cells[0].classList.add("flashcards--width-15-lock");
             cells[1].classList.add("flashcards--width-30-lock");
@@ -166,8 +171,14 @@ export class FlashcardsStudioView extends ItemView {
         deckTable.forEach((deck: Deck) => {
             const tableRow: HTMLTableRowElement = CreateTableRow(table, ["", deck.name, deck.description]);
             const firstCell: HTMLTableCellElement = tableRow.querySelector("td");
-            CreateButton(firstCell, true, null, "x", ["flashcards--width-fit-content", "flashcards--margin-right-8"]);
-            CreateButton(firstCell, true, null, "pencil", ["flashcards--width-fit-content"]);
+            const deleteButton: ButtonComponent = CreateButton(firstCell, true, null, "x", ["flashcards--width-fit-content", "flashcards--margin-right-8"]);
+            deleteButton.onClick(() => {
+
+            });
+            const editButton: ButtonComponent =  CreateButton(firstCell, true, null, "pencil", ["flashcards--width-fit-content"]);
+            editButton.onClick(() => {
+
+            })
             const cells: NodeListOf<HTMLTableCellElement> = tableRow.querySelectorAll("td");
             cells[0].classList.add("flashcards--width-15-lock");
             cells[1].classList.add("flashcards--width-30-lock");
@@ -187,8 +198,14 @@ export class FlashcardsStudioView extends ItemView {
         templateTable.forEach((template: Template) => {
             const tableRow: HTMLTableRowElement = CreateTableRow(table, ["", template.name, template.description]);
             const firstCell: HTMLTableCellElement = tableRow.querySelector("td");
-            CreateButton(firstCell, true, null, "x", ["flashcards--width-fit-content", "flashcards--margin-right-8"]);
-            CreateButton(firstCell, true, null, "pencil", ["flashcards--width-fit-content"]);
+            const deleteButton: ButtonComponent = CreateButton(firstCell, true, null, "x", ["flashcards--width-fit-content", "flashcards--margin-right-8"]);
+            deleteButton.onClick(() => {
+
+            });
+            const editButton: ButtonComponent =  CreateButton(firstCell, true, null, "pencil", ["flashcards--width-fit-content"]);
+            editButton.onClick(() => {
+
+            })
             const cells: NodeListOf<HTMLTableCellElement> = tableRow.querySelectorAll("td");
             cells[0].classList.add("flashcards--width-15-lock");
             cells[1].classList.add("flashcards--width-30-lock");
@@ -208,8 +225,14 @@ export class FlashcardsStudioView extends ItemView {
         tagTable.forEach((tag: Tag) => {
             const tableRow: HTMLTableRowElement = CreateTableRow(table, ["", tag.name, tag.description]);
             const firstCell: HTMLTableCellElement = tableRow.querySelector("td");
-            CreateButton(firstCell, true, null, "x", ["flashcards--width-fit-content", "flashcards--margin-right-8"]);
-            CreateButton(firstCell, true, null, "pencil", ["flashcards--width-fit-content"]);
+            const deleteButton: ButtonComponent = CreateButton(firstCell, true, null, "x", ["flashcards--width-fit-content", "flashcards--margin-right-8"]);
+            deleteButton.onClick(() => {
+
+            });
+            const editButton: ButtonComponent =  CreateButton(firstCell, true, null, "pencil", ["flashcards--width-fit-content"]);
+            editButton.onClick(() => {
+
+            })
             const cells: NodeListOf<HTMLTableCellElement> = tableRow.querySelectorAll("td");
             cells[0].classList.add("flashcards--width-15-lock");
             cells[1].classList.add("flashcards--width-30-lock");
