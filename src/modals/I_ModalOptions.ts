@@ -39,3 +39,9 @@ export const UPDATE_DECK_MODAL_OPTIONS: I_ModalOptions = {
     modalConfirmButtonText: "Update a deck",
     modalConfirmButtonIcon: null
 }
+
+export const UPDATE_TEMPLATE_MODAL_OPTIONS: I_ModalOptions = {
+    modalTitle: "Update a template",
+    modalConfirmButtonText: "Update a template",
+    modalConfirmButtonIcon: null
+}
