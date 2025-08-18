@@ -52,6 +52,12 @@ export const UPDATE_TAG_MODAL_OPTIONS: I_ModalOptions = {
     modalConfirmButtonIcon: null
 }
 
+export const DELETE_NOTE_MODAL_OPTIONS: I_ModalOptions = {
+    modalTitle: "Delete a note",
+    modalConfirmButtonText: "Confirm deletion",
+    modalConfirmButtonIcon: null
+}
+
 export const DELETE_DECK_MODAL_OPTIONS: I_ModalOptions = {
     modalTitle: "Delete a deck",
     modalConfirmButtonText: "Confirm deletion",

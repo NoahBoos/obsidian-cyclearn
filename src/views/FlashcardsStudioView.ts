@@ -16,7 +16,11 @@ import {
     CREATE_DECK_MODAL_OPTIONS,
     CREATE_NOTE_MODAL_OPTIONS,
     CREATE_TAG_MODAL_OPTIONS,
-    CREATE_TEMPLATE_MODAL_OPTIONS, DELETE_DECK_MODAL_OPTIONS, DELETE_TAG_MODAL_OPTIONS, DELETE_TEMPLATE_MODAL_OPTIONS,
+    CREATE_TEMPLATE_MODAL_OPTIONS,
+    DELETE_DECK_MODAL_OPTIONS,
+    DELETE_NOTE_MODAL_OPTIONS,
+    DELETE_TAG_MODAL_OPTIONS,
+    DELETE_TEMPLATE_MODAL_OPTIONS,
     UPDATE_DECK_MODAL_OPTIONS,
     UPDATE_NOTE_MODAL_OPTIONS,
     UPDATE_TAG_MODAL_OPTIONS,
@@ -32,6 +36,7 @@ import {UpdateTagModal} from "../modals/UpdateTagModal";
 import {DeleteTagModal} from "../modals/DeleteTagModal";
 import {DeleteTemplateModal} from "../modals/DeleteTemplateModal";
 import {DeleteDeckModal} from "../modals/DeleteDeckModal";
+import {DeleteNoteModal} from "../modals/DeleteNoteModal";
 
 export const FLASHCARDS_STUDIO_VIEW_TYPE = "flashcards-studio-view";
 let activeView: string = "flashcards--read-all";
@@ -157,7 +162,7 @@ export class FlashcardsStudioView extends ItemView {
             const firstCell: HTMLTableCellElement = tableRow.querySelector("td");
             const deleteButton: ButtonComponent = CreateButton(firstCell, true, null, "x", ["flashcards--width-fit-content", "flashcards--margin-right-8"]);
             deleteButton.onClick(() => {
-
+                new DeleteNoteModal(this.app, DELETE_NOTE_MODAL_OPTIONS, note).open();
             });
             const editButton: ButtonComponent =  CreateButton(firstCell, true, null, "pencil", ["flashcards--width-fit-content"]);
             editButton.onClick(() => {
