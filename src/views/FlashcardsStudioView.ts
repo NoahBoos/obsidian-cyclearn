@@ -39,7 +39,6 @@ import {DeleteDeckModal} from "../modals/DeleteDeckModal";
 import {DeleteNoteModal} from "../modals/DeleteNoteModal";
 
 export const FLASHCARDS_STUDIO_VIEW_TYPE = "flashcards-studio-view";
-let activeView: string = "flashcards--read-all";
 
 export class FlashcardsStudioView extends ItemView {
     plugin: Flashcards;
@@ -115,6 +114,10 @@ export class FlashcardsStudioView extends ItemView {
         tagReadAllButton.onClick(() => {
             this.DisplayTagTable(Tag.ReadAll(database), main);
         });
+        const cardReadAllButton: ButtonComponent = CreateButton(globalFilterWrapper, false, "See all cards (Not the notes)", null, ["flashcards--width-100", "flashcards--justify-start"]);
+        cardReadAllButton.onClick(() => {
+            this.DisplayCardTable(Card.ReadAll(database), main);
+        })
         //// Deck Filter Code
         CreateSubtitle(aside, "Deck filters");
         const deckFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
@@ -173,6 +176,24 @@ export class FlashcardsStudioView extends ItemView {
             cells[1].classList.add("flashcards--width-30-lock");
             cells[2].classList.add("flashcards--width-30-lock");
             cells[3].classList.add("flashcards--width-25-lock");
+        });
+    }
+
+    DisplayCardTable(cardTable: Card[], parent: HTMLElement) {
+        parent.empty();
+        CreateSubtitle(parent, "All cards");
+        const table: HTMLTableElement = CreateTable(parent);
+        const tableHeader: HTMLTableRowElement = CreateTableHeader(table, ["Related note ID", "Due at", "Type"]);
+        const cells: NodeListOf<HTMLTableCellElement> = tableHeader.querySelectorAll("th");
+        cells[0].classList.add("flashcards--width-20-lock");
+        cells[1].classList.add("flashcards--width-40-lock");
+        cells[2].classList.add("flashcards--width-40-lock");
+        cardTable.forEach((card: Card) => {
+            const tableRow: HTMLTableRowElement = CreateTableRow(table, [card.id_note, (card.due_at ?? "Next review").toString(), card.card_type]);
+            const cells: NodeListOf<HTMLTableCellElement> = tableRow.querySelectorAll("td");
+            cells[0].classList.add("flashcards--width-20-lock");
+            cells[1].classList.add("flashcards--width-40-lock");
+            cells[2].classList.add("flashcards--width-40-lock");
         });
     }
 

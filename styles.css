@@ -76,6 +76,12 @@
     max-width: 30% !important;
 }
 
+.flashcards--width-40-lock {
+    min-width: 40% !important;
+    width: 40% !important;
+    max-width: 40% !important;
+}
+
 .flashcards--width-55-lock {
     min-width: 55% !important;
     width: 55% !important;
