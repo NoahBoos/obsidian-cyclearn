@@ -10,6 +10,8 @@ import {TaggedNote} from "../objects/TaggedNote";
 import {Template} from "../objects/Template";
 import {CreateSubtitle, CreateTitle} from "../utils/U_CreateTextualElements";
 import {CreateButton} from "../utils/U_CreateButtonElements";
+import {CreateTable, CreateTableHeader, CreateTableRow} from "../utils/U_CreateTableElements";
+import {stringify} from "node:querystring";
 
 export const FLASHCARDS_STUDIO_VIEW_TYPE = "flashcards-studio-view";
 let activeView: string = "flashcards--read-all";
@@ -44,20 +46,20 @@ export class FlashcardsStudioView extends ItemView {
         const tagTable: Tag[] = Tag.ReadAll(database);
 
         // Header Code
-        const header: HTMLElement = CreateHeader(container);
+        const header: HTMLElement = CreateHeader(container, ["flashcards--margin-bottom-16"]);
         CreateTitle(header, "Flashcards Studio View");
 
         // Aside & Main Wrapper
-        const contentWrapper: HTMLDivElement = CreateContainer(container, ["flashcards--flex-row"]);
+        const contentWrapper: HTMLDivElement = CreateContainer(container, ["flashcards--flex-row", "flashcards--gap-32"]);
         const aside: HTMLElement = CreateAside(contentWrapper, ["flashcards--width-20", "flashcards--flex-column", "flashcards--gap-16"]);
-        const main: HTMLElement = CreateMain(contentWrapper, ["flashcards--width-80"]);
+        const main: HTMLElement = CreateMain(contentWrapper, ["flashcards--width-80", "flashcards--justify-start"]);
         /// Aside Code
         //// Global Filter Code
         CreateSubtitle(aside, "Global Filters");
         const globalFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
         const noteReadAllButton: ButtonComponent = CreateButton(globalFilterWrapper, false, "See all notes", null, ["flashcards--width-100", "flashcards--justify-start"]);
         noteReadAllButton.onClick(() => {
-            this.DisplayNoteTable(Note.ReadAll(database), main);
+            this.DisplayNoteTable(Note.ReadAll(database), main, "All notes");
         });
         const deckReadAllButton: ButtonComponent = CreateButton(globalFilterWrapper, false, "See all decks", null, ["flashcards--width-100", "flashcards--justify-start"]);
         deckReadAllButton.onClick(() => {
@@ -77,7 +79,7 @@ export class FlashcardsStudioView extends ItemView {
         deckTable.forEach((deck: Deck) => {
             const createdButton: ButtonComponent = CreateButton(deckFilterWrapper, false, deck.name, null, ["flashcards--width-100", "flashcards--justify-start"]);
             createdButton.onClick(() => {
-                this.DisplayNoteTable(Note.ReadAllByDeck(database, deck.id), main);
+                this.DisplayNoteTable(Note.ReadAllByDeck(database, deck.id), main, "All notes in " + deck.name);
             });
         })
         //// Template Filter Code
@@ -86,7 +88,7 @@ export class FlashcardsStudioView extends ItemView {
         templateTable.forEach((template: Template) => {
             const createdButton: ButtonComponent = CreateButton(templateFilterWrapper, false, template.name, null, ["flashcards--width-100", "flashcards--justify-start"]);
             createdButton.onClick(() => {
-                this.DisplayNoteTable(Note.ReadAllByTemplate(database, template.id), main);
+                this.DisplayNoteTable(Note.ReadAllByTemplate(database, template.id), main, "All notes made with " + template.name);
             });
         })
         //// Tag Filter Code
@@ -101,19 +103,91 @@ export class FlashcardsStudioView extends ItemView {
 
     }
 
-    DisplayNoteTable(noteTable: Note[], parent: HTMLElement) {
+    DisplayNoteTable(noteTable: Note[], parent: HTMLElement, title: string) {
         parent.empty();
+        CreateSubtitle(parent, title);
+        const table: HTMLTableElement = CreateTable(parent);
+        const tableHeader: HTMLTableRowElement = CreateTableHeader(table, ["Actions", "Main Field", "Deck", "Template"]);
+        const cells: NodeListOf<HTMLTableCellElement> = tableHeader.querySelectorAll("th");
+        cells[0].classList.add("flashcards--width-15-lock");
+        cells[1].classList.add("flashcards--width-30-lock");
+        cells[2].classList.add("flashcards--width-30-lock");
+        cells[3].classList.add("flashcards--width-25-lock");
+        noteTable.forEach((note: Note) => {
+            const usedDeck: Deck = Deck.ReadOne(database, note.id_deck);
+            const usedTemplate: Template = Template.ReadOne(database, note.id_template);
+            const tableRow: HTMLTableRowElement = CreateTableRow(table, ["", Object.values(note.fields)[0], usedDeck.name, usedTemplate.name])
+            const firstCell: HTMLTableCellElement = tableRow.querySelector("td");
+            CreateButton(firstCell, true, null, "x", ["flashcards--width-fit-content", "flashcards--margin-right-8"]);
+            CreateButton(firstCell, true, null, "pencil", ["flashcards--width-fit-content"]);
+            const cells: NodeListOf<HTMLTableCellElement> = tableRow.querySelectorAll("td");
+            cells[0].classList.add("flashcards--width-15-lock");
+            cells[1].classList.add("flashcards--width-30-lock");
+            cells[2].classList.add("flashcards--width-30-lock");
+            cells[3].classList.add("flashcards--width-25-lock");
+        });
     }
 
     DisplayDeckTable(deckTable: Deck[], parent: HTMLElement) {
         parent.empty();
+        CreateSubtitle(parent, "All decks");
+        const table: HTMLTableElement = CreateTable(parent);
+        const tableHeader: HTMLTableRowElement = CreateTableHeader(table, ["Actions", "Name", "Description"]);
+        const cells: NodeListOf<HTMLTableCellElement> = tableHeader.querySelectorAll("th");
+        cells[0].classList.add("flashcards--width-15-lock");
+        cells[1].classList.add("flashcards--width-30-lock");
+        cells[2].classList.add("flashcards--width-55-lock");
+        deckTable.forEach((deck: Deck) => {
+            const tableRow: HTMLTableRowElement = CreateTableRow(table, ["", deck.name, deck.description]);
+            const firstCell: HTMLTableCellElement = tableRow.querySelector("td");
+            CreateButton(firstCell, true, null, "x", ["flashcards--width-fit-content", "flashcards--margin-right-8"]);
+            CreateButton(firstCell, true, null, "pencil", ["flashcards--width-fit-content"]);
+            const cells: NodeListOf<HTMLTableCellElement> = tableRow.querySelectorAll("td");
+            cells[0].classList.add("flashcards--width-15-lock");
+            cells[1].classList.add("flashcards--width-30-lock");
+            cells[2].classList.add("flashcards--width-55-lock");
+        });
     }
 
     DisplayTemplateTable(templateTable: Template[], parent: HTMLElement) {
         parent.empty();
+        CreateSubtitle(parent, "All templates");
+        const table: HTMLTableElement = CreateTable(parent);
+        const tableHeader: HTMLTableRowElement = CreateTableHeader(table, ["Actions", "Name", "Description"]);
+        const cells: NodeListOf<HTMLTableCellElement> = tableHeader.querySelectorAll("th");
+        cells[0].classList.add("flashcards--width-15-lock");
+        cells[1].classList.add("flashcards--width-30-lock");
+        cells[2].classList.add("flashcards--width-55-lock");
+        templateTable.forEach((template: Template) => {
+            const tableRow: HTMLTableRowElement = CreateTableRow(table, ["", template.name, template.description]);
+            const firstCell: HTMLTableCellElement = tableRow.querySelector("td");
+            CreateButton(firstCell, true, null, "x", ["flashcards--width-fit-content", "flashcards--margin-right-8"]);
+            CreateButton(firstCell, true, null, "pencil", ["flashcards--width-fit-content"]);
+            const cells: NodeListOf<HTMLTableCellElement> = tableRow.querySelectorAll("td");
+            cells[0].classList.add("flashcards--width-15-lock");
+            cells[1].classList.add("flashcards--width-30-lock");
+            cells[2].classList.add("flashcards--width-55-lock");
+        });
     }
 
     DisplayTagTable(tagTable: Tag[], parent: HTMLElement) {
         parent.empty();
+        CreateSubtitle(parent, "All templates");
+        const table: HTMLTableElement = CreateTable(parent);
+        const tableHeader: HTMLTableRowElement = CreateTableHeader(table, ["Actions", "Name", "Description"]);
+        const cells: NodeListOf<HTMLTableCellElement> = tableHeader.querySelectorAll("th");
+        cells[0].classList.add("flashcards--width-15-lock");
+        cells[1].classList.add("flashcards--width-30-lock");
+        cells[2].classList.add("flashcards--width-55-lock");
+        tagTable.forEach((tag: Tag) => {
+            const tableRow: HTMLTableRowElement = CreateTableRow(table, ["", tag.name, tag.description]);
+            const firstCell: HTMLTableCellElement = tableRow.querySelector("td");
+            CreateButton(firstCell, true, null, "x", ["flashcards--width-fit-content", "flashcards--margin-right-8"]);
+            CreateButton(firstCell, true, null, "pencil", ["flashcards--width-fit-content"]);
+            const cells: NodeListOf<HTMLTableCellElement> = tableRow.querySelectorAll("td");
+            cells[0].classList.add("flashcards--width-15-lock");
+            cells[1].classList.add("flashcards--width-30-lock");
+            cells[2].classList.add("flashcards--width-55-lock");
+        });
     }
 }
