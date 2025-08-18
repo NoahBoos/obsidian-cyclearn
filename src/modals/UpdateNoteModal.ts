@@ -46,7 +46,7 @@ export class UpdateNoteModal extends Modal {
 
         // General Information Container Code
         const generalInformationContainer: HTMLElement = CreateSection(parent);
-        CreateSubtitle(generalInformationContainer, "General Information");
+        CreateSubtitle(generalInformationContainer, "General information");
         const deckSelector: DropdownComponent = CreateDropdown(generalInformationContainer, "Choose a deck");
         CreateOptionsForDropdownFromTable(deckSelector, deckTable);
         deckSelector.setValue(noteToUpdate.id_deck);
@@ -60,7 +60,7 @@ export class UpdateNoteModal extends Modal {
 
         // Field Information Container Code
         const fieldInformationContainer: HTMLElement = CreateSection(parent);
-        CreateSubtitle(fieldInformationContainer, "Field Information");
+        CreateSubtitle(fieldInformationContainer, "Field information");
         const fieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-center", "flashcards--align-center", "flashcards--gap-16"]);
         for (let fieldsKey in noteToUpdate.fields) {
             const inputGroupData: InputGroupData = new InputGroupData("text", fieldsKey, fieldsKey, noteToUpdate.fields[fieldsKey]);

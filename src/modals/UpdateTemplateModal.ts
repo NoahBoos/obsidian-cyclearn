@@ -38,7 +38,7 @@ export class UpdateTemplateModal extends Modal {
     protected BuildMain(parent: HTMLElement, templateToUpdate: Template): void {
         // General Information Container Code
         const generalInformationContainer: HTMLElement = CreateSection(parent);
-        CreateSubtitle(generalInformationContainer, "General Information");
+        CreateSubtitle(generalInformationContainer, "General information");
         const nameInputGroupData: InputGroupData = new InputGroupData("text", "Name", "A wonderful template", null);
         const nameInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, nameInputGroupData);
         const nameInput: HTMLInputElement = nameInputGroupContainer.querySelector("input");

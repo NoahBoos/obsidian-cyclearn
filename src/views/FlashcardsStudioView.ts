@@ -97,7 +97,7 @@ export class FlashcardsStudioView extends ItemView {
         const main: HTMLElement = CreateMain(contentWrapper, ["flashcards--width-80", "flashcards--justify-start"]);
         /// Aside Code
         //// Global Filter Code
-        CreateSubtitle(aside, "Global Filters");
+        CreateSubtitle(aside, "Global filters");
         const globalFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
         const noteReadAllButton: ButtonComponent = CreateButton(globalFilterWrapper, false, "See all notes", null, ["flashcards--width-100", "flashcards--justify-start"]);
         noteReadAllButton.onClick(() => {
@@ -116,7 +116,7 @@ export class FlashcardsStudioView extends ItemView {
             this.DisplayTagTable(Tag.ReadAll(database), main);
         });
         //// Deck Filter Code
-        CreateSubtitle(aside, "Deck Filters");
+        CreateSubtitle(aside, "Deck filters");
         const deckFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
         deckTable.forEach((deck: Deck) => {
             const createdButton: ButtonComponent = CreateButton(deckFilterWrapper, false, deck.name, null, ["flashcards--width-100", "flashcards--justify-start"]);
@@ -125,7 +125,7 @@ export class FlashcardsStudioView extends ItemView {
             });
         })
         //// Template Filter Code
-        CreateSubtitle(aside, "Template Filters");
+        CreateSubtitle(aside, "Template filters");
         const templateFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
         templateTable.forEach((template: Template) => {
             const createdButton: ButtonComponent = CreateButton(templateFilterWrapper, false, template.name, null, ["flashcards--width-100", "flashcards--justify-start"]);
@@ -134,7 +134,7 @@ export class FlashcardsStudioView extends ItemView {
             });
         })
         //// Tag Filter Code
-        CreateSubtitle(aside, "Tag Filters");
+        CreateSubtitle(aside, "Tag filters");
         const tagFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
         tagTable.forEach((tag: Tag) => {
             CreateButton(tagFilterWrapper, false, tag.name, null, ["flashcards--width-100", "flashcards--justify-start"]);
