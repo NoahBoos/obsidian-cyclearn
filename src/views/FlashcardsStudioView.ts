@@ -232,7 +232,7 @@ export class FlashcardsStudioView extends ItemView {
 
     DisplayTagTable(tagTable: Tag[], parent: HTMLElement) {
         parent.empty();
-        CreateSubtitle(parent, "All templates");
+        CreateSubtitle(parent, "All tags");
         const table: HTMLTableElement = CreateTable(parent);
         const tableHeader: HTMLTableRowElement = CreateTableHeader(table, ["Actions", "Name", "Description"]);
         const cells: NodeListOf<HTMLTableCellElement> = tableHeader.querySelectorAll("th");
