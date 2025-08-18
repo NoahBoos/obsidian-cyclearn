@@ -1,6 +1,6 @@
 import {ButtonComponent, ItemView, WorkspaceLeaf} from "obsidian";
 import Flashcards from "../main";
-import {CreateAside, CreateContainer, CreateFooter, CreateHeader, CreateMain} from "../utils/U_CreateSemanticElements";
+import {CreateAside, CreateContainer,  CreateHeader, CreateMain} from "../utils/U_CreateSemanticElements";
 import {database} from "../database/Database";
 import {Tag} from "../objects/Tag";
 import {Note} from "../objects/Note";
@@ -49,26 +49,45 @@ export class FlashcardsStudioView extends ItemView {
 
         // Aside & Main Wrapper
         const contentWrapper: HTMLDivElement = CreateContainer(container, ["flashcards--flex-row"]);
-        /// Aside Code
         const aside: HTMLElement = CreateAside(contentWrapper, ["flashcards--width-20", "flashcards--flex-column", "flashcards--gap-16"]);
+        const main: HTMLElement = CreateMain(contentWrapper, ["flashcards--width-80"]);
+        /// Aside Code
         //// Global Filter Code
         CreateSubtitle(aside, "Global Filters");
         const globalFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
         const noteReadAllButton: ButtonComponent = CreateButton(globalFilterWrapper, false, "See all notes", null, ["flashcards--width-100", "flashcards--justify-start"]);
+        noteReadAllButton.onClick(() => {
+            this.DisplayNoteTable(Note.ReadAll(database), main);
+        });
         const deckReadAllButton: ButtonComponent = CreateButton(globalFilterWrapper, false, "See all decks", null, ["flashcards--width-100", "flashcards--justify-start"]);
+        deckReadAllButton.onClick(() => {
+            this.DisplayDeckTable(Deck.ReadAll(database), main);
+        });
         const templateReadAllButton: ButtonComponent = CreateButton(globalFilterWrapper, false, "See all templates", null, ["flashcards--width-100", "flashcards--justify-start"]);
+        templateReadAllButton.onClick(() => {
+            this.DisplayTemplateTable(Template.ReadAll(database), main);
+        });
         const tagReadAllButton: ButtonComponent = CreateButton(globalFilterWrapper, false, "See all tags", null, ["flashcards--width-100", "flashcards--justify-start"]);
+        tagReadAllButton.onClick(() => {
+            this.DisplayTagTable(Tag.ReadAll(database), main);
+        });
         //// Deck Filter Code
         CreateSubtitle(aside, "Deck Filters");
         const deckFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
         deckTable.forEach((deck: Deck) => {
-            CreateButton(deckFilterWrapper, false, deck.name, null, ["flashcards--width-100", "flashcards--justify-start"]);
+            const createdButton: ButtonComponent = CreateButton(deckFilterWrapper, false, deck.name, null, ["flashcards--width-100", "flashcards--justify-start"]);
+            createdButton.onClick(() => {
+                this.DisplayNoteTable(Note.ReadAllByDeck(database, deck.id), main);
+            });
         })
         //// Template Filter Code
         CreateSubtitle(aside, "Template Filters");
         const templateFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
         templateTable.forEach((template: Template) => {
-            CreateButton(templateFilterWrapper, false, template.name, null, ["flashcards--width-100", "flashcards--justify-start"]);
+            const createdButton: ButtonComponent = CreateButton(templateFilterWrapper, false, template.name, null, ["flashcards--width-100", "flashcards--justify-start"]);
+            createdButton.onClick(() => {
+                this.DisplayNoteTable(Note.ReadAllByTemplate(database, template.id), main);
+            });
         })
         //// Tag Filter Code
         CreateSubtitle(aside, "Tag Filters");
@@ -76,11 +95,25 @@ export class FlashcardsStudioView extends ItemView {
         tagTable.forEach((tag: Tag) => {
             CreateButton(tagFilterWrapper, false, tag.name, null, ["flashcards--width-100", "flashcards--justify-start"]);
         })
-        /// Main
-        const main: HTMLElement = CreateMain(contentWrapper, ["flashcards--width-80"]);
     }
 
     async onClose() {
 
+    }
+
+    DisplayNoteTable(noteTable: Note[], parent: HTMLElement) {
+        parent.empty();
+    }
+
+    DisplayDeckTable(deckTable: Deck[], parent: HTMLElement) {
+        parent.empty();
+    }
+
+    DisplayTemplateTable(templateTable: Template[], parent: HTMLElement) {
+        parent.empty();
+    }
+
+    DisplayTagTable(tagTable: Tag[], parent: HTMLElement) {
+        parent.empty();
     }
 }
