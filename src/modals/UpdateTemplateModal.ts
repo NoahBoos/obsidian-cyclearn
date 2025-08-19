@@ -53,12 +53,13 @@ export class UpdateTemplateModal extends Modal {
 
         // Field Information Container Code
         const fieldInformationContainer: HTMLElement = CreateSection(parent);
-        const fieldHeader: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-row", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-16"]);
-        CreateSubtitle(fieldHeader, "Fields", ["flashcards--width-fit-content"]);
-        const addFieldButton: ButtonComponent = CreateButton(fieldHeader, true, "", "plus", ["flashcards--width-fit-content"]);
-        const fieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-8"]);
-        for (let fieldsKey in templateToUpdate.fields) {
-            const fieldInputGroupContainer: HTMLDivElement = CreateContainer(fieldContainer, ["flashcards--flex-row", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-16"]);
+        /// Front Field Container Code
+        const frontFieldHeader: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-row", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-16"]);
+        CreateSubtitle(frontFieldHeader, "Front fields", ["flashcards--width-fit-content"]);
+        const addFrontFieldButton: ButtonComponent = CreateButton(frontFieldHeader, true, "", "plus", ["flashcards--width-fit-content"]);
+        const frontFieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-8"]);
+        for (let fieldsKey in templateToUpdate.frontFields) {
+            const fieldInputGroupContainer: HTMLDivElement = CreateContainer(frontFieldContainer, ["flashcards--flex-row", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-16"]);
             const deleteFIGCButton: ButtonComponent = CreateButton(fieldInputGroupContainer, false, null, "x", ["flashcards--width-fit-content"]);
             deleteFIGCButton.onClick(() => {
                 fieldInputGroupContainer.remove();
@@ -67,10 +68,37 @@ export class UpdateTemplateModal extends Modal {
             fieldInput.value = fieldsKey;
             const fieldSelector: DropdownComponent = CreateDropdown(fieldInputGroupContainer, "No type selected", ["flashcards--width-fit-content"]);
             CreateOptionsForDropdownFromRecord(fieldSelector, AUTHORIZED_ELEMENT_TYPES);
-            fieldSelector.setValue(templateToUpdate.fields[fieldsKey]);
+            fieldSelector.setValue(templateToUpdate.frontFields[fieldsKey]);
         }
-        addFieldButton.onClick(async () => {
-            const fieldInputGroupContainer: HTMLDivElement = CreateContainer(fieldContainer, ["flashcards--flex-row", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-16"]);
+        addFrontFieldButton.onClick(async () => {
+            const fieldInputGroupContainer: HTMLDivElement = CreateContainer(frontFieldContainer, ["flashcards--flex-row", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-16"]);
+            const deleteFIGCButton: ButtonComponent = CreateButton(fieldInputGroupContainer, false, null, "x", ["flashcards--width-fit-content"]);
+            deleteFIGCButton.onClick(() => {
+                fieldInputGroupContainer.remove();
+            });
+            const fieldInput: HTMLInputElement = CreateInput(fieldInputGroupContainer, "text", "A cool field", null, ["flashcards--width-100"]);
+            const fieldSelector: DropdownComponent = CreateDropdown(fieldInputGroupContainer, "No type selected", ["flashcards--width-fit-content"]);
+            CreateOptionsForDropdownFromRecord(fieldSelector, AUTHORIZED_ELEMENT_TYPES);
+        });
+        /// Back Field Container Code
+        const backFieldHeader: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-row", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-16"]);
+        CreateSubtitle(backFieldHeader, "Back fields", ["flashcards--width-fit-content"]);
+        const addBackFieldButton: ButtonComponent = CreateButton(backFieldHeader, true, "", "plus", ["flashcards--width-fit-content"]);
+        const backFieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-8"]);
+        for (let fieldsKey in templateToUpdate.backFields) {
+            const fieldInputGroupContainer: HTMLDivElement = CreateContainer(backFieldContainer, ["flashcards--flex-row", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-16"]);
+            const deleteFIGCButton: ButtonComponent = CreateButton(fieldInputGroupContainer, false, null, "x", ["flashcards--width-fit-content"]);
+            deleteFIGCButton.onClick(() => {
+                fieldInputGroupContainer.remove();
+            });
+            const fieldInput: HTMLInputElement = CreateInput(fieldInputGroupContainer, "text", "A cool field", null, ["flashcards--width-100"]);
+            fieldInput.value = fieldsKey;
+            const fieldSelector: DropdownComponent = CreateDropdown(fieldInputGroupContainer, "No type selected", ["flashcards--width-fit-content"]);
+            CreateOptionsForDropdownFromRecord(fieldSelector, AUTHORIZED_ELEMENT_TYPES);
+            fieldSelector.setValue(templateToUpdate.backFields[fieldsKey]);
+        }
+        addBackFieldButton.onClick(async () => {
+            const fieldInputGroupContainer: HTMLDivElement = CreateContainer(backFieldContainer, ["flashcards--flex-row", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-16"]);
             const deleteFIGCButton: ButtonComponent = CreateButton(fieldInputGroupContainer, false, null, "x", ["flashcards--width-fit-content"]);
             deleteFIGCButton.onClick(() => {
                 fieldInputGroupContainer.remove();
@@ -84,27 +112,34 @@ export class UpdateTemplateModal extends Modal {
         const submitContainer: HTMLElement = CreateSection(parent);
         const confirmButton: ButtonComponent = CreateButton(submitContainer, true, this.modalOptions.modalConfirmButtonText, this.modalOptions.modalConfirmButtonIcon);
         confirmButton.onClick(async () => {
-            this.ProcessData(database, fieldContainer, nameInput, descriptionInput);
+            this.ProcessData(database, frontFieldContainer, backFieldContainer, nameInput, descriptionInput);
         });
         this.contentEl.addEventListener("keydown", async (event: KeyboardEvent) => {
             if (event.shiftKey && event.key === "Enter") {
                 event.preventDefault();
-                this.ProcessData(database, fieldContainer, nameInput, descriptionInput);
+                this.ProcessData(database, frontFieldContainer, backFieldContainer, nameInput, descriptionInput);
             }
         });
     }
 
-    protected ProcessData(database: Loki, fieldContainer?: HTMLDivElement, nameInput?: HTMLInputElement, descriptionInput?: HTMLInputElement) {
-        let fields: Record<string, string> = {};
-        for (const field of fieldContainer.querySelectorAll("div")) {
+    protected ProcessData(database: Loki, frontFieldContainer?: HTMLDivElement, backFieldContainer?: HTMLDivElement, nameInput?: HTMLInputElement, descriptionInput?: HTMLInputElement) {
+        let frontFields: Record<string, string> = {};
+        for (const field of frontFieldContainer.querySelectorAll("div")) {
             let fieldInput: HTMLInputElement = field.querySelector("input");
             let fieldSelector: HTMLSelectElement = field.querySelector("select");
-            fields[fieldInput.value] = fieldSelector.value;
+            frontFields[fieldInput.value] = fieldSelector.value;
+        }
+        let backFields: Record<string, string> = {};
+        for (const field of frontFieldContainer.querySelectorAll("div")) {
+            let fieldInput: HTMLInputElement = field.querySelector("input");
+            let fieldSelector: HTMLSelectElement = field.querySelector("select");
+            backFields[fieldInput.value] = fieldSelector.value;
         }
         let partialTemplate: Partial<Template> = {};
         partialTemplate.name = nameInput.value;
         partialTemplate.description = descriptionInput.value;
-        partialTemplate.fields = fields;
+        partialTemplate.frontFields = frontFields;
+        partialTemplate.backFields = backFields;
         Template.Update(database, this.templateToUpdate.id, partialTemplate);
         this.close();
     }

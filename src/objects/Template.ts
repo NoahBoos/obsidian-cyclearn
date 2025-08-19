@@ -4,17 +4,19 @@ export class Template {
     public id: string;
     public name: string;
     public description: string;
-    public fields: Record<string, string>;
+    public frontFields: Record<string, string>;
+    public backFields: Record<string, string>;
 
-    constructor(name: string, description: string, fields: Record<string, string>, id: string = GENERATE_UUID(16)) {
+    constructor(name: string, description: string, frontFields: Record<string, string>, backFields: Record<string, string>, id: string = GENERATE_UUID(16)) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.fields = fields;
+        this.frontFields = frontFields;
+        this.backFields = backFields;
     }
 
-    public static Create(database: Loki, name: string, description: string, fields: Record<string, string>): Template {
-        const newTemplate = new Template(name, description, fields);
+    public static Create(database: Loki, name: string, description: string, frontFields: Record<string, string>, backFields: Record<string, string>): Template {
+        const newTemplate = new Template(name, description, frontFields, backFields);
         database.getCollection<Template>("templates").insert(newTemplate);
         return newTemplate;
     }
