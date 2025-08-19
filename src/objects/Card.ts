@@ -1,5 +1,6 @@
 import {GENERATE_UUID} from "../utils/U_GenerateUUID";
 import {CardType} from "./E_CardType";
+import {Note} from "./Note";
 
 export class Card {
     public id: string;
@@ -36,6 +37,10 @@ export class Card {
 
     public static ReadAllByNote(database: Loki, idNote: string): Card[] {
         return database.getCollection<Card>("cards").find({ id_note: idNote });
+    }
+
+    public static ReadAllByNotes(database: Loki, idNotes: string[]): Card[] {
+        return database.getCollection<Card>("cards").find({ id_note: { $in: idNotes } });
     }
 
     public static Update(database: Loki, idToUpdate: string, newCardData: Partial<Card>): boolean {
