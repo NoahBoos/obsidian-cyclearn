@@ -13,6 +13,7 @@ import {Card} from "../objects/Card";
 import {CardType} from "../objects/E_CardType";
 import Loki from "lokijs";
 import {I_ModalOptions} from "./I_ModalOptions";
+import {GetToday} from "../utils/U_GenerateDate";
 
 export class UpdateNoteModal extends Modal {
     modalOptions: I_ModalOptions;
@@ -106,7 +107,7 @@ export class UpdateNoteModal extends Modal {
         if (partialNote.hasTwoFaces != this.noteToUpdate.hasTwoFaces) {
             const existingCards: Card[] = Card.ReadAllByNote(database, this.noteToUpdate.id);
             if (partialNote.hasTwoFaces && existingCards.length == 1) {
-                Card.Create(database, this.noteToUpdate.id, null, CardType.BACK);
+                Card.Create(database, this.noteToUpdate.id, parseInt(GetToday()), CardType.BACK);
             } else if (!partialNote.hasTwoFaces && existingCards.length == 2) {
                 let backCardToDelete: Card = existingCards.find(card => card.card_type == CardType.BACK);
                 if (backCardToDelete) Card.Delete(database, backCardToDelete.id);

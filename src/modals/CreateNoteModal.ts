@@ -13,6 +13,7 @@ import {Note} from "../objects/Note";
 import {Card} from "../objects/Card";
 import {CardType} from "../objects/E_CardType";
 import Loki from "lokijs";
+import {GetToday} from "../utils/U_GenerateDate";
 
 export class CreateNoteModal extends FlashcardsCreateObjectModal {
     protected BuildMain(parent: HTMLElement): void {
@@ -69,10 +70,10 @@ export class CreateNoteModal extends FlashcardsCreateObjectModal {
         }
         let addedNote: Note = Note.Create(database, deckSelector.getValue(), templateSelector.getValue(), fields, hasTwoFacesCheckboxInput.checked);
         if (addedNote.hasTwoFaces) {
-            Card.Create(database, addedNote.id, null, CardType.FRONT);
-            Card.Create(database, addedNote.id, null, CardType.BACK);
+            Card.Create(database, addedNote.id, parseInt(GetToday()), CardType.FRONT);
+            Card.Create(database, addedNote.id, parseInt(GetToday()), CardType.BACK);
         } else {
-            Card.Create(database, addedNote.id, null, CardType.FRONT);
+            Card.Create(database, addedNote.id, parseInt(GetToday()), CardType.FRONT);
         }
         this.close();
     }
