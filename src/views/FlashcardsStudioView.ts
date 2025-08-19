@@ -161,7 +161,7 @@ export class FlashcardsStudioView extends ItemView {
         noteTable.forEach((note: Note) => {
             const usedDeck: Deck = Deck.ReadOne(database, note.id_deck);
             const usedTemplate: Template = Template.ReadOne(database, note.id_template);
-            const tableRow: HTMLTableRowElement = CreateTableRow(table, ["", Object.values(note.fields)[0], usedDeck.name, usedTemplate.name])
+            const tableRow: HTMLTableRowElement = CreateTableRow(table, ["", Object.values(note.frontFields)[0], usedDeck.name, usedTemplate.name])
             const firstCell: HTMLTableCellElement = tableRow.querySelector("td");
             const deleteButton: ButtonComponent = CreateButton(firstCell, true, null, "x", ["flashcards--width-fit-content", "flashcards--margin-right-8"]);
             deleteButton.onClick(() => {

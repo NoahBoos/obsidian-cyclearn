@@ -61,18 +61,31 @@ export class UpdateNoteModal extends Modal {
 
         // Field Information Container Code
         const fieldInformationContainer: HTMLElement = CreateSection(parent);
-        CreateSubtitle(fieldInformationContainer, "Field information");
-        const fieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-center", "flashcards--align-center", "flashcards--gap-16"]);
-        for (let fieldsKey in noteToUpdate.fields) {
-            const inputGroupData: InputGroupData = new InputGroupData("text", fieldsKey, fieldsKey, noteToUpdate.fields[fieldsKey]);
-            CreateInputGroup(fieldContainer, inputGroupData);
+        /// Front Field Container Code
+        CreateSubtitle(fieldInformationContainer, "Front fields");
+        const frontFieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-center", "flashcards--align-center", "flashcards--gap-16"]);
+        for (let fieldsKey in noteToUpdate.frontFields) {
+            const inputGroupData: InputGroupData = new InputGroupData("text", fieldsKey, fieldsKey, noteToUpdate.frontFields[fieldsKey]);
+            CreateInputGroup(frontFieldContainer, inputGroupData);
+        }
+        /// Back Field Container Code
+        CreateSubtitle(fieldInformationContainer, "Back fields");
+        const backFieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-center", "flashcards--align-center", "flashcards--gap-16"]);
+        for (let fieldsKey in noteToUpdate.backFields) {
+            const inputGroupData: InputGroupData = new InputGroupData("text", fieldsKey, fieldsKey, noteToUpdate.backFields[fieldsKey]);
+            CreateInputGroup(backFieldContainer, inputGroupData);
         }
         templateSelector.onChange(() => {
-            fieldContainer.empty();
             const selectedTemplate: Template = Template.ReadOne(database, templateSelector.getValue());
-            for (let fieldsKey in selectedTemplate.fields) {
-                const inputGroupData: InputGroupData = new InputGroupData("text", fieldsKey, fieldsKey, noteToUpdate.fields[fieldsKey]);
-                CreateInputGroup(fieldContainer, inputGroupData);
+            frontFieldContainer.empty();
+            for (let fieldsKey in selectedTemplate.frontFields) {
+                const inputGroupData: InputGroupData = new InputGroupData("text", fieldsKey, fieldsKey, noteToUpdate.frontFields[fieldsKey]);
+                CreateInputGroup(frontFieldContainer, inputGroupData);
+            }
+            backFieldContainer.empty();
+            for (let fieldsKey in selectedTemplate.backFields) {
+                const inputGroupData: InputGroupData = new InputGroupData("text", fieldsKey, fieldsKey, noteToUpdate.backFields[fieldsKey]);
+                CreateInputGroup(backFieldContainer, inputGroupData);
             }
         });
 
@@ -81,27 +94,34 @@ export class UpdateNoteModal extends Modal {
         const confirmButton: ButtonComponent = CreateButton(submitContainer, true, this.modalOptions.modalConfirmButtonText, this.modalOptions.modalConfirmButtonIcon);
         let fields: Record<string, string> = {};
         confirmButton.onClick(() => {
-            this.ProcessData(database, fieldContainer, deckSelector, templateSelector, hasTwoFacesCheckboxInput);
+            this.ProcessData(database, frontFieldContainer, backFieldContainer, deckSelector, templateSelector, hasTwoFacesCheckboxInput);
         });
         this.contentEl.addEventListener("keydown", (event: KeyboardEvent) => {
             if (event.shiftKey && event.key === "Enter") {
                 event.preventDefault();
-                this.ProcessData(database, fieldContainer, deckSelector, templateSelector, hasTwoFacesCheckboxInput);
+                this.ProcessData(database, frontFieldContainer, backFieldContainer, deckSelector, templateSelector, hasTwoFacesCheckboxInput);
             }
         });
     }
 
-    protected ProcessData(database: Loki, fieldContainer?: HTMLDivElement, deckSelector?: DropdownComponent, templateSelector?: DropdownComponent, hasTwoFacesCheckboxInput?: HTMLInputElement): void {
-        let fields: Record<string, string> = {};
-        for (const field of fieldContainer.querySelectorAll("div")) {
+    protected ProcessData(database: Loki, frontFieldContainer?: HTMLDivElement, backFieldContainer?: HTMLDivElement, deckSelector?: DropdownComponent, templateSelector?: DropdownComponent, hasTwoFacesCheckboxInput?: HTMLInputElement): void {
+        let frontFields: Record<string, string> = {};
+        for (const field of frontFieldContainer.querySelectorAll("div")) {
             let fieldLabel: HTMLLabelElement = field.querySelector("label");
             let fieldInput: HTMLInputElement = field.querySelector("input");
-            fields[fieldLabel.textContent] = fieldInput.value;
+            frontFields[fieldLabel.textContent] = fieldInput.value;
+        }
+        let backFields: Record<string, string> = {};
+        for (const field of backFieldContainer.querySelectorAll("div")) {
+            let fieldLabel: HTMLLabelElement = field.querySelector("label");
+            let fieldInput: HTMLInputElement = field.querySelector("input");
+            backFields[fieldLabel.textContent] = fieldInput.value;
         }
         let partialNote: Partial<Note> = {};
         partialNote.id_deck = deckSelector.getValue();
         partialNote.id_template = templateSelector.getValue();
-        partialNote.fields = fields;
+        partialNote.frontFields = frontFields;
+        partialNote.backFields = backFields;
         partialNote.hasTwoFaces = hasTwoFacesCheckboxInput.checked;
         Note.Update(database, this.noteToUpdate.id, partialNote)
         if (partialNote.hasTwoFaces != this.noteToUpdate.hasTwoFaces) {
