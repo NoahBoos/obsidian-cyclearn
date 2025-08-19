@@ -13,6 +13,7 @@ import {
 import {CreateTagModal} from "./modals/CreateTagModal";
 import {CreateTemplateModal} from "./modals/CreateTemplateModal";
 import {CreateNoteModal} from "./modals/CreateNoteModal";
+import {FLASHCARDS_STUDY_VIEW_TYPE, FlashcardsStudyView} from "./views/FlashcardsStudyView";
 
 export default class Flashcards extends Plugin {
     settings: I_FlashcardsSettings;
@@ -21,6 +22,7 @@ export default class Flashcards extends Plugin {
         await this.LoadSettings();
         InitializeDatabase(this);
         this.registerView(FLASHCARDS_STUDIO_VIEW_TYPE, (leaf: WorkspaceLeaf) => new FlashcardsStudioView(leaf, this));
+        this.registerView(FLASHCARDS_STUDY_VIEW_TYPE, (leaf: WorkspaceLeaf) => new FlashcardsStudyView(leaf, this));
 
         this.addCommand({
             id: "flashcards-studio-view",
@@ -28,6 +30,14 @@ export default class Flashcards extends Plugin {
             callback: () => {
                 ActivateView(FLASHCARDS_STUDIO_VIEW_TYPE);
             }
+        });
+
+        this.addCommand({
+           id: "flashcards-study-view",
+           name: "Study view",
+           callback: () => {
+               ActivateView(FLASHCARDS_STUDY_VIEW_TYPE);
+           }
         });
 
         this.addCommand({
