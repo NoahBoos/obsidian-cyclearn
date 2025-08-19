@@ -32,6 +32,10 @@ export class CreateTemplateModal extends FlashcardsCreateObjectModal {
         const fieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-8"]);
         addFieldButton.onClick(async () => {
            const fieldInputGroupContainer: HTMLDivElement = CreateContainer(fieldContainer, ["flashcards--flex-row", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-16"]);
+           const deleteFIGCButton: ButtonComponent = CreateButton(fieldInputGroupContainer, false, null, "x", ["flashcards--width-fit-content"]);
+           deleteFIGCButton.onClick(() => {
+              fieldInputGroupContainer.remove();
+           });
            const fieldInput: HTMLInputElement = CreateInput(fieldInputGroupContainer, "text", "A cool field", null, ["flashcards--width-100"]);
            const fieldSelector: DropdownComponent = CreateDropdown(fieldInputGroupContainer, "No type selected", ["flashcards--width-fit-content"]);
            CreateOptionsForDropdownFromRecord(fieldSelector, AUTHORIZED_ELEMENT_TYPES);
