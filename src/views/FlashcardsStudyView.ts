@@ -40,6 +40,7 @@ import {DeleteNoteModal} from "../modals/DeleteNoteModal";
 import {CreateListElement, CreateUnorderedList} from "../utils/U_CreateListElements";
 import {CreateRule} from "../utils/U_CreateRuleElement";
 import {GetToday} from "../utils/U_GenerateDate";
+import {FlashcardReviewModal} from "../modals/FlashcardReviewModal";
 
 export const FLASHCARDS_STUDY_VIEW_TYPE = "flashcards-study-view";
 
@@ -116,6 +117,10 @@ export class FlashcardsStudyView extends ItemView {
             CreateParagraph(deckListElementStatisticContainer, "Nouvelles cartes : " + deckCards.filter(card => card.due_at == parseInt(GetToday()) && card.review_amount == 0).length, ["flashcards--margin-0"]);
             CreateParagraph(deckListElementStatisticContainer, "Cartes à revoir : " + deckCards.filter(card => card.due_at == parseInt(GetToday()) && card.review_amount >= 1).length, ["flashcards--margin-0"]);
             const reviewButton: ButtonComponent = CreateButton(deckListElement, false, "Review cards");
+            reviewButton.onClick(() => {
+                let cardsInSession: Card[] = deckCards.filter(card => card.due_at == parseInt(GetToday()));
+                new FlashcardReviewModal(this.app, cardsInSession).open();
+            });
             CreateRule(deckWrapper);
         });
     }

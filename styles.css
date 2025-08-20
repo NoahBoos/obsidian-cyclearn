@@ -10,12 +10,24 @@
     margin: 0;
 }
 
+.flashcards--margin-bottom-0 {
+    margin-bottom: 0;
+}
+
+.flashcards--margin-top-0 {
+    margin-top: 0;
+}
+
 .flashcards--margin-right-8 {
     margin-right: 8px;
 }
 
 .flashcards--margin-bottom-16 {
     margin-bottom: 16px;
+}
+.flashcards--margin-vertical-8px {
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .flashcards--width-10 {
@@ -62,6 +74,12 @@
     min-width: 15% !important;
     width: 15% !important;
     max-width: 15% !important;
+}
+
+.flashcards--width-20-lock {
+    min-width: 20% !important;
+    width: 20% !important;
+    max-width: 20% !important;
 }
 
 .flashcards--width-25-lock {
