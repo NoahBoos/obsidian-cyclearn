@@ -1,6 +1,6 @@
 import {Card} from "../objects/Card";
 import {database} from "../database/Database";
-import {GetToday} from "../utils/U_GenerateDate";
+import {GetNewDueDate} from "../utils/U_GenerateDate";
 
 export function ApplySM2(card: Card, grade: number) {
     let partialCard: Partial<Card> = {};
@@ -20,7 +20,6 @@ export function ApplySM2(card: Card, grade: number) {
         partialCard.ease_factor = card.ease_factor + (0.1 - (5 - grade) * (0.08 + (5 - grade) * 0.02));
         partialCard.ease_factor = Math.max(1.3, partialCard.ease_factor);
     }
-    partialCard.due_at = parseInt(GetToday()) + partialCard.interval;
-
+    partialCard.due_at = parseInt(GetNewDueDate(partialCard.interval));
     Card.Update(database, card.id, partialCard);
 }
