@@ -114,11 +114,11 @@ export class FlashcardsStudyView extends ItemView {
             })
             const deckCards: Card[] = Card.ReadAllByNotes(database, idNotes);
             CreateParagraph(deckListElementStatisticContainer, "Total de cartes : " + deckCards.length.toString(), ["flashcards--margin-0"]);
-            CreateParagraph(deckListElementStatisticContainer, "Nouvelles cartes : " + deckCards.filter(card => card.due_at == parseInt(GetToday()) && card.review_amount == 0).length, ["flashcards--margin-0"]);
-            CreateParagraph(deckListElementStatisticContainer, "Cartes à revoir : " + deckCards.filter(card => card.due_at == parseInt(GetToday()) && card.review_amount >= 1).length, ["flashcards--margin-0"]);
+            CreateParagraph(deckListElementStatisticContainer, "Nouvelles cartes : " + deckCards.filter(card => card.due_at <= parseInt(GetToday()) && card.review_amount == 0).length, ["flashcards--margin-0"]);
+            CreateParagraph(deckListElementStatisticContainer, "Cartes à revoir : " + deckCards.filter(card => card.due_at <= parseInt(GetToday()) && card.review_amount >= 1).length, ["flashcards--margin-0"]);
             const reviewButton: ButtonComponent = CreateButton(deckListElement, false, "Review cards");
             reviewButton.onClick(() => {
-                let cardsInSession: Card[] = deckCards.filter(card => card.due_at == parseInt(GetToday()));
+                let cardsInSession: Card[] = deckCards.filter(card => card.due_at <= parseInt(GetToday()));
                 new FlashcardReviewModal(this.app, cardsInSession).open();
             });
             CreateRule(deckWrapper);
