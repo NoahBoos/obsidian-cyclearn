@@ -2,7 +2,7 @@ import {FlashcardsCreateObjectModal} from "./FlashcardsCreateObjectModal";
 import {CreateContainer, CreateSection} from "../utils/U_CreateSemanticElements";
 import {CreateSubtitle} from "../utils/U_CreateTextualElements";
 import {InputGroupData} from "../objects/InputGroupData";
-import {CreateCheckboxInputGroup, CreateInputGroup} from "../utils/U_CreateInputElements";
+import {CreateCheckboxInputGroup} from "../utils/U_CreateInputElements";
 import {ButtonComponent, DropdownComponent} from "obsidian";
 import {CreateButton} from "../utils/U_CreateButtonElements";
 import {database} from "../database/Database";

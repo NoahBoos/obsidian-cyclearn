@@ -1,7 +1,7 @@
 import {CreateContainer, CreateHeader, CreateMain, CreateSection} from "../utils/U_CreateSemanticElements";
 import {CreateSubtitle, CreateTitle} from "../utils/U_CreateTextualElements";
 import {InputGroupData} from "../objects/InputGroupData";
-import {CreateCheckboxInputGroup, CreateInputGroup} from "../utils/U_CreateInputElements";
+import {CreateCheckboxInputGroup} from "../utils/U_CreateInputElements";
 import {App, ButtonComponent, DropdownComponent, Modal} from "obsidian";
 import {CreateButton} from "../utils/U_CreateButtonElements";
 import {database} from "../database/Database";
@@ -13,7 +13,7 @@ import {Card} from "../objects/Card";
 import {CardType} from "../objects/E_CardType";
 import Loki from "lokijs";
 import {I_ModalOptions} from "./I_ModalOptions";
-import {GetToday, GetTomorrow} from "../utils/U_GenerateDate";
+import {GetTomorrow} from "../utils/U_GenerateDate";
 import {BuildFieldRecord, CreateInputGroupForFieldRecord} from "../utils/U_FlashcardsDataTreatmentUtils";
 
 export class UpdateNoteModal extends Modal {
@@ -30,7 +30,7 @@ export class UpdateNoteModal extends Modal {
         const {contentEl} = this;
         contentEl.addClass("flashcards--width-100", "flashcards--flex-column", "flashcards--justify-center", "flashcards--align-center", "flashcards--gap-16");
         const header = CreateHeader(contentEl);
-        const title = CreateTitle(header, this.modalOptions.modalTitle);
+        CreateTitle(header, this.modalOptions.modalTitle);
         const main = CreateMain(contentEl);
         this.BuildMain(main, this.noteToUpdate);
     }

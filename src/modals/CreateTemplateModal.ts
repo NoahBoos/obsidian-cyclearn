@@ -1,14 +1,12 @@
 import {FlashcardsCreateObjectModal} from "./FlashcardsCreateObjectModal";
-import {ButtonComponent, DropdownComponent} from "obsidian";
+import {ButtonComponent} from "obsidian";
 import {CreateButton} from "../utils/U_CreateButtonElements";
 import {Template} from "../objects/Template";
 import {database} from "../database/Database";
 import {InputGroupData} from "../objects/InputGroupData";
-import {CreateInput, CreateInputGroup} from "../utils/U_CreateInputElements";
+import {CreateInputGroup} from "../utils/U_CreateInputElements";
 import {CreateSubtitle} from "../utils/U_CreateTextualElements";
 import {CreateContainer, CreateSection} from "../utils/U_CreateSemanticElements";
-import {CreateDropdown, CreateOptionsForDropdownFromRecord} from "../utils/U_CreateDropdownElements";
-import {AUTHORIZED_ELEMENT_TYPES} from "../utils/U_AuthorizedElementTypes";
 import Loki from "lokijs";
 import {BuildFieldRecord, GenerateTemplateFieldInputGroupContainer} from "../utils/U_FlashcardsDataTreatmentUtils";
 

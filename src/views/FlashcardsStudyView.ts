@@ -1,42 +1,22 @@
 import {ButtonComponent, ItemView, WorkspaceLeaf} from "obsidian";
 import Flashcards from "../main";
-import {CreateAside, CreateContainer,  CreateHeader, CreateMain} from "../utils/U_CreateSemanticElements";
+import {CreateContainer,  CreateHeader, CreateMain} from "../utils/U_CreateSemanticElements";
 import {database} from "../database/Database";
-import {Tag} from "../objects/Tag";
 import {Note} from "../objects/Note";
 import {Deck} from "../objects/Deck";
 import {Card} from "../objects/Card";
-import {TaggedNote} from "../objects/TaggedNote";
-import {Template} from "../objects/Template";
 import {CreateParagraph, CreateSubtitle, CreateTitle} from "../utils/U_CreateTextualElements";
 import {CreateButton} from "../utils/U_CreateButtonElements";
-import {CreateTable, CreateTableHeader, CreateTableRow} from "../utils/U_CreateTableElements";
 import {CreateNoteModal} from "../modals/CreateNoteModal";
 import {
     CREATE_DECK_MODAL_OPTIONS,
     CREATE_NOTE_MODAL_OPTIONS,
     CREATE_TAG_MODAL_OPTIONS,
     CREATE_TEMPLATE_MODAL_OPTIONS,
-    DELETE_DECK_MODAL_OPTIONS,
-    DELETE_NOTE_MODAL_OPTIONS,
-    DELETE_TAG_MODAL_OPTIONS,
-    DELETE_TEMPLATE_MODAL_OPTIONS,
-    UPDATE_DECK_MODAL_OPTIONS,
-    UPDATE_NOTE_MODAL_OPTIONS,
-    UPDATE_TAG_MODAL_OPTIONS,
-    UPDATE_TEMPLATE_MODAL_OPTIONS
 } from "../modals/I_ModalOptions";
 import {CreateDeckModal} from "../modals/CreateDeckModal";
 import {CreateTemplateModal} from "../modals/CreateTemplateModal";
 import {CreateTagModal} from "../modals/CreateTagModal";
-import {UpdateNoteModal} from "../modals/UpdateNoteModal";
-import {UpdateDeckModal} from "../modals/UpdateDeckModal";
-import {UpdateTemplateModal} from "../modals/UpdateTemplateModal";
-import {UpdateTagModal} from "../modals/UpdateTagModal";
-import {DeleteTagModal} from "../modals/DeleteTagModal";
-import {DeleteTemplateModal} from "../modals/DeleteTemplateModal";
-import {DeleteDeckModal} from "../modals/DeleteDeckModal";
-import {DeleteNoteModal} from "../modals/DeleteNoteModal";
 import {CreateListElement, CreateUnorderedList} from "../utils/U_CreateListElements";
 import {CreateRule} from "../utils/U_CreateRuleElement";
 import {GetToday} from "../utils/U_GenerateDate";
@@ -97,7 +77,6 @@ export class FlashcardsStudyView extends ItemView {
         // const aside: HTMLElement = CreateAside(contentWrapper, ["flashcards--width-20", "flashcards--flex-column", "flashcards--gap-16"]);
         const main: HTMLElement = CreateMain(contentWrapper, ["flashcards--width-100", "flashcards--justify-start"]);
         const deckWrapper: HTMLElement = CreateUnorderedList(main);
-        // ["flashcards--flex-row", "flashcards--justify-between", "flashcards--align-center"]
         deckTable.forEach((deck: Deck) => {
             const deckListElement: HTMLElement = CreateListElement(deckWrapper, ["flashcards--width-100", "flashcards--flex-row", "flashcards--align-center", "flashcards--justify-between"]);
             const deckListElementHeader: HTMLDivElement = CreateContainer(deckListElement, ["flashcards--flex-column"]);

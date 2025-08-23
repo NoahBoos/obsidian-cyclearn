@@ -36,7 +36,7 @@ export function GenerateTemplateFieldInputGroupContainer(parent: HTMLElement) {
     deleteContainerButton.onClick(() => {
         container.remove();
     });
-    const fieldInput: HTMLInputElement = CreateInput(container, "text", "A cool field", null, ["flashcards--width-100"]);
+    CreateInput(container, "text", "A cool field", null, ["flashcards--width-100"]);
     const fieldSelector: DropdownComponent = CreateDropdown(container, "No type selected", ["flashcards--width-fit-content"]);
     CreateOptionsForDropdownFromRecord(fieldSelector, AUTHORIZED_ELEMENT_TYPES);
     return container;

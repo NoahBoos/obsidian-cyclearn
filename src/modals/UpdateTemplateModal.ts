@@ -1,8 +1,8 @@
 import {CreateContainer, CreateHeader, CreateMain, CreateSection} from "../utils/U_CreateSemanticElements";
 import {CreateSubtitle, CreateTitle} from "../utils/U_CreateTextualElements";
 import {InputGroupData} from "../objects/InputGroupData";
-import {CreateInput, CreateInputGroup} from "../utils/U_CreateInputElements";
-import {App, ButtonComponent, DropdownComponent, Modal} from "obsidian";
+import {CreateInputGroup} from "../utils/U_CreateInputElements";
+import {App, ButtonComponent, Modal} from "obsidian";
 import {CreateButton} from "../utils/U_CreateButtonElements";
 import {database} from "../database/Database";
 import Loki from "lokijs";
@@ -24,7 +24,7 @@ export class UpdateTemplateModal extends Modal {
         const {contentEl} = this;
         contentEl.addClass("flashcards--width-100", "flashcards--flex-column", "flashcards--justify-center", "flashcards--align-center", "flashcards--gap-16");
         const header = CreateHeader(contentEl);
-        const title = CreateTitle(header, this.modalOptions.modalTitle);
+        CreateTitle(header, this.modalOptions.modalTitle);
         const main = CreateMain(contentEl);
         this.BuildMain(main, this.templateToUpdate);
     }

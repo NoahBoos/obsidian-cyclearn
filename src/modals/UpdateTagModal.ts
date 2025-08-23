@@ -5,7 +5,6 @@ import {CreateInputGroup} from "../utils/U_CreateInputElements";
 import {App, ButtonComponent, Modal} from "obsidian";
 import {CreateButton} from "../utils/U_CreateButtonElements";
 import {database} from "../database/Database";
-import {Deck} from "../objects/Deck";
 import Loki from "lokijs";
 import {I_ModalOptions} from "./I_ModalOptions";
 import {Tag} from "../objects/Tag";
@@ -24,7 +23,7 @@ export class UpdateTagModal extends Modal {
         const {contentEl} = this;
         contentEl.addClass("flashcards--width-100", "flashcards--flex-column", "flashcards--justify-center", "flashcards--align-center", "flashcards--gap-16");
         const header = CreateHeader(contentEl);
-        const title = CreateTitle(header, this.modalOptions.modalTitle);
+        CreateTitle(header, this.modalOptions.modalTitle);
         const main = CreateMain(contentEl);
         this.BuildMain(main, this.tagToUpdate);
     }

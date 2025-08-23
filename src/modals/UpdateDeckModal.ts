@@ -23,7 +23,7 @@ export class UpdateDeckModal extends Modal {
         const {contentEl} = this;
         contentEl.addClass("flashcards--width-100", "flashcards--flex-column", "flashcards--justify-center", "flashcards--align-center", "flashcards--gap-16");
         const header = CreateHeader(contentEl);
-        const title = CreateTitle(header, this.modalOptions.modalTitle);
+        CreateTitle(header, this.modalOptions.modalTitle);
         const main = CreateMain(contentEl);
         this.BuildMain(main, this.deckToUpdate);
     }
