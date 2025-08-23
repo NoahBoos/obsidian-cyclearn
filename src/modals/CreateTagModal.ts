@@ -14,12 +14,10 @@ export class CreateTagModal extends FlashcardsCreateObjectModal {
         // General Information Container Code
         const generalInformationContainer: HTMLElement = CreateSection(parent);
         CreateSubtitle(generalInformationContainer, "General information");
-        const nameInputGroupData: InputGroupData = new InputGroupData("text", "Name", "My amazing tag", null);
-        const nameInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, nameInputGroupData);
+        const nameInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, new InputGroupData("text", "Name", "My amazing tag", null));
         const nameInput: HTMLInputElement = nameInputGroupContainer.querySelector("input");
 
-        const descriptionInputGroupData: InputGroupData = new InputGroupData("text", "Description", "This tag is tagging cool notes !", null);
-        const descriptionInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, descriptionInputGroupData);
+        const descriptionInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, new InputGroupData("text", "Description", "This tag is tagging cool notes !", null));
         const descriptionInput: HTMLInputElement = descriptionInputGroupContainer.querySelector("input");
 
         // Field Information Container Code

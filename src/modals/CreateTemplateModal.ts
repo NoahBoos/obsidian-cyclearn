@@ -16,12 +16,10 @@ export class CreateTemplateModal extends FlashcardsCreateObjectModal {
         // General Information Container Code
         const generalInformationContainer: HTMLElement = CreateSection(parent);
         CreateSubtitle(generalInformationContainer, "General information");
-        const nameInputGroupData: InputGroupData = new InputGroupData("text", "Name", "A wonderful template", null);
-        const nameInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, nameInputGroupData);
+        const nameInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, new InputGroupData("text", "Name", "A wonderful template", null));
         const nameInput: HTMLInputElement = nameInputGroupContainer.querySelector("input");
 
-        const descriptionInputGroupData: InputGroupData = new InputGroupData("text", "Description", "This template is templating !", null);
-        const descriptionInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, descriptionInputGroupData);
+        const descriptionInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, new InputGroupData("text", "Description", "This template is templating !", null));
         const descriptionInput: HTMLInputElement = descriptionInputGroupContainer.querySelector("input");
 
         // Field Information Container Code

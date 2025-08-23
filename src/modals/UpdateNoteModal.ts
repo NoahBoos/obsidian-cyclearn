@@ -65,27 +65,23 @@ export class UpdateNoteModal extends Modal {
         CreateSubtitle(fieldInformationContainer, "Front fields");
         const frontFieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-center", "flashcards--align-center", "flashcards--gap-16"]);
         for (let fieldsKey in noteToUpdate.frontFields) {
-            const inputGroupData: InputGroupData = new InputGroupData("text", fieldsKey, fieldsKey, noteToUpdate.frontFields[fieldsKey]);
-            CreateInputGroup(frontFieldContainer, inputGroupData);
+            CreateInputGroup(frontFieldContainer, new InputGroupData("text", fieldsKey, fieldsKey, noteToUpdate.frontFields[fieldsKey]));
         }
         /// Back Field Container Code
         CreateSubtitle(fieldInformationContainer, "Back fields");
         const backFieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-center", "flashcards--align-center", "flashcards--gap-16"]);
         for (let fieldsKey in noteToUpdate.backFields) {
-            const inputGroupData: InputGroupData = new InputGroupData("text", fieldsKey, fieldsKey, noteToUpdate.backFields[fieldsKey]);
-            CreateInputGroup(backFieldContainer, inputGroupData);
+            CreateInputGroup(backFieldContainer, new InputGroupData("text", fieldsKey, fieldsKey, noteToUpdate.backFields[fieldsKey]));
         }
         templateSelector.onChange(() => {
             const selectedTemplate: Template = Template.ReadOne(database, templateSelector.getValue());
             frontFieldContainer.empty();
             for (let fieldsKey in selectedTemplate.frontFields) {
-                const inputGroupData: InputGroupData = new InputGroupData("text", fieldsKey, fieldsKey, noteToUpdate.frontFields[fieldsKey]);
-                CreateInputGroup(frontFieldContainer, inputGroupData);
+                CreateInputGroup(frontFieldContainer, new InputGroupData("text", fieldsKey, fieldsKey, noteToUpdate.frontFields[fieldsKey]));
             }
             backFieldContainer.empty();
             for (let fieldsKey in selectedTemplate.backFields) {
-                const inputGroupData: InputGroupData = new InputGroupData("text", fieldsKey, fieldsKey, noteToUpdate.backFields[fieldsKey]);
-                CreateInputGroup(backFieldContainer, inputGroupData);
+                CreateInputGroup(backFieldContainer, new InputGroupData("text", fieldsKey, fieldsKey, noteToUpdate.backFields[fieldsKey]));
             }
         });
 

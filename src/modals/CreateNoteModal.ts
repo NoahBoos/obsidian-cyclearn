@@ -45,13 +45,11 @@ export class CreateNoteModal extends FlashcardsCreateObjectModal {
             const selectedTemplate: Template = Template.ReadOne(database, templateSelector.getValue());
             frontFieldContainer.empty();
             for (let fieldsKey in selectedTemplate.frontFields) {
-                const inputGroupData: InputGroupData = new InputGroupData("text", fieldsKey, fieldsKey, null);
-                CreateInputGroup(frontFieldContainer, inputGroupData);
+                CreateInputGroup(frontFieldContainer, new InputGroupData("text", fieldsKey, fieldsKey, null));
             }
             backFieldContainer.empty();
             for (let fieldsKey in selectedTemplate.backFields) {
-                const inputGroupData: InputGroupData = new InputGroupData("text", fieldsKey, fieldsKey, null);
-                CreateInputGroup(backFieldContainer, inputGroupData);
+                CreateInputGroup(backFieldContainer, new InputGroupData("text", fieldsKey, fieldsKey, null));
             }
         });
 

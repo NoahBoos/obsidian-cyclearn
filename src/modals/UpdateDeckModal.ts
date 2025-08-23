@@ -37,13 +37,11 @@ export class UpdateDeckModal extends Modal {
         // General Information Container Code
         const generalInformationContainer: HTMLElement = CreateSection(parent);
         CreateSubtitle(generalInformationContainer, "General information");
-        const nameInputGroupData: InputGroupData = new InputGroupData("text", "Name", "My cool deck", null);
-        const nameInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, nameInputGroupData);
+        const nameInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, new InputGroupData("text", "Name", "My cool deck", null));
         const nameInput: HTMLInputElement = nameInputGroupContainer.querySelector("input");
         nameInput.value = deckToUpdate.name;
 
-        const descriptionInputGroupData: InputGroupData = new InputGroupData("text", "Description", "This deck teaches cool thingies !", null);
-        const descriptionInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, descriptionInputGroupData);
+        const descriptionInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, new InputGroupData("text", "Description", "This deck teaches cool thingies !", null));
         const descriptionInput: HTMLInputElement = descriptionInputGroupContainer.querySelector("input");
         if (deckToUpdate) {
             descriptionInput.value = deckToUpdate.description;
