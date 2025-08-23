@@ -55,8 +55,7 @@ export class UpdateNoteModal extends Modal {
         const templateSelector: DropdownComponent = CreateDropdown(generalInformationContainer, "Choose a template");
         CreateOptionsForDropdownFromTable(templateSelector, templateTable);
         templateSelector.setValue(noteToUpdate.id_template);
-        const hasTwoFacesCheckboxInputGroupData: InputGroupData = new InputGroupData(null, "Generate two cards : Front & Back.", null, "true");
-        const hasTwoFacesCheckbox: HTMLDivElement = CreateCheckboxInputGroup(generalInformationContainer, hasTwoFacesCheckboxInputGroupData);
+        const hasTwoFacesCheckbox: HTMLDivElement = CreateCheckboxInputGroup(generalInformationContainer, new InputGroupData(null, "Generate two cards : Front & Back.", null, "true"));
         const hasTwoFacesCheckboxInput: HTMLInputElement = hasTwoFacesCheckbox.querySelector("input");
         hasTwoFacesCheckboxInput.checked = noteToUpdate.hasTwoFaces;
 

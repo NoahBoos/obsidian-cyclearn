@@ -30,8 +30,7 @@ export class CreateNoteModal extends FlashcardsCreateObjectModal {
         CreateOptionsForDropdownFromTable(deckSelector, deckTable);
         const templateSelector: DropdownComponent = CreateDropdown(generalInformationContainer, "Choose a template");
         CreateOptionsForDropdownFromTable(templateSelector, templateTable);
-        const hasTwoFacesCheckboxInputGroupData: InputGroupData = new InputGroupData(null, "Generate two cards : Front & Back.", null, "true");
-        const hasTwoFacesCheckbox: HTMLDivElement = CreateCheckboxInputGroup(generalInformationContainer, hasTwoFacesCheckboxInputGroupData);
+        const hasTwoFacesCheckbox: HTMLDivElement = CreateCheckboxInputGroup(generalInformationContainer, new InputGroupData(null, "Generate two cards : Front & Back.", null, "true"));
         const hasTwoFacesCheckboxInput: HTMLInputElement = hasTwoFacesCheckbox.querySelector("input");
 
         // Field Information Container Code
