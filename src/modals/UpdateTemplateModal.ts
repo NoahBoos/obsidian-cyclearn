@@ -10,6 +10,7 @@ import {I_ModalOptions} from "./I_ModalOptions";
 import {CreateDropdown, CreateOptionsForDropdownFromRecord} from "../utils/U_CreateDropdownElements";
 import {AUTHORIZED_ELEMENT_TYPES} from "../utils/U_AuthorizedElementTypes";
 import {Template} from "../objects/Template";
+import {BuildFieldRecord} from "../utils/U_FlashcardsDataTreatmentUtils";
 
 export class UpdateTemplateModal extends Modal {
     modalOptions: I_ModalOptions;
@@ -121,18 +122,8 @@ export class UpdateTemplateModal extends Modal {
     }
 
     protected ProcessData(database: Loki, frontFieldContainer?: HTMLDivElement, backFieldContainer?: HTMLDivElement, nameInput?: HTMLInputElement, descriptionInput?: HTMLInputElement) {
-        let frontFields: Record<string, string> = {};
-        for (const field of frontFieldContainer.querySelectorAll("div")) {
-            let fieldInput: HTMLInputElement = field.querySelector("input");
-            let fieldSelector: HTMLSelectElement = field.querySelector("select");
-            frontFields[fieldInput.value] = fieldSelector.value;
-        }
-        let backFields: Record<string, string> = {};
-        for (const field of frontFieldContainer.querySelectorAll("div")) {
-            let fieldInput: HTMLInputElement = field.querySelector("input");
-            let fieldSelector: HTMLSelectElement = field.querySelector("select");
-            backFields[fieldInput.value] = fieldSelector.value;
-        }
+        let frontFields: Record<string, string> = BuildFieldRecord(frontFieldContainer);
+        let backFields: Record<string, string> = BuildFieldRecord(backFieldContainer);
         let partialTemplate: Partial<Template> = {};
         partialTemplate.name = nameInput.value;
         partialTemplate.description = descriptionInput.value;

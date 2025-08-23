@@ -14,6 +14,7 @@ import {Card} from "../objects/Card";
 import {CardType} from "../objects/E_CardType";
 import Loki from "lokijs";
 import {GetToday, GetTomorrow} from "../utils/U_GenerateDate";
+import {BuildFieldRecord} from "../utils/U_FlashcardsDataTreatmentUtils";
 
 export class CreateNoteModal extends FlashcardsCreateObjectModal {
     protected BuildMain(parent: HTMLElement): void {
@@ -68,18 +69,8 @@ export class CreateNoteModal extends FlashcardsCreateObjectModal {
     }
 
     protected ProcessData(database: Loki, frontFieldContainer?: HTMLDivElement, backFieldContainer?: HTMLDivElement, deckSelector?: DropdownComponent, templateSelector?: DropdownComponent, hasTwoFacesCheckboxInput?: HTMLInputElement): void {
-        let frontFields: Record<string, string> = {};
-        for (const field of frontFieldContainer.querySelectorAll("div")) {
-            let fieldLabel: HTMLLabelElement = field.querySelector("label");
-            let fieldInput: HTMLInputElement = field.querySelector("input");
-            frontFields[fieldLabel.textContent] = fieldInput.value;
-        }
-        let backFields: Record<string, string> = {};
-        for (const field of backFieldContainer.querySelectorAll("div")) {
-            let fieldLabel: HTMLLabelElement = field.querySelector("label");
-            let fieldInput: HTMLInputElement = field.querySelector("input");
-            backFields[fieldLabel.textContent] = fieldInput.value;
-        }
+        let frontFields: Record<string, string> = BuildFieldRecord(frontFieldContainer);
+        let backFields: Record<string, string> = BuildFieldRecord(backFieldContainer);
         let addedNote: Note = Note.Create(database, deckSelector.getValue(), templateSelector.getValue(), frontFields, backFields, hasTwoFacesCheckboxInput.checked);
         if (addedNote.hasTwoFaces) {
             Card.Create(database, addedNote.id, parseInt(GetToday()), CardType.FRONT);

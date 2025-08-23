@@ -14,6 +14,7 @@ import {CardType} from "../objects/E_CardType";
 import Loki from "lokijs";
 import {I_ModalOptions} from "./I_ModalOptions";
 import {GetToday, GetTomorrow} from "../utils/U_GenerateDate";
+import {BuildFieldRecord} from "../utils/U_FlashcardsDataTreatmentUtils";
 
 export class UpdateNoteModal extends Modal {
     modalOptions: I_ModalOptions;
@@ -88,7 +89,6 @@ export class UpdateNoteModal extends Modal {
         // Submit Container & Data Treatment Code
         const submitContainer: HTMLElement = CreateSection(parent);
         const confirmButton: ButtonComponent = CreateButton(submitContainer, true, this.modalOptions.modalConfirmButtonText, this.modalOptions.modalConfirmButtonIcon);
-        let fields: Record<string, string> = {};
         confirmButton.onClick(() => {
             this.ProcessData(database, frontFieldContainer, backFieldContainer, deckSelector, templateSelector, hasTwoFacesCheckboxInput);
         });
@@ -101,18 +101,8 @@ export class UpdateNoteModal extends Modal {
     }
 
     protected ProcessData(database: Loki, frontFieldContainer?: HTMLDivElement, backFieldContainer?: HTMLDivElement, deckSelector?: DropdownComponent, templateSelector?: DropdownComponent, hasTwoFacesCheckboxInput?: HTMLInputElement): void {
-        let frontFields: Record<string, string> = {};
-        for (const field of frontFieldContainer.querySelectorAll("div")) {
-            let fieldLabel: HTMLLabelElement = field.querySelector("label");
-            let fieldInput: HTMLInputElement = field.querySelector("input");
-            frontFields[fieldLabel.textContent] = fieldInput.value;
-        }
-        let backFields: Record<string, string> = {};
-        for (const field of backFieldContainer.querySelectorAll("div")) {
-            let fieldLabel: HTMLLabelElement = field.querySelector("label");
-            let fieldInput: HTMLInputElement = field.querySelector("input");
-            backFields[fieldLabel.textContent] = fieldInput.value;
-        }
+        let frontFields: Record<string, string> = BuildFieldRecord(frontFieldContainer);
+        let backFields: Record<string, string> = BuildFieldRecord(backFieldContainer);
         let partialNote: Partial<Note> = {};
         partialNote.id_deck = deckSelector.getValue();
         partialNote.id_template = templateSelector.getValue();

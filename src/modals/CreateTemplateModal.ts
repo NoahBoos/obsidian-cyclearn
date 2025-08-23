@@ -10,6 +10,7 @@ import {CreateContainer, CreateSection} from "../utils/U_CreateSemanticElements"
 import {CreateDropdown, CreateOptionsForDropdownFromRecord} from "../utils/U_CreateDropdownElements";
 import {AUTHORIZED_ELEMENT_TYPES} from "../utils/U_AuthorizedElementTypes";
 import Loki from "lokijs";
+import {BuildFieldRecord} from "../utils/U_FlashcardsDataTreatmentUtils";
 
 export class CreateTemplateModal extends FlashcardsCreateObjectModal {
     protected BuildMain(parent: HTMLElement): void {
@@ -70,18 +71,8 @@ export class CreateTemplateModal extends FlashcardsCreateObjectModal {
     }
 
     protected ProcessData(database: Loki, frontFieldContainer?: HTMLDivElement, backFieldContainer?: HTMLDivElement, nameInput?: HTMLInputElement, descriptionInput?: HTMLInputElement) {
-        let frontFields: Record<string, string> = {};
-        for (const field of frontFieldContainer.querySelectorAll("div")) {
-            let fieldInput: HTMLInputElement = field.querySelector("input");
-            let fieldSelector: HTMLSelectElement = field.querySelector("select");
-            frontFields[fieldInput.value] = fieldSelector.value;
-        }
-        let backFields: Record<string, string> = {};
-        for (const field of frontFieldContainer.querySelectorAll("div")) {
-            let fieldInput: HTMLInputElement = field.querySelector("input");
-            let fieldSelector: HTMLSelectElement = field.querySelector("select");
-            backFields[fieldInput.value] = fieldSelector.value;
-        }
+        let frontFields: Record<string, string> = BuildFieldRecord(frontFieldContainer);
+        let backFields: Record<string, string> = BuildFieldRecord(backFieldContainer);
         Template.Create(database, nameInput.value, descriptionInput.value, frontFields, backFields);
         this.close();
     }
