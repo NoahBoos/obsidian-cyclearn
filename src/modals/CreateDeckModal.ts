@@ -1,4 +1,4 @@
-import {FlashcardsCreateObjectModal} from "./FlashcardsCreateObjectModal";
+import {CyclearnCreateObjectModal} from "./CyclearnCreateObjectModal";
 import {CreateButton} from "../utils/U_CreateButtonElements";
 import {CreateInputGroup} from "../utils/U_CreateInputElements";
 import {InputGroupData} from "../objects/InputGroupData";
@@ -9,7 +9,7 @@ import {CreateSubtitle} from "../utils/U_CreateTextualElements";
 import {CreateSection} from "../utils/U_CreateSemanticElements";
 
 /**
- * Modal for creating a new Flashcards deck.
+ * Modal for creating a new Cyclearn deck.
  *
  * Provides a form with :
  * - An input field for the deck name ;
@@ -18,7 +18,7 @@ import {CreateSection} from "../utils/U_CreateSemanticElements";
  *
  * On confirmation, the deck is created in the database and the modal closes.
  */
-export class CreateDeckModal extends FlashcardsCreateObjectModal {
+export class CreateDeckModal extends CyclearnCreateObjectModal {
     /**
      * Builds the modal content :
      * - Adds input fields for deck name and description ;

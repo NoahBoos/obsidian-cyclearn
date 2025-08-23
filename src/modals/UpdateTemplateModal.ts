@@ -11,7 +11,7 @@ import {Template} from "../objects/Template";
 import {BuildFieldRecord, GenerateTemplateFieldInputGroupContainer} from "../utils/U_FlashcardsDataTreatmentUtils";
 
 /**
- * Modal for updating a Flashcards template.
+ * Modal for updating a Cyclearn template.
  *
  * Provides a prefilled form with :
  * - An input field for the template name ;

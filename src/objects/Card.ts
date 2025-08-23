@@ -1,6 +1,5 @@
 import {GENERATE_UUID} from "../utils/U_GenerateUUID";
 import {CardType} from "./E_CardType";
-import {Note} from "./Note";
 
 export class Card {
     public id: string;

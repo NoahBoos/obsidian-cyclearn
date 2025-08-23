@@ -17,7 +17,7 @@ import {GetTomorrow} from "../utils/U_GenerateDate";
 import {BuildFieldRecord, CreateInputGroupForFieldRecord} from "../utils/U_FlashcardsDataTreatmentUtils";
 
 /**
- * Modal for updating a Flashcards note and its related cards.
+ * Modal for updating a Cyclearn note and its related cards.
  *
  * Provides a prefilled form with :
  * - A selector for the deck the note will be stored in.

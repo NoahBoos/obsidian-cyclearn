@@ -7,7 +7,7 @@ import {database} from "../database/Database";
 import {Deck} from "../objects/Deck";
 
 /**
- * Modal for deleting a Flashcards deck.
+ * Modal for deleting a Cyclearn deck.
  *
  * Provides :
  * - A disclaimer message ;

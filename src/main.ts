@@ -1,9 +1,9 @@
 import {Plugin, WorkspaceLeaf} from "obsidian";
-import {DEFAULT_SETTINGS, I_FlashcardsSettings} from "./settings/I_FlashcardsSettings";
+import {DEFAULT_SETTINGS, I_CyclearnSettings} from "./settings/I_CyclearnSettings";
 import {InitializeDatabase} from "./database/Database";
-import {FlashcardsStudioView, FLASHCARDS_STUDIO_VIEW_TYPE} from "./views/FlashcardsStudioView";
+import {CyclearnStudioView, CYCLEARN_STUDIO_VIEW_TYPE} from "./views/CyclearnStudioView";
 import {ActivateView} from "./utils/U_View";
-import {FlashcardsSettingTab} from "./settings/FlashcardsSettingTab";
+import {CyclearnSettingTab} from "./settings/CyclearnSettingTab";
 import {CreateDeckModal} from "./modals/CreateDeckModal";
 import {
     CREATE_DECK_MODAL_OPTIONS, CREATE_NOTE_MODAL_OPTIONS,
@@ -13,35 +13,35 @@ import {
 import {CreateTagModal} from "./modals/CreateTagModal";
 import {CreateTemplateModal} from "./modals/CreateTemplateModal";
 import {CreateNoteModal} from "./modals/CreateNoteModal";
-import {FLASHCARDS_STUDY_VIEW_TYPE, FlashcardsStudyView} from "./views/FlashcardsStudyView";
+import {CYCLEARN_STUDY_VIEW_TYPE, CyclearnStudyView} from "./views/CyclearnStudyView";
 
-export default class Flashcards extends Plugin {
-    settings: I_FlashcardsSettings;
+export default class Cyclearn extends Plugin {
+    settings: I_CyclearnSettings;
 
     async onload() {
         await this.LoadSettings();
         InitializeDatabase(this);
-        this.registerView(FLASHCARDS_STUDIO_VIEW_TYPE, (leaf: WorkspaceLeaf) => new FlashcardsStudioView(leaf, this));
-        this.registerView(FLASHCARDS_STUDY_VIEW_TYPE, (leaf: WorkspaceLeaf) => new FlashcardsStudyView(leaf, this));
+        this.registerView(CYCLEARN_STUDIO_VIEW_TYPE, (leaf: WorkspaceLeaf) => new CyclearnStudioView(leaf, this));
+        this.registerView(CYCLEARN_STUDY_VIEW_TYPE, (leaf: WorkspaceLeaf) => new CyclearnStudyView(leaf, this));
 
         this.addCommand({
-            id: "flashcards-studio-view",
+            id: "cyclearn-studio-view",
             name: "Studio view",
             callback: () => {
-                ActivateView(FLASHCARDS_STUDIO_VIEW_TYPE);
+                ActivateView(CYCLEARN_STUDIO_VIEW_TYPE);
             }
         });
 
         this.addCommand({
-           id: "flashcards-study-view",
+           id: "cyclearn-study-view",
            name: "Study view",
            callback: () => {
-               ActivateView(FLASHCARDS_STUDY_VIEW_TYPE);
+               ActivateView(CYCLEARN_STUDY_VIEW_TYPE);
            }
         });
 
         this.addCommand({
-            id: "flashcards-create-deck",
+            id: "cyclearn-create-deck",
             name: "Create a new deck",
             callback: () => {
                 new CreateDeckModal(this.app, CREATE_DECK_MODAL_OPTIONS).open();
@@ -49,7 +49,7 @@ export default class Flashcards extends Plugin {
         });
 
         this.addCommand({
-           id: "flashcards-create-tag",
+           id: "cyclearn-create-tag",
            name: "Create a new tag",
            callback: () => {
                new CreateTagModal(this.app, CREATE_TAG_MODAL_OPTIONS).open();
@@ -57,7 +57,7 @@ export default class Flashcards extends Plugin {
         });
 
         this.addCommand({
-            id: "flashcards-create-template",
+            id: "cyclearn-create-template",
             name: "Create a new template",
             callback: () => {
                 new CreateTemplateModal(this.app, CREATE_TEMPLATE_MODAL_OPTIONS).open();
@@ -65,7 +65,7 @@ export default class Flashcards extends Plugin {
         });
 
         this.addCommand({
-            id: "flashcards-create-note",
+            id: "cyclearn-create-note",
             name: "Create a new note",
             callback: () => {
                 new CreateNoteModal(this.app, CREATE_NOTE_MODAL_OPTIONS).open();

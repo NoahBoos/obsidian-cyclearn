@@ -1,6 +1,6 @@
 # Rift Open Source Software License v3.0
 
-*This license concern “Obsidian Plugin - Flashcards”.*
+*This license concern “Obsidian Plugin - Cyclearn”.*
 
 *Here is a link to the GitHub repository of this project : https://github.com/NoahBoos/obsidian-flashcards.*
 

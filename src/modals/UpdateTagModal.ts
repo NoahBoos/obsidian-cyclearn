@@ -10,7 +10,7 @@ import {I_ModalOptions} from "./I_ModalOptions";
 import {Tag} from "../objects/Tag";
 
 /**
- * Modal for updating a Flashcards tag.
+ * Modal for updating a Cyclearn tag.
  *
  * Provides a prefilled form with :
  * - An input field for the tag name ;

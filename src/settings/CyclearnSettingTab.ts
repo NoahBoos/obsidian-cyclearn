@@ -1,10 +1,10 @@
 import {App, PluginSettingTab} from "obsidian";
-import Flashcards from "../main";
+import Cyclearn from "../main";
 
-export class FlashcardsSettingTab extends PluginSettingTab {
-    plugin: Flashcards;
+export class CyclearnSettingTab extends PluginSettingTab {
+    plugin: Cyclearn;
 
-    constructor(app: App, plugin: Flashcards) {
+    constructor(app: App, plugin: Cyclearn) {
         super(app, plugin);
         this.plugin = plugin;
     }

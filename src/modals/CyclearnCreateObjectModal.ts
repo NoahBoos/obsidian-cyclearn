@@ -4,7 +4,7 @@ import {I_ModalOptions} from "./I_ModalOptions";
 import {CreateTitle} from "../utils/U_CreateTextualElements";
 
 /**
- * Abstract modal used as a base for creating Modal that aims to create a Flashcards-related objects.
+ * Abstract modal used as a base for creating Modal that aims to create a Cyclearn-related objects.
  *
  * This class provides a predefined modal structure with :
  * - A header implementing a customizable title ;
@@ -13,7 +13,7 @@ import {CreateTitle} from "../utils/U_CreateTextualElements";
  * Inheriting classes must implement the `BuildMain()` method to define the content of the main content area of the modal.
  * Inheriting classes must also implement the `ProcessData()` to handle data persistence and processing logic.
  */
-export abstract class FlashcardsCreateObjectModal extends Modal {
+export abstract class CyclearnCreateObjectModal extends Modal {
     /**
      * Options used to configure the modal.
      */

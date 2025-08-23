@@ -8,7 +8,7 @@ import {Note} from "../objects/Note";
 import {Card} from "../objects/Card";
 
 /**
- * Modal for deleting a Flashcards note and its related cards.
+ * Modal for deleting a Cyclearn note and its related cards.
  *
  * Provides :
  * - A disclaimer message ;

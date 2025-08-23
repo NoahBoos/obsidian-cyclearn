@@ -1,4 +1,4 @@
-import {FlashcardsCreateObjectModal} from "./FlashcardsCreateObjectModal";
+import {CyclearnCreateObjectModal} from "./CyclearnCreateObjectModal";
 import {CreateContainer, CreateSection} from "../utils/U_CreateSemanticElements";
 import {CreateSubtitle} from "../utils/U_CreateTextualElements";
 import {InputGroupData} from "../objects/InputGroupData";
@@ -17,7 +17,7 @@ import {GetToday, GetTomorrow} from "../utils/U_GenerateDate";
 import {BuildFieldRecord, CreateInputGroupForFieldRecord} from "../utils/U_FlashcardsDataTreatmentUtils";
 
 /**
- * Modal for creating a new Flashcards note and its related cards.
+ * Modal for creating a new Cyclearn note and its related cards.
  *
  * Provides a form with :
  * - A selector for the deck the note will be stored in.
@@ -27,7 +27,7 @@ import {BuildFieldRecord, CreateInputGroupForFieldRecord} from "../utils/U_Flash
  *
  * On confirmation, the note and its related cards are created in the database and the modal closes.
  */
-export class CreateNoteModal extends FlashcardsCreateObjectModal {
+export class CreateNoteModal extends CyclearnCreateObjectModal {
     /**
      * Builds the modal content :
      * - Adds selectors for deck and template choices ;

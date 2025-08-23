@@ -10,7 +10,7 @@ import Loki from "lokijs";
 import {I_ModalOptions} from "./I_ModalOptions";
 
 /**
- * Modal for updating a Flashcards deck.
+ * Modal for updating a Cyclearn deck.
  *
  * Provides a prefilled form with :
  * - An input field for the deck name ;

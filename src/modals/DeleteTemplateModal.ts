@@ -7,7 +7,7 @@ import {CreateButton} from "../utils/U_CreateButtonElements";
 import {database} from "../database/Database";
 
 /**
- * Modal for deleting a Flashcards template.
+ * Modal for deleting a Cyclearn template.
  *
  * Provides :
  * - A disclaimer message ;

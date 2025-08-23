@@ -1,5 +1,5 @@
 import {ButtonComponent, ItemView, WorkspaceLeaf} from "obsidian";
-import Flashcards from "../main";
+import Cyclearn from "../main";
 import {CreateAside, CreateContainer,  CreateHeader, CreateMain} from "../utils/U_CreateSemanticElements";
 import {database} from "../database/Database";
 import {Tag} from "../objects/Tag";
@@ -38,22 +38,22 @@ import {DeleteTemplateModal} from "../modals/DeleteTemplateModal";
 import {DeleteDeckModal} from "../modals/DeleteDeckModal";
 import {DeleteNoteModal} from "../modals/DeleteNoteModal";
 
-export const FLASHCARDS_STUDIO_VIEW_TYPE = "flashcards-studio-view";
+export const CYCLEARN_STUDIO_VIEW_TYPE = "cyclearn-studio-view";
 
-export class FlashcardsStudioView extends ItemView {
-    plugin: Flashcards;
+export class CyclearnStudioView extends ItemView {
+    plugin: Cyclearn;
 
-    constructor(leaf: WorkspaceLeaf, plugin: Flashcards) {
+    constructor(leaf: WorkspaceLeaf, plugin: Cyclearn) {
         super(leaf);
         this.plugin = plugin;
     }
 
     getViewType(): string {
-        return FLASHCARDS_STUDIO_VIEW_TYPE;
+        return CYCLEARN_STUDIO_VIEW_TYPE;
     }
 
     getDisplayText(): string {
-        return "Flashcards Studio View";
+        return "Cyclearn Studio View";
     }
 
     getIcon(): string {
@@ -71,7 +71,7 @@ export class FlashcardsStudioView extends ItemView {
 
         // Header Code
         const header: HTMLElement = CreateHeader(container, ["flashcards--margin-bottom-16", "flashcards--flex-column", "flashcards--gap-16"]);
-        CreateTitle(header, "Flashcards Studio View", ["flashcards--width-fit-content"]);
+        CreateTitle(header, "Cyclearn Studio View", ["flashcards--width-fit-content"]);
         const headerButtonContainer: HTMLDivElement = CreateContainer(header, ["flashcards--flex-row", "flashcards--justify-center", "flashcards--gap-16"]);
         const newNoteButton: ButtonComponent = CreateButton(headerButtonContainer, true, "New note", null, ["flashcards--width-fit-content"]);
         newNoteButton.onClick(() => {

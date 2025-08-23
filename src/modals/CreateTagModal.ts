@@ -1,4 +1,4 @@
-import {FlashcardsCreateObjectModal} from "./FlashcardsCreateObjectModal";
+import {CyclearnCreateObjectModal} from "./CyclearnCreateObjectModal";
 import {InputGroupData} from "../objects/InputGroupData";
 import {CreateInputGroup} from "../utils/U_CreateInputElements";
 import {CreateButton} from "../utils/U_CreateButtonElements";
@@ -10,7 +10,7 @@ import Loki from "lokijs";
 import {CreateSection} from "../utils/U_CreateSemanticElements";
 
 /**
- * Modal for creating a new Flashcards tag.
+ * Modal for creating a new Cyclearn tag.
  *
  * Provides a form with :
  * - An input field for the tag name ;
@@ -19,7 +19,7 @@ import {CreateSection} from "../utils/U_CreateSemanticElements";
  *
  * On confirmation, the tag is created in the database and the modal closes.
  */
-export class CreateTagModal extends FlashcardsCreateObjectModal {
+export class CreateTagModal extends CyclearnCreateObjectModal {
     /**
      * Builds the modal content :
      * - Adds an input fields for tag name and description ;

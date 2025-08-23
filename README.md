@@ -1,6 +1,6 @@
 # Learn Smarter, Remember Longer
 
-Flashcards is the all-in-one solution tailored for learners who want to remember more with less effort. With no external apps required, everything's created, organized, and reviewed directly inside your vault.
+Cyclearn is the all-in-one solution tailored for learners who want to remember more with less effort. With no external apps required, everything's created, organized, and reviewed directly inside your vault.
 
 ## ✨ Core features
 - **Effortless Creation** – Build flashcards in just a few clicks with a clean, intuitive interface.
@@ -9,7 +9,7 @@ Flashcards is the all-in-one solution tailored for learners who want to remember
 - **Personalized Learning** – Adapt revision sessions to match your own pace and style.
 
 ## 🚀 Why Use It?
-Your vault becomes more than just notes — it becomes a complete learning system. Whether you're preparing for exams, learning a new language, or sharpening professional knowledge, Flashcards makes studying both simple and effective.
+Your vault becomes more than just notes — it becomes a complete learning system. Whether you're preparing for exams, learning a new language, or sharpening professional knowledge, Cyclearn makes studying both simple and effective.
 
 ## 💡 Tailored for...
 - Language learners building strong vocabulary ;

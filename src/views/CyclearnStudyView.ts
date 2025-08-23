@@ -1,5 +1,5 @@
 import {ButtonComponent, ItemView, WorkspaceLeaf} from "obsidian";
-import Flashcards from "../main";
+import Cyclearn from "../main";
 import {CreateContainer,  CreateHeader, CreateMain} from "../utils/U_CreateSemanticElements";
 import {database} from "../database/Database";
 import {Note} from "../objects/Note";
@@ -22,22 +22,22 @@ import {CreateRule} from "../utils/U_CreateRuleElement";
 import {GetToday} from "../utils/U_GenerateDate";
 import {FlashcardReviewModal} from "../modals/FlashcardReviewModal";
 
-export const FLASHCARDS_STUDY_VIEW_TYPE = "flashcards-study-view";
+export const CYCLEARN_STUDY_VIEW_TYPE = "cyclearn-study-view";
 
-export class FlashcardsStudyView extends ItemView {
-    plugin: Flashcards;
+export class CyclearnStudyView extends ItemView {
+    plugin: Cyclearn;
 
-    constructor(leaf: WorkspaceLeaf, plugin: Flashcards) {
+    constructor(leaf: WorkspaceLeaf, plugin: Cyclearn) {
         super(leaf);
         this.plugin = plugin;
     }
 
     getViewType(): string {
-        return FLASHCARDS_STUDY_VIEW_TYPE;
+        return CYCLEARN_STUDY_VIEW_TYPE;
     }
 
     getDisplayText(): string {
-        return "Flashcards Study View";
+        return "Cyclearn Study View";
     }
 
     getIcon(): string {
@@ -53,7 +53,7 @@ export class FlashcardsStudyView extends ItemView {
 
         // Header Code
         const header: HTMLElement = CreateHeader(container, ["flashcards--margin-bottom-16", "flashcards--flex-column", "flashcards--gap-16"]);
-        CreateTitle(header, "Flashcards Study View", ["flashcards--width-fit-content"]);
+        CreateTitle(header, "Cyclearn Study View", ["flashcards--width-fit-content"]);
         const headerButtonContainer: HTMLDivElement = CreateContainer(header, ["flashcards--flex-row", "flashcards--justify-center", "flashcards--gap-16"]);
         const newNoteButton: ButtonComponent = CreateButton(headerButtonContainer, true, "New note", null, ["flashcards--width-fit-content"]);
         newNoteButton.onClick(() => {

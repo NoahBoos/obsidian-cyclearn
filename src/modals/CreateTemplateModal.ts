@@ -1,4 +1,4 @@
-import {FlashcardsCreateObjectModal} from "./FlashcardsCreateObjectModal";
+import {CyclearnCreateObjectModal} from "./CyclearnCreateObjectModal";
 import {ButtonComponent} from "obsidian";
 import {CreateButton} from "../utils/U_CreateButtonElements";
 import {Template} from "../objects/Template";
@@ -11,7 +11,7 @@ import Loki from "lokijs";
 import {BuildFieldRecord, GenerateTemplateFieldInputGroupContainer} from "../utils/U_FlashcardsDataTreatmentUtils";
 
 /**
- * Modal for creating a new Flashcards template.
+ * Modal for creating a new Cyclearn template.
  *
  * Provides a form with :
  * - An input field for the template name ;
@@ -21,7 +21,7 @@ import {BuildFieldRecord, GenerateTemplateFieldInputGroupContainer} from "../uti
 
  * On confirmation, the template is created in the database and the modal closes.
  */
-export class CreateTemplateModal extends FlashcardsCreateObjectModal {
+export class CreateTemplateModal extends CyclearnCreateObjectModal {
     /**
      * Builds the modal content :
      * - Adds an input fields for template name and description ;
