@@ -44,9 +44,7 @@ export class UpdateTemplateModal extends Modal {
 
         const descriptionInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, new InputGroupData("text", "Description", "This template is templating !", null));
         const descriptionInput: HTMLInputElement = descriptionInputGroupContainer.querySelector("input");
-        if (templateToUpdate.description) {
-            descriptionInput.value = templateToUpdate.description;
-        }
+        descriptionInput.value = templateToUpdate.description;
 
         // Field Information Container Code
         const fieldInformationContainer: HTMLElement = CreateSection(parent);

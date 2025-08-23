@@ -44,9 +44,7 @@ export class UpdateTagModal extends Modal {
 
         const descriptionInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, new InputGroupData("text", "Description", "This deck teaches cool thingies !", null));
         const descriptionInput: HTMLInputElement = descriptionInputGroupContainer.querySelector("input");
-        if (tagToUpdate) {
-            descriptionInput.value = tagToUpdate.description;
-        }
+        descriptionInput.value = tagToUpdate.description;
 
         // Submit Container & Data Treatment Code
         const submitContainer: HTMLElement = CreateSection(parent);
