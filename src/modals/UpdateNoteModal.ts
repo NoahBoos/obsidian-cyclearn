@@ -14,7 +14,7 @@ import {CardType} from "../objects/E_CardType";
 import Loki from "lokijs";
 import {I_ModalOptions} from "./I_ModalOptions";
 import {GetToday, GetTomorrow} from "../utils/U_GenerateDate";
-import {BuildFieldRecord} from "../utils/U_FlashcardsDataTreatmentUtils";
+import {BuildFieldRecord, CreateInputGroupForFieldRecord} from "../utils/U_FlashcardsDataTreatmentUtils";
 
 export class UpdateNoteModal extends Modal {
     modalOptions: I_ModalOptions;
@@ -64,25 +64,17 @@ export class UpdateNoteModal extends Modal {
         /// Front Field Container Code
         CreateSubtitle(fieldInformationContainer, "Front fields");
         const frontFieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-center", "flashcards--align-center", "flashcards--gap-16"]);
-        for (let fieldsKey in noteToUpdate.frontFields) {
-            CreateInputGroup(frontFieldContainer, new InputGroupData("text", fieldsKey, fieldsKey, noteToUpdate.frontFields[fieldsKey]));
-        }
+        CreateInputGroupForFieldRecord(frontFieldContainer, noteToUpdate.frontFields, noteToUpdate.frontFields);
         /// Back Field Container Code
         CreateSubtitle(fieldInformationContainer, "Back fields");
         const backFieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-center", "flashcards--align-center", "flashcards--gap-16"]);
-        for (let fieldsKey in noteToUpdate.backFields) {
-            CreateInputGroup(backFieldContainer, new InputGroupData("text", fieldsKey, fieldsKey, noteToUpdate.backFields[fieldsKey]));
-        }
+        CreateInputGroupForFieldRecord(backFieldContainer, noteToUpdate.backFields, noteToUpdate.backFields);
         templateSelector.onChange(() => {
             const selectedTemplate: Template = Template.ReadOne(database, templateSelector.getValue());
             frontFieldContainer.empty();
-            for (let fieldsKey in selectedTemplate.frontFields) {
-                CreateInputGroup(frontFieldContainer, new InputGroupData("text", fieldsKey, fieldsKey, noteToUpdate.frontFields[fieldsKey]));
-            }
+            CreateInputGroupForFieldRecord(frontFieldContainer, selectedTemplate.frontFields, noteToUpdate.frontFields);
             backFieldContainer.empty();
-            for (let fieldsKey in selectedTemplate.backFields) {
-                CreateInputGroup(backFieldContainer, new InputGroupData("text", fieldsKey, fieldsKey, noteToUpdate.backFields[fieldsKey]));
-            }
+            CreateInputGroupForFieldRecord(backFieldContainer, selectedTemplate.backFields, noteToUpdate.backFields);
         });
 
         // Submit Container & Data Treatment Code

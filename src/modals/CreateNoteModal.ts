@@ -14,7 +14,7 @@ import {Card} from "../objects/Card";
 import {CardType} from "../objects/E_CardType";
 import Loki from "lokijs";
 import {GetToday, GetTomorrow} from "../utils/U_GenerateDate";
-import {BuildFieldRecord} from "../utils/U_FlashcardsDataTreatmentUtils";
+import {BuildFieldRecord, CreateInputGroupForFieldRecord} from "../utils/U_FlashcardsDataTreatmentUtils";
 
 export class CreateNoteModal extends FlashcardsCreateObjectModal {
     protected BuildMain(parent: HTMLElement): void {
@@ -44,13 +44,9 @@ export class CreateNoteModal extends FlashcardsCreateObjectModal {
         templateSelector.onChange(() => {
             const selectedTemplate: Template = Template.ReadOne(database, templateSelector.getValue());
             frontFieldContainer.empty();
-            for (let fieldsKey in selectedTemplate.frontFields) {
-                CreateInputGroup(frontFieldContainer, new InputGroupData("text", fieldsKey, fieldsKey, null));
-            }
+            CreateInputGroupForFieldRecord(frontFieldContainer, selectedTemplate.frontFields, null);
             backFieldContainer.empty();
-            for (let fieldsKey in selectedTemplate.backFields) {
-                CreateInputGroup(backFieldContainer, new InputGroupData("text", fieldsKey, fieldsKey, null));
-            }
+            CreateInputGroupForFieldRecord(backFieldContainer, selectedTemplate.backFields, null);
         });
 
         // Submit Container & Data Treatment Code
