@@ -10,7 +10,7 @@ import {CreateContainer, CreateSection} from "../utils/U_CreateSemanticElements"
 import {CreateDropdown, CreateOptionsForDropdownFromRecord} from "../utils/U_CreateDropdownElements";
 import {AUTHORIZED_ELEMENT_TYPES} from "../utils/U_AuthorizedElementTypes";
 import Loki from "lokijs";
-import {BuildFieldRecord} from "../utils/U_FlashcardsDataTreatmentUtils";
+import {BuildFieldRecord, GenerateTemplateFieldInputGroupContainer} from "../utils/U_FlashcardsDataTreatmentUtils";
 
 export class CreateTemplateModal extends FlashcardsCreateObjectModal {
     protected BuildMain(parent: HTMLElement): void {
@@ -31,14 +31,7 @@ export class CreateTemplateModal extends FlashcardsCreateObjectModal {
         const addFrontFieldButton: ButtonComponent = CreateButton(frontFieldHeader, true, "", "plus", ["flashcards--width-fit-content"]);
         const frontFieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-8"]);
         addFrontFieldButton.onClick(async () => {
-           const fieldInputGroupContainer: HTMLDivElement = CreateContainer(frontFieldContainer, ["flashcards--flex-row", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-16"]);
-           const deleteFIGCButton: ButtonComponent = CreateButton(fieldInputGroupContainer, false, null, "x", ["flashcards--width-fit-content"]);
-           deleteFIGCButton.onClick(() => {
-              fieldInputGroupContainer.remove();
-           });
-           const fieldInput: HTMLInputElement = CreateInput(fieldInputGroupContainer, "text", "A cool field", null, ["flashcards--width-100"]);
-           const fieldSelector: DropdownComponent = CreateDropdown(fieldInputGroupContainer, "No type selected", ["flashcards--width-fit-content"]);
-           CreateOptionsForDropdownFromRecord(fieldSelector, AUTHORIZED_ELEMENT_TYPES);
+           GenerateTemplateFieldInputGroupContainer(frontFieldContainer);
         });
         /// Back Field Container Code
         const backFieldHeader: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-row", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-16"]);
@@ -46,14 +39,7 @@ export class CreateTemplateModal extends FlashcardsCreateObjectModal {
         const addBackFieldButton: ButtonComponent = CreateButton(backFieldHeader, true, "", "plus", ["flashcards--width-fit-content"]);
         const backFieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-8"]);
         addBackFieldButton.onClick(async () => {
-            const fieldInputGroupContainer: HTMLDivElement = CreateContainer(backFieldContainer, ["flashcards--flex-row", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-16"]);
-            const deleteFIGCButton: ButtonComponent = CreateButton(fieldInputGroupContainer, false, null, "x", ["flashcards--width-fit-content"]);
-            deleteFIGCButton.onClick(() => {
-                fieldInputGroupContainer.remove();
-            });
-            const fieldInput: HTMLInputElement = CreateInput(fieldInputGroupContainer, "text", "A cool field", null, ["flashcards--width-100"]);
-            const fieldSelector: DropdownComponent = CreateDropdown(fieldInputGroupContainer, "No type selected", ["flashcards--width-fit-content"]);
-            CreateOptionsForDropdownFromRecord(fieldSelector, AUTHORIZED_ELEMENT_TYPES);
+            GenerateTemplateFieldInputGroupContainer(backFieldContainer);
         });
 
         // Submit Container & Data Treatment Code
