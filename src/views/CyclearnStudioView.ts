@@ -1,14 +1,13 @@
-import {ButtonComponent, ItemView, WorkspaceLeaf} from "obsidian";
+import {ButtonComponent, DropdownComponent, ItemView, WorkspaceLeaf} from "obsidian";
 import Cyclearn from "../main";
-import {CreateAside, CreateContainer,  CreateHeader, CreateMain} from "../utils/U_CreateSemanticElements";
+import {CreateAside, CreateContainer, CreateHeader, CreateMain} from "../utils/U_CreateSemanticElements";
 import {database} from "../database/Database";
 import {Tag} from "../objects/Tag";
 import {Note} from "../objects/Note";
 import {Deck} from "../objects/Deck";
 import {Card} from "../objects/Card";
-import {TaggedNote} from "../objects/TaggedNote";
 import {Template} from "../objects/Template";
-import {CreateSubtitle, CreateTitle} from "../utils/U_CreateTextualElements";
+import {CreateH3, CreateSubtitle, CreateTitle} from "../utils/U_CreateTextualElements";
 import {CreateButton} from "../utils/U_CreateButtonElements";
 import {CreateTable, CreateTableHeader, CreateTableRow} from "../utils/U_CreateTableElements";
 import {CreateNoteModal} from "../modals/CreateNoteModal";
@@ -37,6 +36,8 @@ import {DeleteTagModal} from "../modals/DeleteTagModal";
 import {DeleteTemplateModal} from "../modals/DeleteTemplateModal";
 import {DeleteDeckModal} from "../modals/DeleteDeckModal";
 import {DeleteNoteModal} from "../modals/DeleteNoteModal";
+import {CreateDropdown, CreateOptionsForDropdownFromTable} from "../utils/U_CreateDropdownElements";
+import {TaggedNote} from "../objects/TaggedNote";
 
 export const CYCLEARN_STUDIO_VIEW_TYPE = "cyclearn-studio-view";
 
@@ -65,9 +66,11 @@ export class CyclearnStudioView extends ItemView {
         container.empty();
 
         // Table Gathering
+        const noteTable: Note[] = Note.ReadAll(database);
         const deckTable: Deck[] = Deck.ReadAll(database);
         const templateTable: Template[] = Template.ReadAll(database);
         const tagTable: Tag[] = Tag.ReadAll(database);
+        const taggedNotesTable: TaggedNote[] = TaggedNote.ReadAll(database);
 
         // Header Code
         const header: HTMLElement = CreateHeader(container, ["flashcards--margin-bottom-16", "flashcards--flex-column", "flashcards--gap-16"]);
@@ -88,20 +91,16 @@ export class CyclearnStudioView extends ItemView {
         const newTagButton: ButtonComponent = CreateButton(headerButtonContainer, true, "New tag", null, ["flashcards--width-fit-content"]);
         newTagButton.onClick(() => {
             new CreateTagModal(this.app, CREATE_TAG_MODAL_OPTIONS).open();
-        })
+        });
 
         // Aside & Main Wrapper
         const contentWrapper: HTMLDivElement = CreateContainer(container, ["flashcards--flex-row", "flashcards--gap-32"]);
         const aside: HTMLElement = CreateAside(contentWrapper, ["flashcards--width-20", "flashcards--flex-column", "flashcards--gap-16"]);
         const main: HTMLElement = CreateMain(contentWrapper, ["flashcards--width-80", "flashcards--justify-start"]);
-        /// Aside Code
+
         //// Global Filter Code
         CreateSubtitle(aside, "Global filters");
         const globalFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
-        const noteReadAllButton: ButtonComponent = CreateButton(globalFilterWrapper, false, "See all notes", null, ["flashcards--width-100", "flashcards--justify-start"]);
-        noteReadAllButton.onClick(() => {
-            this.DisplayNoteTable(Note.ReadAll(database), main, "All notes");
-        });
         const deckReadAllButton: ButtonComponent = CreateButton(globalFilterWrapper, false, "See all decks", null, ["flashcards--width-100", "flashcards--justify-start"]);
         deckReadAllButton.onClick(() => {
             this.DisplayDeckTable(Deck.ReadAll(database), main);
@@ -118,34 +117,48 @@ export class CyclearnStudioView extends ItemView {
         cardReadAllButton.onClick(() => {
             this.DisplayCardTable(Card.ReadAll(database), main);
         })
-        //// Deck Filter Code
-        CreateSubtitle(aside, "Deck filters");
-        const deckFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
-        deckTable.forEach((deck: Deck) => {
-            const createdButton: ButtonComponent = CreateButton(deckFilterWrapper, false, deck.name, null, ["flashcards--width-100", "flashcards--justify-start"]);
-            createdButton.onClick(() => {
-                this.DisplayNoteTable(Note.ReadAllByDeck(database, deck.id), main, "All notes in " + deck.name);
-            });
-        })
-        //// Template Filter Code
-        CreateSubtitle(aside, "Template filters");
-        const templateFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
-        templateTable.forEach((template: Template) => {
-            const createdButton: ButtonComponent = CreateButton(templateFilterWrapper, false, template.name, null, ["flashcards--width-100", "flashcards--justify-start"]);
-            createdButton.onClick(() => {
-                this.DisplayNoteTable(Note.ReadAllByTemplate(database, template.id), main, "All notes made with " + template.name);
-            });
-        })
-        //// Tag Filter Code
-        CreateSubtitle(aside, "Tag filters");
-        const tagFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
-        tagTable.forEach((tag: Tag) => {
-            CreateButton(tagFilterWrapper, false, tag.name, null, ["flashcards--width-100", "flashcards--justify-start"]);
-        })
+
+        CreateSubtitle(aside, "Note filters");
+        const noteReadAllButton: ButtonComponent = CreateButton(aside, false, "See all notes", null, ["flashcards--width-100", "flashcards--justify-start"]);
+        noteReadAllButton.onClick(() => {
+            this.DisplayNoteTable(Note.ReadAll(database), main, "All notes");
+        });
+        CreateH3(aside, "Dynamic note filters")
+        let selectedDeckID: string = "default";
+        const noteFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
+        const deckSelector: DropdownComponent = CreateDropdown(noteFilterWrapper, "All deck");
+        CreateOptionsForDropdownFromTable(deckSelector, deckTable);
+        deckSelector.onChange((deckID: string) => {
+            selectedDeckID = deckID;
+            this.DisplayNoteTable(this.FilterDataToDisplay(noteTable, taggedNotesTable, selectedDeckID, selectedTemplateID, selectedTagID), main, "Notes");
+        });
+        let selectedTemplateID: string = "default";
+        const templateSelector: DropdownComponent = CreateDropdown(noteFilterWrapper, "All template");
+        CreateOptionsForDropdownFromTable(templateSelector, templateTable);
+        templateSelector.onChange((templateID: string) => {
+            selectedTemplateID = templateID;
+            this.DisplayNoteTable(this.FilterDataToDisplay(noteTable, taggedNotesTable, selectedDeckID, selectedTemplateID, selectedTagID), main, "Notes");
+        });
+        let selectedTagID: string = "default";
+        const tagSelector: DropdownComponent = CreateDropdown(noteFilterWrapper, "All tags");
+        // tagSelector.selectEl.multiple = true;
+        CreateOptionsForDropdownFromTable(tagSelector, tagTable);
+        tagSelector.onChange((tagID: string) => {
+            selectedTagID = tagID;
+            this.DisplayNoteTable(this.FilterDataToDisplay(noteTable, taggedNotesTable, selectedDeckID, selectedTemplateID, selectedTagID), main, "Notes");
+        });
     }
 
     async onClose() {
 
+    }
+
+    // TODO - TAGS
+    FilterDataToDisplay(notes: Note[], taggedNotes: TaggedNote[], deckID: string, templateID: string, tagID: string) {
+        return notes.filter(note =>
+            (deckID === "default" || note.id_deck === deckID) &&
+            (templateID === "default" || note.id_template === templateID)
+        );
     }
 
     DisplayNoteTable(noteTable: Note[], parent: HTMLElement, title: string) {
