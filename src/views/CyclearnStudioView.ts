@@ -165,12 +165,12 @@ export class CyclearnStudioView extends ItemView {
         parent.empty();
         CreateSubtitle(parent, title);
         const table: HTMLTableElement = CreateTable(parent);
-        const tableHeader: HTMLTableRowElement = CreateTableHeader(table, ["Actions", "Main Field", "Deck", "Template"]);
+        const tableHeader: HTMLTableRowElement = CreateTableHeader(table, ["Actions", "Deck", "Template", "Main Field"]);
         const cells: NodeListOf<HTMLTableCellElement> = tableHeader.querySelectorAll("th");
         cells[0].classList.add("flashcards--width-15-lock");
-        cells[1].classList.add("flashcards--width-30-lock");
-        cells[2].classList.add("flashcards--width-30-lock");
-        cells[3].classList.add("flashcards--width-25-lock");
+        cells[1].classList.add("flashcards--width-25-lock");
+        cells[2].classList.add("flashcards--width-25-lock");
+        cells[3].classList.add("flashcards--width-35-lock");
         noteTable.forEach((note: Note) => {
             const usedDeck: Deck = Deck.ReadOne(database, note.id_deck);
             const usedTemplate: Template = Template.ReadOne(database, note.id_template);
@@ -180,7 +180,7 @@ export class CyclearnStudioView extends ItemView {
                     mainFieldValue = note.frontFields[frontFieldsKey];
                 }
             }
-            const tableRow: HTMLTableRowElement = CreateTableRow(table, ["", mainFieldValue, usedDeck.name, usedTemplate.name])
+            const tableRow: HTMLTableRowElement = CreateTableRow(table, ["", usedDeck.name, usedTemplate.name, mainFieldValue])
             const firstCell: HTMLTableCellElement = tableRow.querySelector("td");
             const deleteButton: ButtonComponent = CreateButton(firstCell, true, null, "x", ["flashcards--width-fit-content", "flashcards--margin-right-8"]);
             deleteButton.onClick(() => {
@@ -192,9 +192,9 @@ export class CyclearnStudioView extends ItemView {
             });
             const cells: NodeListOf<HTMLTableCellElement> = tableRow.querySelectorAll("td");
             cells[0].classList.add("flashcards--width-15-lock");
-            cells[1].classList.add("flashcards--width-30-lock");
-            cells[2].classList.add("flashcards--width-30-lock");
-            cells[3].classList.add("flashcards--width-25-lock");
+            cells[1].classList.add("flashcards--width-25-lock");
+            cells[2].classList.add("flashcards--width-25-lock");
+            cells[3].classList.add("flashcards--width-35-lock");
         });
     }
 
