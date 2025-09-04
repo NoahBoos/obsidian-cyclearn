@@ -14,6 +14,7 @@ export class Tag {
     public static Create(database: Loki, name: string, description: string): Tag {
         const newTag = new Tag(name, description);
         database.getCollection<Tag>("tags").insert(newTag);
+        database.saveDatabase();
         return newTag;
     }
 
@@ -30,6 +31,7 @@ export class Tag {
         if (!tagToUpdate) return false;
         Object.assign(tagToUpdate, newTagData);
         database.getCollection<Tag>("tags").update(tagToUpdate);
+        database.saveDatabase();
         return true;
     }
 
@@ -37,6 +39,7 @@ export class Tag {
         const tagToDelete = database.getCollection<Tag>("tags").findOne({ id: idToDelete });
         if (!tagToDelete) return false;
         database.getCollection<Tag>("tags").remove(tagToDelete);
+        database.saveDatabase();
         return true;
     }
 }

@@ -20,6 +20,7 @@ export class Template {
     public static Create(database: Loki, name: string, description: string, mainField: string, frontFields: Record<string, string>, backFields: Record<string, string>): Template {
         const newTemplate = new Template(name, description, mainField, frontFields, backFields);
         database.getCollection<Template>("templates").insert(newTemplate);
+        database.saveDatabase();
         return newTemplate;
     }
 
@@ -36,6 +37,7 @@ export class Template {
         if (!templateToUpdate) return false;
         Object.assign(templateToUpdate, newTemplateData);
         database.getCollection<Template>("templates").update(templateToUpdate);
+        database.saveDatabase();
         return true;
     }
 
@@ -43,6 +45,7 @@ export class Template {
         const templateToDelete = database.getCollection<Template>("templates").findOne({ id: idToDelete });
         if (!templateToDelete) return false;
         database.getCollection<Template>("decks").remove(templateToDelete);
+        database.saveDatabase();
         return true;
     }
 }

@@ -20,6 +20,7 @@ export class Note {
     public static Create(database: Loki, idDeck: string, idTemplate: string, frontFields: Record<string, string>, backFields: Record<string, string>, hasTwoFaces: boolean): Note {
         const newNote = new Note(idDeck, idTemplate, frontFields, backFields, hasTwoFaces);
         database.getCollection<Note>("notes").insert(newNote);
+        database.saveDatabase();
         return newNote;
     }
 
@@ -44,6 +45,7 @@ export class Note {
         if (!noteToUpdate) return false;
         Object.assign(noteToUpdate, newNoteData);
         database.getCollection<Note>("notes").update(noteToUpdate);
+        database.saveDatabase();
         return true;
     }
 
@@ -51,6 +53,7 @@ export class Note {
         const noteToDelete = database.getCollection<Note>("notes").findOne({ id: idToDelete });
         if (!noteToDelete) return false;
         database.getCollection<Note>("notes").remove(noteToDelete);
+        database.saveDatabase();
         return true;
     }
 }

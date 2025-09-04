@@ -18,6 +18,7 @@ export class Review {
     public static Create(database: Loki, idCard: string, reviewAt: string, grade: number, timeTaken: number) {
         const newReview = new Review(idCard, reviewAt, grade, timeTaken);
         database.getCollection<Review>("reviews").insert(newReview);
+        database.saveDatabase();
         return newReview;
     }
 
@@ -38,6 +39,7 @@ export class Review {
         if (!reviewToUpdate) return false;
         Object.assign(reviewToUpdate, newReviewData);
         database.getCollection<Review>("reviews").update(reviewToUpdate);
+        database.saveDatabase();
         return true;
     }
 
@@ -45,6 +47,7 @@ export class Review {
         const reviewToDelete = database.getCollection<Review>("reviews").findOne({ id: idToDelete });
         if (!reviewToDelete) return false;
         database.getCollection<Review>("reviews").remove(reviewToDelete);
+        database.saveDatabase();
         return true;
     }
 }

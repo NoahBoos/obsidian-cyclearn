@@ -15,6 +15,7 @@ export class TaggedNote {
         const newTaggedNote = new TaggedNote(idNote, idTag);
         database.getCollection<TaggedNote>("notes_tags").insert(newTaggedNote);
         return newTaggedNote;
+        database.saveDatabase();
     }
 
     public static ReadOne(database: Loki, idToRead: string): TaggedNote {
@@ -38,6 +39,15 @@ export class TaggedNote {
         if (!taggedNoteToUpdate) return false;
         Object.assign(taggedNoteToUpdate, newTaggedNoteData);
         database.getCollection<TaggedNote>("notes_tags").update(taggedNoteToUpdate);
+        database.saveDatabase();
+        return true;
+    }
+
+    public static Delete(database: Loki, idToDelete: string): boolean {
+        const taggedNoteToDelete = database.getCollection<TaggedNote>("notes_tags").findOne({ id: idToDelete });
+        if (!taggedNoteToDelete) return false;
+        database.getCollection<TaggedNote>("notes_tags").remove(taggedNoteToDelete);
+        database.saveDatabase();
         return true;
     }
 }

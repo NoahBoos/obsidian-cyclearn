@@ -23,6 +23,7 @@ export class Card {
     public static Create(database: Loki, idNote: string, dueAt: number, cardType: CardType): Card {
         const newCard = new Card(idNote, dueAt, cardType);
         database.getCollection<Card>("cards").insert(newCard);
+        database.saveDatabase();
         return newCard;
     }
 
@@ -47,6 +48,7 @@ export class Card {
         if (!cardToUpdate) return false;
         Object.assign(cardToUpdate, newCardData);
         database.getCollection<Card>("cards").update(cardToUpdate);
+        database.saveDatabase();
         return true;
     }
 
@@ -54,6 +56,7 @@ export class Card {
         const cardToDelete = database.getCollection<Card>("cards").findOne({ id: idToDelete });
         if (!cardToDelete) return false;
         database.getCollection<Card>("cards").remove(cardToDelete);
+        database.saveDatabase();
         return true;
     }
 }

@@ -14,6 +14,7 @@ export class Deck {
     public static Create(database: Loki, name: string, description: string): Deck {
         const newDeck = new Deck(name, description);
         database.getCollection<Deck>("decks").insert(newDeck);
+        database.saveDatabase();
         return newDeck;
     }
 
@@ -30,6 +31,7 @@ export class Deck {
         if (!deckToUpdate) return false;
         Object.assign(deckToUpdate, newDeckData);
         database.getCollection<Deck>("decks").update(deckToUpdate);
+        database.saveDatabase();
         return true;
     }
 
@@ -37,6 +39,7 @@ export class Deck {
         const deckToDelete = database.getCollection<Deck>("decks").findOne({ id: idToDelete });
         if (!deckToDelete) return false;
         database.getCollection<Deck>("decks").remove(deckToDelete);
+        database.saveDatabase();
         return true;
     }
 }
