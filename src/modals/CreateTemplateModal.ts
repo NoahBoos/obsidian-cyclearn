@@ -58,14 +58,16 @@ export class CreateTemplateModal extends CyclearnCreateObjectModal {
         const addFrontFieldButton: ButtonComponent = CreateButton(frontFieldHeader, true, "", "plus", ["flashcards--width-fit-content"]);
         const frontFieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-8"]);
         addFrontFieldButton.onClick(async () => {
-           let frontFieldInput: HTMLInputElement = GenerateTemplateFieldInputGroupContainer(frontFieldContainer).querySelector("input");
-           frontFieldInput.addEventListener("input", () => {
-               const inputs: NodeListOf<HTMLInputElement> = frontFieldContainer.querySelectorAll("input");
-               mainFieldSelector.selectEl.empty();
-               mainFieldSelector.addOption("default", "Choose a main field among the front fields you created");
-               inputs.forEach((input: HTMLInputElement) => {
-                   mainFieldSelector.addOption(input.value, input.value);
-               })
+            // TODO - Reset the dropdown when an input is deleted by the user.
+            let fieldInputGroupContainer = GenerateTemplateFieldInputGroupContainer(frontFieldContainer);
+            let frontFieldInput: HTMLInputElement = fieldInputGroupContainer.querySelector("input");
+            frontFieldInput.addEventListener("input", () => {
+                const inputs: NodeListOf<HTMLInputElement> = frontFieldContainer.querySelectorAll("input");
+                mainFieldSelector.selectEl.empty();
+                mainFieldSelector.addOption("default", "Choose a main field among the front fields you created");
+                inputs.forEach((input: HTMLInputElement) => {
+                    mainFieldSelector.addOption(input.value, input.value);
+                })
            });
         });
 
