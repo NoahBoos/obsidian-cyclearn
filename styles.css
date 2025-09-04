@@ -42,6 +42,10 @@
     width: 30% !important;
 }
 
+.flashcards--width-35 {
+    width: 35% !important;
+}
+
 .flashcards--width-40 {
     width: 40%;
 }
@@ -152,7 +156,6 @@
 
 .flashcards--table {
     border-collapse: collapse;
-    border: var(--border-width) solid var(--color-base-60);
     text-align: center;
     tr:not(:first-child) {
         border-top: var(--border-width) solid var(--color-base-50);
