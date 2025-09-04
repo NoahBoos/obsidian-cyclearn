@@ -161,7 +161,13 @@ export class CyclearnStudioView extends ItemView {
         noteTable.forEach((note: Note) => {
             const usedDeck: Deck = Deck.ReadOne(database, note.id_deck);
             const usedTemplate: Template = Template.ReadOne(database, note.id_template);
-            const tableRow: HTMLTableRowElement = CreateTableRow(table, ["", Object.values(note.frontFields)[0], usedDeck.name, usedTemplate.name])
+            let mainFieldValue: string;
+            for (let frontFieldsKey in note.frontFields) {
+                if (frontFieldsKey == usedTemplate.mainField) {
+                    mainFieldValue = note.frontFields[frontFieldsKey];
+                }
+            }
+            const tableRow: HTMLTableRowElement = CreateTableRow(table, ["", mainFieldValue, usedDeck.name, usedTemplate.name])
             const firstCell: HTMLTableCellElement = tableRow.querySelector("td");
             const deleteButton: ButtonComponent = CreateButton(firstCell, true, null, "x", ["flashcards--width-fit-content", "flashcards--margin-right-8"]);
             deleteButton.onClick(() => {

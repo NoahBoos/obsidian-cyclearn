@@ -2,13 +2,14 @@ import {CreateContainer, CreateHeader, CreateMain, CreateSection} from "../utils
 import {CreateSubtitle, CreateTitle} from "../utils/U_CreateTextualElements";
 import {InputGroupData} from "../objects/InputGroupData";
 import {CreateInputGroup} from "../utils/U_CreateInputElements";
-import {App, ButtonComponent, Modal} from "obsidian";
+import {App, ButtonComponent, DropdownComponent, Modal} from "obsidian";
 import {CreateButton} from "../utils/U_CreateButtonElements";
 import {database} from "../database/Database";
 import Loki from "lokijs";
 import {I_ModalOptions} from "./I_ModalOptions";
 import {Template} from "../objects/Template";
 import {BuildFieldRecord, GenerateTemplateFieldInputGroupContainer} from "../utils/U_FlashcardsDataTreatmentUtils";
+import {CreateDropdown} from "../utils/U_CreateDropdownElements";
 
 /**
  * Modal for updating a Cyclearn template.
@@ -92,6 +93,15 @@ export class UpdateTemplateModal extends Modal {
         const descriptionInput: HTMLInputElement = descriptionInputGroupContainer.querySelector("input");
         descriptionInput.value = templateToUpdate.description;
 
+        // Template Main Field Selector (Auto-Filling
+        const mainFieldSelector: DropdownComponent = CreateDropdown(generalInformationContainer, "Choose a main field among the front fields you created");
+        for (let frontFieldsKey in this.templateToUpdate.frontFields) {
+            mainFieldSelector.addOption(frontFieldsKey, frontFieldsKey);
+            if (frontFieldsKey == this.templateToUpdate.mainField) {
+                mainFieldSelector.setValue(frontFieldsKey);
+            }
+        }
+
         // Field Information Section
         const fieldInformationContainer: HTMLElement = CreateSection(parent);
 
@@ -104,11 +114,32 @@ export class UpdateTemplateModal extends Modal {
             const fieldInputGroupContainer: HTMLDivElement = GenerateTemplateFieldInputGroupContainer(frontFieldContainer);
             const fieldInput: HTMLInputElement = fieldInputGroupContainer.querySelector("input");
             fieldInput.value = fieldsKey;
+            fieldInput.addEventListener("input", () => {
+                const inputs: NodeListOf<HTMLInputElement> = frontFieldContainer.querySelectorAll("input");
+                mainFieldSelector.selectEl.empty();
+                mainFieldSelector.addOption("default", "Choose a main field among the front fields you created");
+                inputs.forEach((input: HTMLInputElement) => {
+                    mainFieldSelector.addOption(input.value, input.value);
+                    if (input.value == this.templateToUpdate.mainField) {
+                        mainFieldSelector.setValue(input.value);
+                    } else {
+                        mainFieldSelector.setValue(fieldInput.value);
+                    }
+                })
+            });
             const fieldSelector: HTMLSelectElement = fieldInputGroupContainer.querySelector("select");
             fieldSelector.value = templateToUpdate.frontFields[fieldsKey];
         }
         addFrontFieldButton.onClick(async () => {
-            GenerateTemplateFieldInputGroupContainer(frontFieldContainer);
+            let frontFieldInput: HTMLInputElement = GenerateTemplateFieldInputGroupContainer(frontFieldContainer).querySelector("input");
+            frontFieldInput.addEventListener("input", () => {
+                const inputs: NodeListOf<HTMLInputElement> = frontFieldContainer.querySelectorAll("input");
+                mainFieldSelector.selectEl.empty();
+                mainFieldSelector.addOption("default", "Choose a main field among the front fields you created");
+                inputs.forEach((input: HTMLInputElement) => {
+                    mainFieldSelector.addOption(input.value, input.value);
+                })
+            });
         });
 
         // Back Field Sub-Section (Auto-Filling)
@@ -133,14 +164,14 @@ export class UpdateTemplateModal extends Modal {
         // Confirm Button
         const confirmButton: ButtonComponent = CreateButton(submitContainer, true, this.modalOptions.modalConfirmButtonText, this.modalOptions.modalConfirmButtonIcon);
         confirmButton.onClick(async () => {
-            this.ProcessData(database, frontFieldContainer, backFieldContainer, nameInput, descriptionInput);
+            this.ProcessData(database, frontFieldContainer, backFieldContainer, nameInput, descriptionInput, mainFieldSelector);
         });
 
         // Keyboard Shortcut : SHIFT + ENTER
         this.contentEl.addEventListener("keydown", async (event: KeyboardEvent) => {
             if (event.shiftKey && event.key === "Enter") {
                 event.preventDefault();
-                this.ProcessData(database, frontFieldContainer, backFieldContainer, nameInput, descriptionInput);
+                this.ProcessData(database, frontFieldContainer, backFieldContainer, nameInput, descriptionInput, mainFieldSelector);
             }
         });
     }
@@ -155,12 +186,13 @@ export class UpdateTemplateModal extends Modal {
      * @param descriptionInput - Deck description input element.
      * @protected
      */
-    protected ProcessData(database: Loki, frontFieldContainer?: HTMLDivElement, backFieldContainer?: HTMLDivElement, nameInput?: HTMLInputElement, descriptionInput?: HTMLInputElement) {
+    protected ProcessData(database: Loki, frontFieldContainer?: HTMLDivElement, backFieldContainer?: HTMLDivElement, nameInput?: HTMLInputElement, descriptionInput?: HTMLInputElement, mainFieldSelector?: DropdownComponent) {
         let frontFields: Record<string, string> = BuildFieldRecord(frontFieldContainer);
         let backFields: Record<string, string> = BuildFieldRecord(backFieldContainer);
         let partialTemplate: Partial<Template> = {};
         partialTemplate.name = nameInput.value;
         partialTemplate.description = descriptionInput.value;
+        partialTemplate.mainField = mainFieldSelector.getValue();
         partialTemplate.frontFields = frontFields;
         partialTemplate.backFields = backFields;
         Template.Update(database, this.templateToUpdate.id, partialTemplate);

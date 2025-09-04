@@ -1,5 +1,5 @@
 import {CyclearnCreateObjectModal} from "./CyclearnCreateObjectModal";
-import {ButtonComponent} from "obsidian";
+import {ButtonComponent, DropdownComponent} from "obsidian";
 import {CreateButton} from "../utils/U_CreateButtonElements";
 import {Template} from "../objects/Template";
 import {database} from "../database/Database";
@@ -9,6 +9,7 @@ import {CreateSubtitle} from "../utils/U_CreateTextualElements";
 import {CreateContainer, CreateSection} from "../utils/U_CreateSemanticElements";
 import Loki from "lokijs";
 import {BuildFieldRecord, GenerateTemplateFieldInputGroupContainer} from "../utils/U_FlashcardsDataTreatmentUtils";
+import {CreateDropdown} from "../utils/U_CreateDropdownElements";
 
 /**
  * Modal for creating a new Cyclearn template.
@@ -45,6 +46,9 @@ export class CreateTemplateModal extends CyclearnCreateObjectModal {
         const descriptionInputGroupContainer: HTMLDivElement = CreateInputGroup(generalInformationContainer, new InputGroupData("text", "Description", "This template is templating !", null));
         const descriptionInput: HTMLInputElement = descriptionInputGroupContainer.querySelector("input");
 
+        // Template Main Field Selector
+        const mainFieldSelector: DropdownComponent = CreateDropdown(generalInformationContainer, "Choose a main field among the front fields you created");
+
         // Field Information Section
         const fieldInformationContainer: HTMLElement = CreateSection(parent);
 
@@ -54,7 +58,15 @@ export class CreateTemplateModal extends CyclearnCreateObjectModal {
         const addFrontFieldButton: ButtonComponent = CreateButton(frontFieldHeader, true, "", "plus", ["flashcards--width-fit-content"]);
         const frontFieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-8"]);
         addFrontFieldButton.onClick(async () => {
-           GenerateTemplateFieldInputGroupContainer(frontFieldContainer);
+           let frontFieldInput: HTMLInputElement = GenerateTemplateFieldInputGroupContainer(frontFieldContainer).querySelector("input");
+           frontFieldInput.addEventListener("input", () => {
+               const inputs: NodeListOf<HTMLInputElement> = frontFieldContainer.querySelectorAll("input");
+               mainFieldSelector.selectEl.empty();
+               mainFieldSelector.addOption("default", "Choose a main field among the front fields you created");
+               inputs.forEach((input: HTMLInputElement) => {
+                   mainFieldSelector.addOption(input.value, input.value);
+               })
+           });
         });
 
         // Back Field Sub-Section
@@ -72,14 +84,14 @@ export class CreateTemplateModal extends CyclearnCreateObjectModal {
         // Confirm Button
         const confirmButton: ButtonComponent = CreateButton(submitContainer, true, this.modalOptions.modalConfirmButtonText, this.modalOptions.modalConfirmButtonIcon);
         confirmButton.onClick(async () => {
-            this.ProcessData(database, frontFieldContainer, backFieldContainer, nameInput, descriptionInput);
+            this.ProcessData(database, frontFieldContainer, backFieldContainer, nameInput, descriptionInput, mainFieldSelector);
         });
 
         // Keyboard Shortcut : SHIFT + ENTER
         this.contentEl.addEventListener("keydown", async (event: KeyboardEvent) => {
             if (event.shiftKey && event.key === "Enter") {
                 event.preventDefault();
-                this.ProcessData(database, frontFieldContainer, backFieldContainer, nameInput, descriptionInput);
+                this.ProcessData(database, frontFieldContainer, backFieldContainer, nameInput, descriptionInput, mainFieldSelector);
             }
         });
     }
@@ -94,10 +106,10 @@ export class CreateTemplateModal extends CyclearnCreateObjectModal {
      * @param descriptionInput - Deck description input element.
      * @protected
      */
-    protected ProcessData(database: Loki, frontFieldContainer?: HTMLDivElement, backFieldContainer?: HTMLDivElement, nameInput?: HTMLInputElement, descriptionInput?: HTMLInputElement) {
+    protected ProcessData(database: Loki, frontFieldContainer?: HTMLDivElement, backFieldContainer?: HTMLDivElement, nameInput?: HTMLInputElement, descriptionInput?: HTMLInputElement, mainFieldSelector?: DropdownComponent) {
         let frontFields: Record<string, string> = BuildFieldRecord(frontFieldContainer);
         let backFields: Record<string, string> = BuildFieldRecord(backFieldContainer);
-        Template.Create(database, nameInput.value, descriptionInput.value, frontFields, backFields);
+        Template.Create(database, nameInput.value, descriptionInput.value, mainFieldSelector.getValue(), frontFields, backFields);
         this.close();
     }
 }
