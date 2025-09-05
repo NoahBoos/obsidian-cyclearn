@@ -165,7 +165,7 @@ export class CyclearnStudioView extends ItemView {
         parent.empty();
         CreateSubtitle(parent, title);
         const table: HTMLTableElement = CreateTable(parent);
-        const tableHeader: HTMLTableRowElement = CreateTableHeader(table, ["Actions", "Deck", "Template", "Main Field"]);
+        const tableHeader: HTMLTableRowElement = CreateTableHeader(table, ["Actions", "Main Field", "Deck", "Template"]);
         const cells: NodeListOf<HTMLTableCellElement> = tableHeader.querySelectorAll("th");
         cells[0].classList.add("flashcards--width-15-lock");
         cells[1].classList.add("flashcards--width-25-lock");
@@ -180,7 +180,7 @@ export class CyclearnStudioView extends ItemView {
                     mainFieldValue = note.frontFields[frontFieldsKey];
                 }
             }
-            const tableRow: HTMLTableRowElement = CreateTableRow(table, ["", usedDeck.name, usedTemplate.name, mainFieldValue])
+            const tableRow: HTMLTableRowElement = CreateTableRow(table, ["", mainFieldValue, usedDeck.name, usedTemplate.name])
             const firstCell: HTMLTableCellElement = tableRow.querySelector("td");
             const deleteButton: ButtonComponent = CreateButton(firstCell, true, null, "x", ["flashcards--width-fit-content", "flashcards--margin-right-8"]);
             deleteButton.onClick(() => {
