@@ -122,6 +122,9 @@ export class CyclearnStudioView extends ItemView {
         const noteReadAllButton: ButtonComponent = CreateButton(aside, false, "See all notes", null, ["flashcards--width-100", "flashcards--justify-start"]);
         noteReadAllButton.onClick(() => {
             this.DisplayNoteTable(Note.ReadAll(database), main, "All notes");
+            deckSelector.setValue("default");
+            templateSelector.setValue("default");
+            tagSelector.setValue("default");
         });
         CreateH3(aside, "Dynamic note filters")
         let selectedDeckID: string = "default";
