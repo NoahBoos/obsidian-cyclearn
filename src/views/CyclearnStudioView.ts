@@ -94,13 +94,13 @@ export class CyclearnStudioView extends ItemView {
         });
 
         // Aside & Main Wrapper
-        const contentWrapper: HTMLDivElement = CreateContainer(container, ["flashcards--flex-row", "flashcards--gap-32"]);
-        const aside: HTMLElement = CreateAside(contentWrapper, ["flashcards--width-20", "flashcards--flex-column", "flashcards--gap-16"]);
-        const main: HTMLElement = CreateMain(contentWrapper, ["flashcards--width-80", "flashcards--justify-start"]);
+        const contentWrapper: HTMLDivElement = CreateContainer(container, ["flashcards--flex-column", "flashcards--gap-32"]);
+        const aside: HTMLElement = CreateAside(contentWrapper, ["flashcards--width-100", "flashcards--flex-column", "flashcards--gap-16"]);
+        const main: HTMLElement = CreateMain(contentWrapper, ["flashcards--width-100", "flashcards--justify-start"]);
 
         //// Global Filter Code
         CreateSubtitle(aside, "Global filters");
-        const globalFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
+        const globalFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-row", "flashcards--gap-8"]);
         const deckReadAllButton: ButtonComponent = CreateButton(globalFilterWrapper, false, "See all decks", null, ["flashcards--width-100", "flashcards--justify-start"]);
         deckReadAllButton.onClick(() => {
             this.DisplayDeckTable(Deck.ReadAll(database), main);
@@ -119,31 +119,40 @@ export class CyclearnStudioView extends ItemView {
         })
 
         CreateSubtitle(aside, "Note filters");
-        const noteReadAllButton: ButtonComponent = CreateButton(aside, false, "See all notes", null, ["flashcards--width-100", "flashcards--justify-start"]);
+        const noteFilterContainer: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-row", "flashcards--gap-16"]);
+        const staticFilterContainer: HTMLDivElement = CreateContainer(noteFilterContainer, ["flashcards--flex-column", "flashcards--gap-8"]);
+        CreateH3(staticFilterContainer, "Static note filters");
+        const staticFilterWrapper: HTMLDivElement = CreateContainer(staticFilterContainer, ["flashcards--flex-row", "flashcards--gap-8"]);
+        const noteReadAllButton: ButtonComponent = CreateButton(staticFilterWrapper, false, "See all notes", null, ["flashcards--width-100", "flashcards--justify-start"]);
         noteReadAllButton.onClick(() => {
             this.DisplayNoteTable(Note.ReadAll(database), main, "All notes");
             deckSelector.setValue("default");
             templateSelector.setValue("default");
             tagSelector.setValue("default");
         });
-        CreateH3(aside, "Dynamic note filters")
+
+        const dynamicFilterContainer: HTMLDivElement = CreateContainer(noteFilterContainer, ["flashcards--flex-column", "flashcards--gap-8"]);
+        CreateH3(dynamicFilterContainer, "Dynamic note filters")
+        const dynamicFilterWrapper: HTMLDivElement = CreateContainer(dynamicFilterContainer, ["flashcards--flex-row", "flashcards--gap-8"]);
+
         let selectedDeckID: string = "default";
-        const noteFilterWrapper: HTMLDivElement = CreateContainer(aside, ["flashcards--flex-column", "flashcards--gap-8"]);
-        const deckSelector: DropdownComponent = CreateDropdown(noteFilterWrapper, "All deck");
+        const deckSelector: DropdownComponent = CreateDropdown(dynamicFilterWrapper, "All deck");
         CreateOptionsForDropdownFromTable(deckSelector, deckTable);
         deckSelector.onChange((deckID: string) => {
             selectedDeckID = deckID;
             this.DisplayNoteTable(this.FilterDataToDisplay(noteTable, taggedNotesTable, selectedDeckID, selectedTemplateID, selectedTagID), main, "Notes");
         });
+
         let selectedTemplateID: string = "default";
-        const templateSelector: DropdownComponent = CreateDropdown(noteFilterWrapper, "All template");
+        const templateSelector: DropdownComponent = CreateDropdown(dynamicFilterWrapper, "All template");
         CreateOptionsForDropdownFromTable(templateSelector, templateTable);
         templateSelector.onChange((templateID: string) => {
             selectedTemplateID = templateID;
             this.DisplayNoteTable(this.FilterDataToDisplay(noteTable, taggedNotesTable, selectedDeckID, selectedTemplateID, selectedTagID), main, "Notes");
         });
+
         let selectedTagID: string = "default";
-        const tagSelector: DropdownComponent = CreateDropdown(noteFilterWrapper, "All tags");
+        const tagSelector: DropdownComponent = CreateDropdown(dynamicFilterWrapper, "All tags");
         // tagSelector.selectEl.multiple = true;
         CreateOptionsForDropdownFromTable(tagSelector, tagTable);
         tagSelector.onChange((tagID: string) => {
