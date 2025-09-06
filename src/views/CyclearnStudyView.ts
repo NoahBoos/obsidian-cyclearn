@@ -82,8 +82,8 @@ export class CyclearnStudyView extends ItemView {
             const deckListElementHeader: HTMLDivElement = CreateContainer(deckListElement, ["flashcards--flex-column"]);
             CreateSubtitle(deckListElementHeader, deck.name);
             if (deck.description) {
-                deckListElementHeader.classList.add("flashcards--gap-8");
-                CreateParagraph(deckListElementHeader, deck.description);
+                deckListElementHeader.classList.add("flashcards--gap-8", "flashcards--margin-right-16px");
+                CreateParagraph(deckListElementHeader, deck.description, ["flashcards--text-justify"]);
             }
             const deckListElementStatisticContainer: HTMLDivElement = CreateContainer(deckListElement, ["flashcards--flex-column", "flashcards--gap-8"]);
             const deckNotes: Note[] = Note.ReadAllByDeck(database, deck.id);

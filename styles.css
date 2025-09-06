@@ -6,6 +6,10 @@
     text-align: center;
 }
 
+.flashcards--text-justify {
+    text-align: justify;
+}
+
 .flashcards--margin-0 {
     margin: 0;
 }
@@ -28,6 +32,10 @@
 .flashcards--margin-vertical-8px {
     margin-top: 8px;
     margin-bottom: 8px;
+}
+
+.flashcards--margin-right-16px {
+    margin-right: 16px;
 }
 
 .flashcards--width-10 {
