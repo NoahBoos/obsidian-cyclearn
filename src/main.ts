@@ -73,8 +73,8 @@ export default class Cyclearn extends Plugin {
         })
     }
 
-    async onunload() {
-        await this.SaveSettings();
+    onunload() {
+        this.SaveSettings().catch(console.error);
     }
 
     async LoadSettings() {
