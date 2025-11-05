@@ -46,12 +46,12 @@ export class CreateTagModal extends CyclearnCreateObjectModal {
 
         // Confirm Button
         const confirmButton: ButtonComponent = CreateButton(submitContainer, true, this.modalOptions.modalConfirmButtonText, this.modalOptions.modalConfirmButtonIcon);
-        confirmButton.onClick(async () => {
+        confirmButton.onClick(() => {
             this.ProcessData(database, nameInput, descriptionInput);
         });
 
         // Keyboard Shortcut : SHIFT + ENTER
-        this.contentEl.addEventListener("keydown", async (event: KeyboardEvent) => {
+        this.contentEl.addEventListener("keydown", (event: KeyboardEvent) => {
            if (event.shiftKey && event.key === "Enter") {
                event.preventDefault();
                this.ProcessData(database, nameInput, descriptionInput);

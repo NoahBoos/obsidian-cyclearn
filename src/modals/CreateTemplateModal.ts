@@ -57,7 +57,7 @@ export class CreateTemplateModal extends CyclearnCreateObjectModal {
         CreateSubtitle(frontFieldHeader, "Front fields", ["flashcards--width-fit-content"]);
         const addFrontFieldButton: ButtonComponent = CreateButton(frontFieldHeader, true, "", "plus", ["flashcards--width-fit-content"]);
         const frontFieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-8"]);
-        addFrontFieldButton.onClick(async () => {
+        addFrontFieldButton.onClick(() => {
             // TODO - Reset the dropdown when an input is deleted by the user.
             let fieldInputGroupContainer = GenerateTemplateFieldInputGroupContainer(frontFieldContainer);
             let frontFieldInput: HTMLInputElement = fieldInputGroupContainer.querySelector("input");
@@ -76,7 +76,7 @@ export class CreateTemplateModal extends CyclearnCreateObjectModal {
         CreateSubtitle(backFieldHeader, "Back fields", ["flashcards--width-fit-content"]);
         const addBackFieldButton: ButtonComponent = CreateButton(backFieldHeader, true, "", "plus", ["flashcards--width-fit-content"]);
         const backFieldContainer: HTMLDivElement = CreateContainer(fieldInformationContainer, ["flashcards--flex-column", "flashcards--justify-between", "flashcards--align-center", "flashcards--gap-8"]);
-        addBackFieldButton.onClick(async () => {
+        addBackFieldButton.onClick(() => {
             GenerateTemplateFieldInputGroupContainer(backFieldContainer);
         });
 
@@ -85,12 +85,12 @@ export class CreateTemplateModal extends CyclearnCreateObjectModal {
 
         // Confirm Button
         const confirmButton: ButtonComponent = CreateButton(submitContainer, true, this.modalOptions.modalConfirmButtonText, this.modalOptions.modalConfirmButtonIcon);
-        confirmButton.onClick(async () => {
+        confirmButton.onClick(() => {
             this.ProcessData(database, frontFieldContainer, backFieldContainer, nameInput, descriptionInput, mainFieldSelector);
         });
 
         // Keyboard Shortcut : SHIFT + ENTER
-        this.contentEl.addEventListener("keydown", async (event: KeyboardEvent) => {
+        this.contentEl.addEventListener("keydown", (event: KeyboardEvent) => {
             if (event.shiftKey && event.key === "Enter") {
                 event.preventDefault();
                 this.ProcessData(database, frontFieldContainer, backFieldContainer, nameInput, descriptionInput, mainFieldSelector);

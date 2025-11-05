@@ -130,7 +130,7 @@ export class UpdateTemplateModal extends Modal {
             const fieldSelector: HTMLSelectElement = fieldInputGroupContainer.querySelector("select");
             fieldSelector.value = templateToUpdate.frontFields[fieldsKey];
         }
-        addFrontFieldButton.onClick(async () => {
+        addFrontFieldButton.onClick(() => {
             let frontFieldInput: HTMLInputElement = GenerateTemplateFieldInputGroupContainer(frontFieldContainer).querySelector("input");
             frontFieldInput.addEventListener("input", () => {
                 const inputs: NodeListOf<HTMLInputElement> = frontFieldContainer.querySelectorAll("input");
@@ -154,7 +154,7 @@ export class UpdateTemplateModal extends Modal {
             const fieldSelector: HTMLSelectElement = fieldInputGroupContainer.querySelector("select");
             fieldSelector.value = templateToUpdate.backFields[fieldsKey];
         }
-        addBackFieldButton.onClick(async () => {
+        addBackFieldButton.onClick(() => {
             GenerateTemplateFieldInputGroupContainer(backFieldContainer);
         });
 
@@ -163,12 +163,12 @@ export class UpdateTemplateModal extends Modal {
 
         // Confirm Button
         const confirmButton: ButtonComponent = CreateButton(submitContainer, true, this.modalOptions.modalConfirmButtonText, this.modalOptions.modalConfirmButtonIcon);
-        confirmButton.onClick(async () => {
+        confirmButton.onClick(() => {
             this.ProcessData(database, frontFieldContainer, backFieldContainer, nameInput, descriptionInput, mainFieldSelector);
         });
 
         // Keyboard Shortcut : SHIFT + ENTER
-        this.contentEl.addEventListener("keydown", async (event: KeyboardEvent) => {
+        this.contentEl.addEventListener("keydown", (event: KeyboardEvent) => {
             if (event.shiftKey && event.key === "Enter") {
                 event.preventDefault();
                 this.ProcessData(database, frontFieldContainer, backFieldContainer, nameInput, descriptionInput, mainFieldSelector);
