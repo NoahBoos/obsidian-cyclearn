@@ -37,7 +37,7 @@ export class CyclearnStudyView extends ItemView {
     }
 
     getDisplayText(): string {
-        return "Cyclearn Study View";
+        return "Cyclearn study view";
     }
 
     getIcon(): string {
