@@ -27,16 +27,16 @@ export default class Cyclearn extends Plugin {
         this.addCommand({
             id: "studio-view",
             name: "Studio view",
-            callback: () => {
-                ActivateView(CYCLEARN_STUDIO_VIEW_TYPE);
+            callback: async () => {
+                await ActivateView(CYCLEARN_STUDIO_VIEW_TYPE);
             }
         });
 
         this.addCommand({
            id: "study-view",
            name: "Study view",
-           callback: () => {
-               ActivateView(CYCLEARN_STUDY_VIEW_TYPE);
+           callback: async () => {
+               await ActivateView(CYCLEARN_STUDY_VIEW_TYPE);
            }
         });
 
