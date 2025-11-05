@@ -25,7 +25,7 @@ export default class Cyclearn extends Plugin {
         this.registerView(CYCLEARN_STUDY_VIEW_TYPE, (leaf: WorkspaceLeaf) => new CyclearnStudyView(leaf, this));
 
         this.addCommand({
-            id: "cyclearn-studio-view",
+            id: "studio-view",
             name: "Studio view",
             callback: () => {
                 ActivateView(CYCLEARN_STUDIO_VIEW_TYPE);
@@ -33,7 +33,7 @@ export default class Cyclearn extends Plugin {
         });
 
         this.addCommand({
-           id: "cyclearn-study-view",
+           id: "study-view",
            name: "Study view",
            callback: () => {
                ActivateView(CYCLEARN_STUDY_VIEW_TYPE);
@@ -41,7 +41,7 @@ export default class Cyclearn extends Plugin {
         });
 
         this.addCommand({
-            id: "cyclearn-create-deck",
+            id: "create-deck",
             name: "Create a new deck",
             callback: () => {
                 new CreateDeckModal(this.app, CREATE_DECK_MODAL_OPTIONS).open();
@@ -49,7 +49,7 @@ export default class Cyclearn extends Plugin {
         });
 
         this.addCommand({
-           id: "cyclearn-create-tag",
+           id: "create-tag",
            name: "Create a new tag",
            callback: () => {
                new CreateTagModal(this.app, CREATE_TAG_MODAL_OPTIONS).open();
@@ -57,7 +57,7 @@ export default class Cyclearn extends Plugin {
         });
 
         this.addCommand({
-            id: "cyclearn-create-template",
+            id: "create-template",
             name: "Create a new template",
             callback: () => {
                 new CreateTemplateModal(this.app, CREATE_TEMPLATE_MODAL_OPTIONS).open();
@@ -65,7 +65,7 @@ export default class Cyclearn extends Plugin {
         });
 
         this.addCommand({
-            id: "cyclearn-create-note",
+            id: "create-note",
             name: "Create a new note",
             callback: () => {
                 new CreateNoteModal(this.app, CREATE_NOTE_MODAL_OPTIONS).open();
