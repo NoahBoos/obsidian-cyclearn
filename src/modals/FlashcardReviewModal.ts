@@ -48,8 +48,7 @@ export class FlashcardReviewModal extends Modal {
             answerRevealed = true;
         });
         this.contentEl.addEventListener("keydown", (event: KeyboardEvent) => {
-            console.log(event.key);
-           if (event.key === " ") {
+            if (event.key === " ") {
                if (answerRevealed) {
                    return;
                }
@@ -58,7 +57,7 @@ export class FlashcardReviewModal extends Modal {
                middleCardSeparator.nextElementSibling.classList.add("flashcards--margin-top-0");
                main.lastElementChild.classList.add("flashcards--margin-bottom-0");
                answerRevealed = true;
-           }
+            }
         });
         const gradeButtonContainer: HTMLDivElement = CreateContainer(footer, ["flashcards--flex-row", "flashcards--justify-center", "flashcards--align-center", "flashcards--gap-16"]);
         const buttonTexts: Array<string> = ["Forgotten", "Hard", "Medium", "Easy", "Perfect"];
